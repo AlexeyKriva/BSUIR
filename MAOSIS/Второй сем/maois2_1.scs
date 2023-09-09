@@ -1,0 +1,33 @@
+//Крылатые фразы
+
+section_subject_domain_of_catch_phrases
+
+=> nrel_main_idtf: [Section. Catch phrases]
+	(*
+		<-lang_en;;
+	*);;
+=> nrel_main_idtf: [Раздел. Крылатые фразы]
+	(*
+		<-lang_ru;;
+	*);;
+
+<- non_atomic_section;;
+
+section_subject_domain_of_catch_phrases = [*^"file://section_subject_domain_of_catch_phrases.scsi"*];;
+
+section_subject_domain_of_catch_phrases => nrel_section_decomposition: 
+	{
+		section_subject_domain_of_titles_of_works;
+		section_subject_domain_of_names_of_the_heroes;
+		section_subject_domain_of_quote;
+                section_subject_domain_of_own_pronouncements_of_famous_personalities;
+	};
+
+-> rrel_key_sc_element:	
+	concept_idea;
+	concept_words;
+	concept_attitude_towards_the_people;
+	nrel_phrase_maker;
+	nrel_source;
+	subject_domain_of_catch_phrases;;
+

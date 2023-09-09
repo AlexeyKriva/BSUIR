@@ -1,0 +1,72 @@
+TEST 01 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 02 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found NO
+TEST 03 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 04 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found NO
+TEST 05 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found NO
+TEST 06 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 07 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 08 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 09 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 10 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found YES
+TEST 11 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 1
+.Result name (optional) = wrong answer 
+.Check Comments = wrong: expected , found NO
+TEST %2 
+Error - The system cannot find the file specified.
+
+.Testlib Result Number = 2
+.Result name (optional) = wrong output format 
+.Check Comments = File not found %2.a

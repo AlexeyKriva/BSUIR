@@ -1,0 +1,15 @@
+Matematika:
+4
+D
+2003
+9
+Fizika:
+2
+B
+2004
+9.25
+Fizika:
+3
+C
+2005
+8.75

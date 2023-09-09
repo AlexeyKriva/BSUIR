@@ -1,0 +1,4 @@
+cd E:
+mkdir Papka
+cd Papka
+git init

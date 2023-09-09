@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HashTable/HashTable.iml" filepath="$PROJECT_DIR$/HashTable/HashTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LW6.iml" filepath="$PROJECT_DIR$/.idea/LW6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Table/Table.iml" filepath="$PROJECT_DIR$/Table/Table.iml" />
+    </modules>
+  </component>
+</project>

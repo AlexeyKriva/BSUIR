@@ -1,0 +1,5 @@
+cd E:/Papka
+git remote add Papka https://github.com/AlexeyKriva/-.git
+git push Papka
+
+
