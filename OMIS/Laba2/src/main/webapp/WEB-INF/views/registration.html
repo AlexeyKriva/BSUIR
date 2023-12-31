@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        /* CSS стили для формы регистрации */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            width: 300px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Registration</h1>
+    <form th:action="@{/userProfile/user-profile-registration}" method="post" th:object="${userProfile}">
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" th:field="*{fullName}" required>
+        </div>
+        <div>
+            <label for="education">Education:</label>
+            <input type="text" id="education" name="education" th:field="*{education}" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" th:field="*{emailAddress}" required>
+        </div>
+        <div>
+            <label for="birthdate">Date of Birth:</label>
+            <input type="text" id="birthdate" name="birthdate" th:field="*{birthdayDate}" required>
+        </div>
+        <div>
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" th:field="*{post}" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" th:field="*{isPassword}" required>
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

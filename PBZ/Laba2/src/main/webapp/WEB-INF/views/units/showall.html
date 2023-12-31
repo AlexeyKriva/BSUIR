@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Computing's</title>
+    <style>
+        a {
+            font-size: 20px;
+            text-align: center;
+            display: block;
+            margin-bottom: 10px;
+            color: blue;
+        }
+
+        a[href="/"] {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div th:each="unit : ${units}">
+    <a th:href="@{/units/elements/showone/{unit_number}(unit_number=${unit.getUnitNumber()})}"
+       th:text="${unit.getFullNameUnit()}">VALUE</a>
+</div>
+<a href="/">Home page</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/units/elements/showone/{unit_number}(unit_number=${unit.getUnitNumber()})}" th:object="${unit}">
+  <label for="fullName">Enter name: </label>
+  <input type="text" th:field="*{fullNameUnit}" id="fullName"/>
+  <br/>
+  <label for="shortName">Enter model: </label>
+  <input type="text" th:field="*{shortNameUnit}" id="shortName"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

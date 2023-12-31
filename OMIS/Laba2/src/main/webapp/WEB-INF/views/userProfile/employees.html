@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Full name</th>
+        <th>Education</th>
+        <th>Email address</th>
+        <th>Birthday date</th>
+        <th>Post</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userProfile : ${userProfiles}">
+        <td th:text="${userProfile.fullName}">VALUE</td>
+        <td th:text="${userProfile.education}">VALUE</td>
+        <td th:text="${userProfile.emailAddress}">VALUE</td>
+        <td th:text="${userProfile.birthdayDate}">VALUE</td>
+        <td th:text="${userProfile.post}">VALUE</td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

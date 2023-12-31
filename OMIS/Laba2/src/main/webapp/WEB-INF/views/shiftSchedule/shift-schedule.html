@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Example</title>
+    <style>
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/shiftSchedule/commit-changes}" method="post" th:object="${helpShiftSchedule}">
+    <div>
+        <label for="emailAddress">Email address:</label>
+        <input type="text" id="emailAddress" name="emailAddress" th:field="*{emailAddress}" required>
+    </div>
+    <div>
+        <label for="workDays">Work days:</label>
+        <input type="text" id="workDays" name="workDays" th:field="*{workDays}" required>
+    </div>
+    <div>
+        <label for="start_time">Start time:</label>
+        <input type="text" id="start_time" name="start_time" th:field="*{startTime}" required>
+    </div>
+    <div>
+        <label for="finish_time">Start time:</label>
+        <input type="text" id="finish_time" name="finish_time" th:field="*{finishTime}" required>
+    </div>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

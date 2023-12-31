@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/units/elements}" th:object="${unit}">
+    <label for="id">Enter unit number: </label>
+    <input type="number" th:field="*{unitNumber}" id="id"/>
+    <br/>
+    <label for="name">Enter full name: </label>
+    <input type="text" th:field="*{fullNameUnit}" id="name"/>
+    <br/>
+    <label for="model">Enter short name: </label>
+    <input type="text" th:field="*{shortNameUnit}" id="model"/>
+    <br/>
+    <input type="submit" value="Add new unit!"/>
+</form>
+
+</body>
+</html>

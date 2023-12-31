@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        .user-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-details img {
+            width: 333px;
+            height: auto;
+            margin-right: 50px; /* Увеличил отступ справа */
+            border-radius: 50%;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            flex-grow: 1;
+            max-width: calc(20% - 25px);
+            box-sizing: border-box;
+        }
+        .active {
+            background-color: #e0f0ff;
+        }
+        button:nth-child(1) {
+            background-color: #00bfff;
+        }
+        button:nth-child(n+2) {
+            background-color: #f0f0f0;
+        }
+        .user-fields {
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            width: 50%; /* Определяем ширину блока с данными */
+        }
+        .user-fields > span {
+            margin-bottom: 10px; /* Увеличил отступ между полями */
+            line-height: 1.6; /* Увеличил высоту строки для лучшей читаемости */
+        }
+        .user-fields > span::before {
+            content: attr(data-label) ": ";
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="button-container">
+    <button onclick="location.href=''">Profile</button>
+    <button onclick="redirectTo('/penalty/penaltyes')">Penalties</button>
+    <script>
+        function redirectTo(path) {
+            window.location.href = path;
+        }
+    </script>
+    <button onclick="redirectTo('/userProfile/employees')">Employees</button>
+    <button onclick="redirectTo('/shiftSchedule/shift-schedule')">Edit shift schedule</button>
+</div>
+<div th:each="userProfile : ${userProfiles}">
+    <div class="user-details">
+        <img th:src="@{/images/Person.jpg}" alt="User Photo">
+        <div class="user-fields">
+            <span data-label="Full name" th:text="${userProfile.getFullName()}"></span>
+            <span data-label="Birthday date" th:text="${userProfile.getBirthdayDate()}"></span>
+            <span data-label="Education" th:text="${userProfile.getEducation()}"></span>
+            <span data-label="Post" th:text="${userProfile.getPost()}"></span>
+            <span data-label="Email address" th:text="${userProfile.getEmailAddress()}"></span>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Work Day</th>
+            <th>Start Time</th>
+            <th>Finish Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="shiftSchedule : ${shiftSchedules}">
+            <tr th:each="index : ${#numbers.sequence(0, shiftSchedule.workDays.size() - 1)}">
+                <td th:text="${shiftSchedule.workDays[__${index}__]}"></td>
+                <td th:text="${shiftSchedule.startTime[__${index}__]}"></td>
+                <td th:text="${shiftSchedule.finishTime[__${index}__]}"></td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

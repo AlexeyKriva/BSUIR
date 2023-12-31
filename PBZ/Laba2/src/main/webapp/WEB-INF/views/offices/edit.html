@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/offices/elements/showone/{is_id1}(is_id1=${officeEquipment.getIsId1()})}" th:object="${officeEquipment}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{isName1}" id="name"/>
+  <br/>
+  <label for="model">Enter model: </label>
+  <input type="text" th:field="*{model1}" id="model"/>
+  <br/>
+  <label for="acquisition">Enter acquisition date: </label>
+  <input type="text" th:field="*{acquisitionDate1}" id="acquisition"/>
+  <br/>
+  <label for="price">Enter price: </label>
+  <input type="text" th:field="*{price1}" id="price"/>
+  <br/>
+  <label for="unit">Enter unit number: </label>
+  <input type="number" th:field="*{unitNumber1}" id="unit"/>
+  <br/>
+  <label for="transfer">Enter transfer data: </label>
+  <input type="text" th:field="*{transferData1}" id="transfer"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

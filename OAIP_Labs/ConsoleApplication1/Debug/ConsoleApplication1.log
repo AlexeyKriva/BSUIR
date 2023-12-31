@@ -1,0 +1,21 @@
+﻿  ConsoleApplication1.cpp
+E:\OAIP\ConsoleApplication1\ConsoleApplication1.cpp(11,9): warning C4101: k: неиспользованная локальная переменная
+E:\OAIP\ConsoleApplication1\ConsoleApplication1.cpp(12,9): warning C4101: h: неиспользованная локальная переменная
+E:\OAIP\ConsoleApplication1\ConsoleApplication1.cpp(10,9): warning C4101: col: неиспользованная локальная переменная
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7515,5): error C2672: "_Sort_unchecked": не найдена соответствующая перегруженная функция
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7520): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::sort<_RanIt,std::less<void>>(const _RanIt,const _RanIt,_Pr)"
+          with
+          [
+              _RanIt=int,
+              _Pr=std::less<void>
+          ]
+E:\OAIP\ConsoleApplication1\ConsoleApplication1.cpp(18): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::sort<int>(const _RanIt,const _RanIt)"
+          with
+          [
+              _RanIt=int
+          ]
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7515,1): error C2893: Сбой при специализации функции-шаблона "void std::_Sort_unchecked(_RanIt,_RanIt,iterator_traits<_Iter>::difference_type,_Pr)".
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7481): message : см. объявление "std::_Sort_unchecked"
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7515,1): message : Со следующими аргументами шаблона:
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7515,1): message : "_RanIt=_RanIt"
+D:\Visual\VC\Tools\MSVC\14.28.29910\include\algorithm(7515,1): message : "_Pr=_Fn"

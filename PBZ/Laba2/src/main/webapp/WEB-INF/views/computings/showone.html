@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Computing</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        p {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #333;
+        }
+        a {
+            font-size: 16px;
+            text-decoration: none;
+            color: blue;
+        }
+        .color1 { color: #FF6347; }
+        .color2 { color: #4682B4; }
+        .color3 { color: #228B22; }
+        .color4 { color: #800080; }
+        .update-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<p><span class="nowrap">Id:</span> <span th:text="${computing.getIsId()}" class="color1">ID</span></p>
+<p><span class="nowrap">Name:</span> <span th:text="${computing.getIsName()}" class="color2">Name</span></p>
+<p><span class="nowrap">Model:</span> <span th:text="${computing.getModel()}" class="color3">Model</span></p>
+<p><span class="nowrap">Acquisition date:</span> <span th:text="${computing.getAcquisitionDate()}" class="color4">Acquisition Date</span></p>
+<p><span class="nowrap">Price:</span> <span th:text="${computing.getPrice()}" class="color1">Price</span></p>
+<p><span class="nowrap">Unit number:</span> <span th:text="${computing.getUnitNumber()}" class="color2">Unit Number</span></p>
+<p><span class="nowrap">Transfer date:</span> <span th:text="${computing.getTransferData()}" class="color3">Transfer Date</span></p>
+<a th:href="@{'/computings/elements/showone/'+${computing.getIsId()}+'/edit'}" class="update-link">Update this computing</a>
+<a th:href="@{'/computings/elements/showone/'+${computing.getIsId()}+'/delete'}" class="update-link">Delete this computing</a>
+<a href="/computings/elements/showall" class="update-link">View computings</a>
+</body>
+</html>

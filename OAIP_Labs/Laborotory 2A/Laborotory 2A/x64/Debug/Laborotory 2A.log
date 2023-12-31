@@ -1,0 +1,20 @@
+﻿  Laborotory 2A.cpp
+D:\OAIP\Laborotory 2A\Laborotory 2A\Laborotory 2A.cpp(14,35): warning C4244: =: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\OAIP\Laborotory 2A\Laborotory 2A\Laborotory 2A.cpp(15,35): warning C4244: =: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Laborotory 2A.vcxproj -> D:\OAIP\Laborotory 2A\x64\Debug\Laborotory 2A.exe
