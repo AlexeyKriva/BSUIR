@@ -1,0 +1,3 @@
+SELECT DISTINCT t1.surname
+FROM teacher t1, teacher_teaches_subjects_in_groups t2, teacher_teaches_subjects_in_groups t3, teacher_teaches_subjects_in_groups t4
+WHERE t2.subject_code_number = '14П' AND t2.person_number = t3.person_number AND t3.subject_code_number != '14П' AND t3.subject_code_number = t4.subject_code_number AND t3.person_number != t4.person_number AND t1.person_number = t4.person_number

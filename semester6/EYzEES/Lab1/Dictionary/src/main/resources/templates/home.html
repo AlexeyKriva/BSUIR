@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+        h1 {
+            color: #000; /* Чёрный цвет текста */
+            font-size: 42px; /* Увеличенный размер шрифта для заголовка */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Тень с бликами */
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .link-button {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px 50px; /* Подогнанный внутренний отступ для кнопки */
+            font-size: 50px; /* Увеличенный размер шрифта для кнопки */
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(45deg, #004080, #34a853); /* Золотистый градиент */
+            border-radius: 5px;
+            transition: background 0.3s;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .link-button:hover {
+            background: linear-gradient(45deg, #004080, #34a853); /* Градиент при наведении */
+        }
+        .link-button:active {
+            background-color: #004080;
+        }
+        .rectangle {
+            border: 1px solid #dddddd;
+            padding: 12px;
+            margin: 20px 0;
+            background-color: #ffffff;
+            text-align: center; /* Выравнивание текста по центру */
+        }
+    </style>
+</head>
+<body>
+<div class="rectangle">
+    <h1>Welcome to the FileWorker</h1>
+</div>
+
+<div class="links">
+    <a th:href="@{/file/upload}" class="link-button">Upload file</a>
+    <!--<a th:href="@{/file/create}" class="link-button">Create file</a>-->
+    <a th:href="@{/file/watch-dictionary}" class="link-button">Watch dictionary</a>
+    <a th:href="@{/file/instruction}" class="link-button">Instruction</a>
+</div>
+</body>
+</html>

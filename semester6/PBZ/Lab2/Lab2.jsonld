@@ -1,0 +1,423 @@
+[ {
+  "@id" : "http://localhost/ontology/crypto",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#APT",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Coin" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "10.21"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Alexey",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#SimpleUser" ],
+  "http://localhost/ontology/crypto#doTest" : [ {
+    "@id" : "http://localhost/ontology/crypto#Aptos"
+  } ],
+  "http://localhost/ontology/crypto#makeTransaction" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "109000.0"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Aptos",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#PublicBlockchain" ],
+  "http://localhost/ontology/crypto#PoS" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#containsSmartContracts" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#hasCoin" : [ {
+    "@id" : "http://localhost/ontology/crypto#APT"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#BTC",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Coin" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "65939.88"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Base",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#PublicBlockchain" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Bitcoin",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#PublicBlockchain" ],
+  "http://localhost/ontology/crypto#PoW" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#containsBlocks" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "839487"
+  } ],
+  "http://localhost/ontology/crypto#containsNodes" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "45000"
+  } ],
+  "http://localhost/ontology/crypto#containsSmartContracts" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "false"
+  } ],
+  "http://localhost/ontology/crypto#hasCoin" : [ {
+    "@id" : "http://localhost/ontology/crypto#BTC"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Blockchain",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#BlockchainContent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Coin",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#BlockchainContent"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#ConcensusAlgorithm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#BlockchainContent"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Developer",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#Person"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#ETH",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Coin" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "3136.99"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Ethereum",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#PublicBlockchain" ],
+  "http://localhost/ontology/crypto#PoS" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#containsBlocks" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "19710277"
+  } ],
+  "http://localhost/ontology/crypto#containsNodes" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "8933"
+  } ],
+  "http://localhost/ontology/crypto#containsSmartContracts" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#hasCoin" : [ {
+    "@id" : "http://localhost/ontology/crypto#ETH"
+  } ],
+  "http://localhost/ontology/crypto#hasToken" : [ {
+    "@id" : "http://localhost/ontology/crypto#PEPE"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#HybridBlockchain",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Jhon",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Miner" ],
+  "http://localhost/ontology/crypto#doMining" : [ {
+    "@id" : "http://localhost/ontology/crypto#BTC"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Miner",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#User"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#ORDI",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Token" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "49.17"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#PEPE",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Token" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.00078"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Person",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#PoS",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#concensusAlgorithm"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#PoW",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#boolean"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#concensusAlgorithm"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#PrivateBlockchain",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#PublicBlockchain",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Ripple",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#PrivateBlockchain" ],
+  "http://localhost/ontology/crypto#containsSmartContracts" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+    "@value" : "true"
+  } ],
+  "http://localhost/ontology/crypto#hasCoin" : [ {
+    "@id" : "http://localhost/ontology/crypto#XRP"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Satoshi_Nakomoto",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Developer" ],
+  "http://localhost/ontology/crypto#doDevelop" : [ {
+    "@id" : "http://localhost/ontology/crypto#Bitcoin"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#SimpleUser",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#User"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Token",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#BlockchainContent"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#User",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#Person"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#Validator",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#User"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#XRP",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "http://localhost/ontology/crypto#Coin" ],
+  "http://localhost/ontology/crypto#price" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.548"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#be",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#beBlockchainToken",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#be"
+  } ],
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#hasToken"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#beBlockhainCoin",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#be"
+  } ],
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#hasCoin"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#beConsensusAlgorithm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#be"
+  } ],
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#hasConsensusAlgorithm"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#concensusAlgorithm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#contains",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#containsBlocks",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#long"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#contains"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#containsNodes",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#long"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#contains"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#containsSmartContracts",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#boolean"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#contains"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#do",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#doDevelop",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Developer"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#do"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#doMining",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Miner"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Coin"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#do"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#doTest",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Person"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#do"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#doValidate",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Validator"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Coin"
+  }, {
+    "@id" : "http://localhost/ontology/crypto#Token"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#do"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#has",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#BlockchainContent"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#hasCoin",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Coin"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#has"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#hasConsensusAlgorithm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#ConcensusAlgorithm"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#has"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#hasToken",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Blockchain"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://localhost/ontology/crypto#Token"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#has"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#make",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#makeTransaction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://localhost/ontology/crypto#Person"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "http://www.w3.org/2001/XMLSchema#double"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://localhost/ontology/crypto#make"
+  } ]
+}, {
+  "@id" : "http://localhost/ontology/crypto#price",
+  "@type" : [ "http://www.w3.org/2002/07/owl#DatatypeProperty" ]
+} ]

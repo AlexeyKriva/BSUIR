@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects List</title>
+    <style>
+        body {
+            background-color: #4CAF50;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 2px solid white;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid white;
+        }
+
+        thead {
+            background-color: #388E3C;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #66BB6A;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #81C784;
+        }
+
+    </style>
+</head>
+<body>
+<h1>History</h1>
+<table>
+    <thead>
+    <tr>
+        <th>First Number</th>
+        <th>Second Number</th>
+        <th>Partial Sums</th>
+        <th>Partial Products</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pairHistory : ${informationHistory}">
+        <td th:text="${pairHistory.pair.firstNumber}"></td>
+        <td th:text="${pairHistory.pair.secondNumber}"></td>
+        <td>
+            <ul>
+                <li th:each="sum, index : ${pairHistory.partialSums}" th:text="${sum.substring(0, 6 + index.index)}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="product : ${pairHistory.partialProducts}" th:if="${#strings.length(product) >= 6}" th:text="${product.substring(0, 6)}"></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

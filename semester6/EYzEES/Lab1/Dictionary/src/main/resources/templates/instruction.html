@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Text Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            color: #000000;
+        }
+
+        .instruction {
+            font-size: 36px; /* Увеличенный размер надписи */
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd700, #757575);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .styled-text {
+            font-size: 18px;
+            color: #000000;
+            font-weight: bold;
+            display: block;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #e6e6e6, #ffffff);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-text::before, .styled-text::after {
+            content: '•';
+            font-size: 24px;
+            color: #000;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .styled-text::before {
+            left: -20px;
+        }
+
+        .styled-text::after {
+            right: -20px;
+        }
+
+        .shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.6) 40%, transparent);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="instruction">
+    Instruction
+</div>
+<div class="styled-text">
+    The "Upload file" button —  downloads the selected file from the computer. The file should have an extension .pdf    <div class="shine"></div>
+</div>
+<!--<div class="styled-text">
+    The "Create file" button — allows the user to create and text a format file .pdf    <div class="shine"></div>
+</div>-->
+<div class="styled-text">
+    The "Watch dictionary" buttons — show the user words that have been processed by the StandfordNLP library    <div class="shine"></div>
+</div>
+<div class="styled-text">
+    StandfordNLP is a set of tools and libraries for natural language processing (NLP) provided by Stanford University. The text enters the pipeline and is subjected to various operations. In the program, the user will send an POST request, in which he will transfer the file from the computer to the system. The system will split into sentences, tokens, morphological parsing, token definition and syntax word parsing. the user can also execute the POST request by creating a file and sending the source code, file name and file extension to the system. The user can also send a GET request to get a dictionary output. <div class="shine"></div>
+</div>
+</body>
+</html>

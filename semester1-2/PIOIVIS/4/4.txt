@@ -1,0 +1,9 @@
+1.
+b)aaa bbb ccc ddd eee abcde abc edbc bdeca aebdc
+\b([a|b|c|d|e]{
+
+c)aaaa bbbb ababab aaabbabbbb bbbbaaaaa
+\b(?![a|b]*ab)([a|b])+\b
+
+d)aaa ababba bbba ababbab bbbbbb
+\b(?![a|b]*abb)([a|b])+\b

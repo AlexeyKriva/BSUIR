@@ -1,0 +1,8 @@
+cd E:
+mkdir Papka
+cd E:/Papka
+git init
+touch File.txt
+git add File.txt
+git commit -m "file has been added"
+git reset File.txt

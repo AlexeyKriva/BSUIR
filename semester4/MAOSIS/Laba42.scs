@@ -1,0 +1,167 @@
+concept_task2<-[*
+concept_market <- sc_node_class;;
+
+concept_market => nrel_main_idtf: [рынок]
+		(*
+		  <- lang_russian;;
+		*);
+		=> nrel_main_idtf: [market]
+		(*
+		  <- lang_english;;
+		*);
+		=> nrel_main_idtf: [concept_facility];;
+
+sc_definition <- sc_node_class;;
+place_of_sale <- sc_node_class;;
+nrel_salesman<-sc_node_norole_relation;;
+nrel_buyer<-sc_node_norole_relation;;
+rrel_trade<-sc_node_role_relation;;
+
+concept_market 
+	<- rrel_key_sc_element: ... 
+	(*
+	  <- sc_definition;;
+	  => nrel_using_constants: ...
+	  (*
+	    <- place_of_sale;nrel_salesman;nrel_salesman;rrel_trade;;
+	  *);;
+	  => nrel_main_idtf: [опр. Рынок]
+	  (*
+	    <- lang_russian;;
+	  *);;
+	  => nrel_sc_text_translation: ...
+	  (*
+	    -> rrel_example: [Рынок - место розничной торговли под открытым небом или в торговых рядах, обеспеивающее обмен между покупателем и продавцом]
+	    (*
+	      <- lang_russian;;
+	    *);;
+	  *);;
+	*);;
+
+sc_statement <- sc_node_class;;
+buyer <- sc_node_class;;
+salesman <- sc_node_class;;
+nrel_сompetition<-sc_node_norole_relation;;
+
+concept_program 
+	<- rrel_key_sc_element: ... 
+	(*
+	  <- sc_statement;;
+	  => nrel_using_constants: ...
+	  (*
+	    <- buyer;salesman;nrel_сompetition;;
+	  *);;
+	  => nrel_main_idtf: [Утв. Рынок]
+	  (*
+	    <- lang_russian;;
+	  *);;
+	  => nrel_sc_text_translation: ...
+	  (*
+	    -> rrel_example: [Для существования рынка требуется не только наличие покупателя и продавца, но и конкуренция]
+	    (*
+	      <- lang_russian;;
+	    *);;
+	  *);;
+	*);;
+
+place_of_sale => nrel_including: concept_market;;
+
+tent_in_the_market <- sc_node_class;;
+product <- sc_node_class;;
+
+market => nrel_including: tent_in_the_market
+	 (*
+	   => nrel_sale: product;;
+	 *);;
+
+nrel_salesman <- sc_node_norole_relation;;
+
+nrel_salesman => nrel_main_idtf:[продавец*]
+		(*
+		  <- lang_russian;;
+		*);
+		=> nrel_main_idtf: [salesman*]
+		(*
+		  <- lang_english;;
+		*);
+		=> nrel_idtf: [dealer*]
+		(*
+		  <- lang_english;;
+		*);
+		=> nrel_system_idtf: [nrel_salesman];;
+
+organization<-sc_node_class;;
+prodact<-sc_node_norole_relation;;
+
+nrel_salesman
+	<- rrel_key_sc_element: ... 
+	(*
+	  <- sc_definition;;
+	  => nrel_using_constants: ...
+	  (*
+	    <- organization;prodact;;
+	  *);;
+	  => nrel_main_idtf: [опр. продавец]
+	  (*
+	    <- lang_russian;;
+	  *);;
+	  => nrel_sc_text_translation: ...
+	  (*
+	    -> rrel_example: [Продавец - это организация, отпускающего товар покупателям]
+	    (*
+	      <- lang_russian;;
+	    *);;
+	  *);;
+	*);;
+
+organization<- sc_node_class;;
+product<-sc_node_role_relation;;
+supplier_of_the_goods <- sc_node_class;;
+
+nrel_salesman 
+	<- rrel_key_sc_element: ... 
+	(*
+	  <- sc_statement;;
+	  => nrel_using_constants: ...
+	  (*
+	    <- organization;product;supplier_of_the_goods;;
+	  *);;
+	  => nrel_main_idtf: [Утв. Продавец]
+	  (*
+	    <- lang_russian;;
+	  *);;
+	  => nrel_sc_text_translation: ...
+	  (*
+	    -> rrel_example: [Продавец, который поставляет товар, называется поставщиком товара]
+	    (*
+	      <- lang_russian;;
+	    *);;
+	  *);;
+	*);;
+
+..node <- sc_node_class;;
+
+..node <- arity;
+       -> nrel_salesman;
+       => nrel_measurment: 2
+	(*
+	  <- number;;
+	*);;
+
+company <- sc_node_class;;
+nrel_salesman => nrel_first_domain: company;
+	       => nrel_second_domain: prodact;
+	       => nrel_definition_domain: ...
+		 (*
+		   <= nrel_union:{ company; prodact;;};;
+		 *);;
+
+symmetric_relation -|> nrel_including: nrel_salesman;;
+transitive_relation -|> nrel_including: nrel_salesman;;
+reflexive_relation -|> nrel_including: nrel_salesman;;
+oriented_relation -|> nrel_including: nrel_salesman;;
+
+concept -> Adidas;;
+concept_market -> minski_clothes_market;;
+Adidas => nrel_salesman: minski_clothes_market;;
+*];;

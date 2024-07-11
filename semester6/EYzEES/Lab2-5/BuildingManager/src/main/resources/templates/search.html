@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Search</h2>
+    <form th:action="@{/search}" method="post" id="searchForm">
+        <div class="form-group">
+            <label for="searchInput">Search:</label>
+            <input type="text" id="searchInput" name="query" class="form-control" placeholder="Поиск">
+        </div>
+        <div class="form-group">
+            <label for="enumSelect">Выберите параметр:</label><br>
+            <select id="enumSelect" name="enumValue" class="form-control">
+                <option th:each="value : ${T(analysis.buildingmanager.models.Parameters).values()}"
+                        th:value="${value}" th:text="${value}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <button onclick="addForm()" class="btn btn-primary">Добавить</button>
+</div>
+
+<script>
+    function addForm() {
+        let formGroup = document.createElement('div');
+        formGroup.classList.add('form-group');
+
+        let searchLabel = document.createElement('label');
+        searchLabel.textContent = 'Search:';
+
+        let searchInput = document.createElement('input');
+        searchInput.setAttribute('type', 'text');
+        searchInput.classList.add('form-control');
+        searchInput.setAttribute('name', 'query');
+        searchInput.setAttribute('placeholder', 'Поиск');
+
+        let selectLabel = document.createElement('label');
+        selectLabel.textContent = 'Выберите параметр:';
+
+        let select = document.createElement('select');
+        select.classList.add('form-control');
+        select.setAttribute('name', 'enumValue');
+        let enumValues = ["noun", "adjective", "verb", "singular", "plural", "no_parameters"];
+        for (let i = 0; i < enumValues.length; i++) {
+            let option = document.createElement('option');
+            option.value = enumValues[i];
+            option.textContent = enumValues[i];
+            select.appendChild(option);
+        }
+
+        formGroup.appendChild(searchLabel);
+        formGroup.appendChild(searchInput);
+        formGroup.appendChild(selectLabel);
+        formGroup.appendChild(select);
+
+        document.getElementById('searchForm').appendChild(formGroup);
+    }
+</script>
+
+</body>
+</html>

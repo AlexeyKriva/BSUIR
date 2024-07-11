@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* Зеленый цвет */
+            color: #4CAF50;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            transition-duration: 0.4s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h2>Список чисел</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Первое число в двочиной системе</th>
+        <th>Второе число в двоичной системе</th>
+        <th>Первое число в десятичной системе</th>
+        <th>Второе число в десятичной системе</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pair : ${pairs}">
+        <td th:text="${pair.firstNumber}"></td>
+        <td th:text="${pair.secondNumber}"></td>
+        <td th:text="${pair.intFirstNumber}"></td>
+        <td th:text="${pair.intSecondNumber}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Конвеер</h2>
+<h2>Такт: <span th:text="${tact}"></span></h2>
+<table>
+    <thead>
+    <tr>
+        <th>Номер пары</th>
+        <th>Частичное произведение</th>
+        <th>Частичная сумма</th>
+        <th>Этап</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="index : ${#numbers.sequence(0, currentStep.size() - 1)}" th:if="${not #lists.isEmpty(currentStep)}">
+        <td th:text="${index + 1}"></td>
+        <td th:if="${currentStep[index] != null}" th:text="${currentStep[index]?.partialProduct?.substring(0, 6)}"></td>
+        <td th:if="${currentStep[index] != null}" th:text="${#strings.repeat('0', currentStep[index]?.multipliers.size() + 1) + currentStep[index]?.getPartialSum?.substring(0, 12 - currentStep[index]?.multipliers.size() - 1)}"></td>
+        <td th:if="${currentStep[index] != null}" th:text="${currentStep[index]?.stage}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Текущий результат</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Результат в двоичной системе</th>
+        <th>Результат в десятичной системе</th>
+        <th>Такт</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="result : ${results}">
+        <td th:text="${result.getResult}"></td>
+        <td th:text="${result.getNumberResult}"></td>
+        <td th:text="${result.getTact}"></td>
+    </tr>
+    </tbody>
+</table>
+<a href="/calculating" class="button">Следующая итерация</a>
+<a href="/buildGraph" class="button" th:if="${#lists.isEmpty(currentStep)}">Посмотреть умножение в столбик</a>
+</body>
+</html>

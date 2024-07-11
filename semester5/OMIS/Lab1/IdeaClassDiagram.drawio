@@ -1,0 +1,203 @@
+<mxfile host="app.diagrams.net" modified="2023-11-29T02:41:45.009Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="EeE76JUxGKRfFRofUNLM" version="22.1.4" type="device">
+  <diagram name="Страница — 1" id="OpHZaXfCGuiaW9MRZw7B">
+    <mxGraphModel dx="1780" dy="1818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Z3c1PODK50aoowwPdpxu-9" value="&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;br&gt;&amp;lt;&amp;lt;Injector&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Фабрика_стандартного_интерфейса&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="90" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-10" value="+ Фабрика_стандартного_интерфейса()&lt;br&gt;+ создать_кнопку(): Кнопка&lt;br&gt;+ создать_окно(): Окно&lt;br&gt;+ создать_поле(): Поле&lt;br&gt;+ создать_слой(): Слой&lt;br&gt;+ создать_таблицу(): Таблица" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Z3c1PODK50aoowwPdpxu-9">
+          <mxGeometry y="50" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Фабрика_интерфейса&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ создать_кнопку(): Кнопка&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ создать_окно(): Окно&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ создать_поле(): Поле&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ создать_слой(): Слой&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ создать_таблицу(): Таблица&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="20" y="120" width="190" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-19" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-17">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="250" y="210" as="sourcePoint" />
+            <mxPoint x="410" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-20" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Кнопка&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ присвоить_действие(действие: Действие): Void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="360" y="400" width="290" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-21" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-20">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="360" y="290" as="sourcePoint" />
+            <mxPoint x="520" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-22" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Объект_интерфейса&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ задать_параметры(длина: Floatm ширина: Float): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ нарисовать(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="680" y="610" width="350" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-23" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-20" target="Z3c1PODK50aoowwPdpxu-22">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="680" y="490" as="sourcePoint" />
+            <mxPoint x="840" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-24" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Поле&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ задать_тип(тип: Тип_поля): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="280" y="530" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-25" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-24" target="Z3c1PODK50aoowwPdpxu-22">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="370" y="670" as="sourcePoint" />
+            <mxPoint x="530" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-26" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Слой&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ задать_тип(тип: Тип_слоя): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ добавить(объект: Объект_интерфейса, x: Float, y: Float)&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="980" y="360" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-27" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.832;entryY=0.022;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-26" target="Z3c1PODK50aoowwPdpxu-22">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="970" y="790" as="sourcePoint" />
+            <mxPoint x="1130" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-28" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Окно&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ добавить_слой(слой: Слой): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="30" y="640" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-29" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-28" target="Z3c1PODK50aoowwPdpxu-22">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="900" y="760" as="sourcePoint" />
+            <mxPoint x="1060" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-30" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-28">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="620" y="310" as="sourcePoint" />
+            <mxPoint x="780" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-34" value="&amp;lt;&amp;lt;instatiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-26">
+          <mxGeometry x="0.4664" y="11" width="160" relative="1" as="geometry">
+            <mxPoint x="650" y="380" as="sourcePoint" />
+            <mxPoint x="810" y="380" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="740" y="460" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-35" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Таблица&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ задать_базу(строки: Integer, столбцы: Integer): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="670" y="260" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-36" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-35">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="770" y="190" as="sourcePoint" />
+            <mxPoint x="930" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-37" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-35" target="Z3c1PODK50aoowwPdpxu-22">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1250" y="480" as="sourcePoint" />
+            <mxPoint x="1280" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-38" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;main&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;injector&amp;gt;&amp;gt;&lt;br&gt;&lt;/i&gt;&lt;b&gt;Запуск_программы&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Запуск_программы()&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="810" y="90" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-39" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-38" target="Z3c1PODK50aoowwPdpxu-10">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="690" y="20" as="sourcePoint" />
+            <mxPoint x="850" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-40" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;injector&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Главный_контроллер&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="790" y="-70" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-41" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-38" target="Z3c1PODK50aoowwPdpxu-40">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="930" y="160" as="sourcePoint" />
+            <mxPoint x="1090" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-42" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;UI&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;injector&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Приложение&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;# фабрика: Фабрика_интерфейса&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- окна: Map&amp;lt;String, Окно&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Приложение(фабрика: Фабрика_интерфейса)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ создать_интерфейс(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ нарисовать_интерфейс(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ показать_окно(name: String): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ получить_окна(): Map&amp;lt;String, Окно&amp;gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-210" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-43" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.691;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-40" target="Z3c1PODK50aoowwPdpxu-42">
+          <mxGeometry x="-0.7658" y="-5" relative="1" as="geometry">
+            <mxPoint x="730" y="40" as="sourcePoint" />
+            <mxPoint x="890" y="40" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-44" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-43">
+          <mxGeometry x="0.8434" relative="1" as="geometry">
+            <mxPoint x="7" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-48" value="# приложение" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-43">
+          <mxGeometry x="-0.0348" relative="1" as="geometry">
+            <mxPoint y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-49" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-42">
+          <mxGeometry x="-0.907" y="20" relative="1" as="geometry">
+            <mxPoint x="160" y="-60" as="sourcePoint" />
+            <mxPoint x="120" y="120" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="120" y="-90" />
+              <mxPoint x="120" y="120" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-52" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-49">
+          <mxGeometry x="0.9296" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-53" value="- фабрика" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-49">
+          <mxGeometry x="0.9024" relative="1" as="geometry">
+            <mxPoint x="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-54" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-42" target="Z3c1PODK50aoowwPdpxu-28">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="650" y="50" as="sourcePoint" />
+            <mxPoint x="810" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-55" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-54">
+          <mxGeometry x="-0.9644" relative="1" as="geometry">
+            <mxPoint x="14" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-65" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-54">
+          <mxGeometry x="0.7851" y="3" relative="1" as="geometry">
+            <mxPoint x="-31" y="47" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-66" value="# окна" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-54">
+          <mxGeometry x="0.9341" y="-3" relative="1" as="geometry">
+            <mxPoint x="-27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-67" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-54">
+          <mxGeometry x="0.7457" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-68" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-10" target="Z3c1PODK50aoowwPdpxu-24">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="310" y="290" as="sourcePoint" />
+            <mxPoint x="470" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-71" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Z3c1PODK50aoowwPdpxu-68">
+          <mxGeometry x="0.6526" y="5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z3c1PODK50aoowwPdpxu-76" value="&amp;lt;&amp;lt;instantiate&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z3c1PODK50aoowwPdpxu-38" target="Z3c1PODK50aoowwPdpxu-42">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="690" y="50" as="sourcePoint" />
+            <mxPoint x="850" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

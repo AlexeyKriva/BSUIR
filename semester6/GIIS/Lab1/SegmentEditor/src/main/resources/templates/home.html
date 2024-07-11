@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор отрезка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            width: 300px;
+            height: 580px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 15px; /* Уменьшено расстояние до canvas */
+            margin-left: 15px; /* Уменьшено расстояние до canvas */
+        }
+
+        label {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<form action="/create" method="post" th:object="${segment}">
+    <label for="startX">x1:</label>
+    <input type="number" id="startX" th:field="*{startX}">
+    <span th:if="${#fields.hasErrors('startX')}" th:errors="*{startX}" th:class="${#fields.hasErrors('startX')} ? 'error-message' : ''"></span>
+
+    <label for="startY">y1:</label>
+    <input type="number" id="startY" th:field="*{startY}">
+    <span th:if="${#fields.hasErrors('startY')}" th:errors="*{startY}" th:class="${#fields.hasErrors('startY')} ? 'error-message' : ''"></span>
+
+    <label for="finishX">x2:</label>
+    <input type="number" id="finishX" th:field="*{finishX}">
+    <span th:if="${#fields.hasErrors('finishX')}" th:errors="*{finishX}" th:class="${#fields.hasErrors('finishX')} ? 'error-message' : ''"></span>
+
+    <label for="finishY">y2:</label>
+    <input type="number" id="finishY" th:field="*{finishY}">
+    <span th:if="${#fields.hasErrors('finishY')}" th:errors="*{finishY}" th:class="${#fields.hasErrors('finishY')} ? 'error-message' : ''"></span>
+
+    <label for="algorithm">Выберите алгоритм:</label>
+    <select id="algorithm" th:field="*{algorithm}">
+        <option th:each="alg : ${T(com.editor.segmenteditor.models.Algorithm).values()}"
+                th:value="${alg}"
+                th:text="${alg}">
+        </option>
+    </select>
+
+    <span th:if="${#fields.hasErrors('algorithm')}" th:errors="*{algorithm}" th:class="${#fields.hasErrors('algorithm')} ? 'error-message' : ''"></span>
+
+    <br>
+
+    <button type="button" onclick="drawLine()">Нарисовать линию</button>
+
+    <br>
+
+    <button type="button" onclick="drawLinePixel()">Нарисовать пиксель</button>
+</form>
+
+<canvas id="myCanvas" width="900" height="700" style="border:1px solid #000;"></canvas>
+
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    let bool = true
+    let arr = []
+    let arr1 = []
+
+    function drawLinePixel() {
+        console.log(arr)
+        if (bool) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bool = false
+        }
+        let pixel = arr.shift()
+        console.log(typeof pixel.x, typeof pixel.y)
+        drawPixel(pixel.x, pixel.y)
+    }
+
+    function drawLine() {
+        arr.length = 0
+        bool = true
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let x1 = Number(document.getElementById("startX").value);
+        let y1 = Number(document.getElementById("startY").value);
+        let x2 = Number(document.getElementById("finishX").value);
+        let y2 = Number(document.getElementById("finishY").value);
+        let algorithm = document.getElementById("algorithm").value;
+
+        switch (algorithm){
+            case "DDA":
+                drawLineDDA(Number(x1), Number(y1), Number(x2), Number(y2));
+                break
+            case "Bresenham":
+                drawLineBresenham(Number(x1),Number(y1),Number(x2),Number(y2));
+                break
+            case "Vu":
+                drawLineVu(Number(x1), Number(y1), x2, y2);
+                break
+        }
+    }
+
+    function drawLineDDA(x1, y1, x2, y2) {
+        const length = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1))
+
+        let dx = (x2 - x1) / length;
+        let dy = (y2 - y1) / length;
+
+        let x = x1 + 0.5 * dx
+        let y = y1 + 0.5 * dy
+
+        let i = 0
+            function drawNextPixel() {
+                if (i <= length) {
+                    x = x + dx
+                    y = y + dy
+                    console.log(x, y, i)
+                    arr.push({x, y})
+
+                    drawPixel(x, y)
+                    i++
+
+                    setTimeout(drawNextPixel, 5)
+                }
+            }
+
+        drawNextPixel()
+        console.log(arr)
+    }
+
+    function drawLineBresenham(x1, y1, x2, y2) {
+        let dx = Math.abs(x2 - x1);
+        let dy = Math.abs(y2 - y1);
+        let sx = (x1 < x2) ? 1 : -1;
+        let sy = (y1 < y2) ? 1 : -1;
+        let err = dx - dy;
+
+        function drawNextPixel() {
+            if (x1 !== x2 || y1 !== y2) {
+                drawPixel(x1, y1);
+                let x = x1
+                let y = y1
+                arr.push({x, y})
+
+                let e2 = 2 * err;
+                if (e2 > -dy) {
+                    err -= dy;
+                    x1 += sx;
+                }
+
+                if (e2 < dx) {
+                    err += dx;
+                    y1 += sy;
+                }
+
+                setTimeout(drawNextPixel, 5)
+            }
+        }
+
+        drawNextPixel()
+    }
+
+
+    function drawLineVu(x1, y1, x2, y2) {
+        let x = x1;
+        let y = y1;
+
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+
+        let e = 2 * dy - dx;
+
+        let i = 0;
+        if (Math.abs(dx) >= Math.abs(dy)) {
+            while (i <= Math.abs(dx)) {
+                if (dx >= 0) {
+                    if (dy <= 0) {
+                        if (e >= 0) {
+                            y = y - 1;
+                            e = e - 2 * dx;
+                        }
+                        x = x + 1;
+                        e = e - 2 * dy;
+                        i = i + 1;
+                    } else {
+                        if (e <= 0) {
+                            y = y + 1;
+                            e = e + 2 * dx;
+                        }
+                        x = x + 1;
+                        e = e - 2 * dy;
+                        i = i + 1;
+                    }
+                } else {
+                    if (dy <= 0) {
+                        if (e >= 0) {
+                            y = y - 1;
+                            e = e + 2 * dx;
+                        }
+                        x = x - 1;
+                        e = e - 2 * dy;
+                        i = i + 1;
+                    } else {
+                        if (e <= 0) {
+                            y = y + 1;
+                            e = e - 2 * dx;
+                        }
+                        x = x - 1;
+                        e = e - 2 * dy;
+                        i = i + 1;
+                    }
+                }
+
+                drawColoredPixel(x, y, 'rgba(0,0,0,1.0)')
+                arr1.push({x, y})
+                this.drawLessColorPixelsX(x, y);
+            }
+        } else {
+            while (i <= Math.abs(dy)) {
+                if (dx > 0) {
+                    if (dy <= 0) {
+                        if (e <= 0) {
+                            x = x + 1;
+                            e = e - 2 * dy;
+                        }
+                        y = y - 1;
+                        e = e - 2 * dx;
+                        i = i + 1;
+                    } else {
+                        if (e >= 0) {
+                            x = x + 1;
+                            e = e - 2 * dy;
+                        }
+                        y = y + 1;
+                        e = e + 2 * dx;
+                        i = i + 1;
+                    }
+                } else {
+                    if (dy <= 0) {
+                        if (e <= 0) {
+                            x = x - 1;
+                            e = e - 2 * dy;
+                        }
+                        y = y - 1;
+                        e = e + 2 * dx;
+                        i = i + 1;
+                    } else {
+                        if (e >= 0) {
+                            x = x - 1;
+                            e = e - 2 * dy;
+                        }
+                        y = y + 1;
+                        e = e - 2 * dx;
+                        i = i + 1;
+                    }
+                }
+                drawPixel(x, y)
+                this.drawLessColorPixelsY(x, y);
+            }
+        }
+    }
+
+    function drawLessColorPixelsX(x, y) {
+        let opacityPixels = ['0.6', '0.4'];
+        for (let i = 1; i <= opacityPixels.length; i++) {
+            let a1 = opacityPixels[i - 1]
+            let myFirstColor = {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: a1
+            }
+            drawColoredPixel(x, y - i, myFirstColor)
+            drawColoredPixel(x, y + i, myFirstColor)
+        }
+    }
+
+    function drawLessColorPixelsY(x, y) {
+        let opacityPixels = ['0.6', '0.4', '0.2'];
+        for (let i = 1; i <= opacityPixels.length; i++) {
+            let a1 = opacityPixels[i - 1]
+            let myFirstColor = {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: a1
+            }
+            drawColoredPixel(x, y - i, myFirstColor)
+            drawColoredPixel(x, y + i, myFirstColor)
+        }
+    }
+
+    function drawColoredPixel(x, y, color) {
+        // Сохраняем текущий цвет холста
+        let originalColor = ctx.fillStyle;
+
+        // Устанавливаем цвет для рисования прямоугольника
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+
+        // Рисуем прямоугольник в один пиксель
+        ctx.fillRect(x, y, 1, 1);
+
+        // Восстанавливаем оригинальный цвет холста
+        ctx.fillStyle = originalColor;
+
+        ctx.stroke()
+    }
+
+
+    function drawPixel(x, y) {
+        ctx.fillRect(x, y, 1, 1);
+        console.log('HERE')
+        ctx.stroke()
+    }
+
+</script>
+</body>
+</html>

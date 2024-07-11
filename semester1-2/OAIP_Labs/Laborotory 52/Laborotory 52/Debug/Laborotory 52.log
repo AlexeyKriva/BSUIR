@@ -1,0 +1,3 @@
+﻿  Laborotory 52.cpp
+D:\OAIP\Laborotory 52\Laborotory 52\Laborotory 52.cpp(177,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Laborotory 52.vcxproj -> D:\OAIP\Laborotory 52\Debug\Laborotory 52.exe

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 30px;
+            font-size: 23px;
+            color: #000000; /* Чёрный цвет текста */
+        }
+        .outer-rectangle {
+            margin-bottom: 20px;
+        }
+        .rectangle {
+            border: 1px solid #dddddd;
+            padding: 12px;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #f2f2f2, #e6e6e6);
+            text-align: left;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin: 0;
+            color: #000000; /* Чёрный цвет текста */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+            background: linear-gradient(45deg, #f2f2f2, #e6e6e6);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #000000; /* Чёрный цвет текста */
+        }
+        th {
+            background-color: #757575;
+            color: #000000; /* Чёрный цвет текста */
+        }
+        .search-form {
+            margin-top: 20px;
+        }
+        .search-input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #dddddd;
+            margin-right: 10px;
+        }
+        .search-button {
+            background-color: #757575;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #757575;
+        }
+    </style>
+</head>
+<body>
+<div class="rectangle">
+    <h1>Dictionary</h1>
+    <form class="search-form" action="/file/watch-dictionary" method="post">
+        <input type="text" class="search-input" name="text" placeholder="Enter text to search">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Word</th>
+            <th>Frequency of Occurrence</th>
+            <th>Parameters</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="textLine : ${dictionary}">
+            <td th:text="${textLine.getWord()}"></td>
+            <td th:text="${textLine.getFrequencyOfOccurrence()}"></td>
+            <td th:text="${textLine.getParameters()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,329 @@
+@prefix : <http://localhost/ontology/crypto/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix crypto: <http://localhost/ontology/crypto#> .
+@base <http://localhost/ontology/crypto/> .
+
+<http://localhost/ontology/crypto> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://localhost/ontology/crypto#be
+crypto:be rdf:type owl:ObjectProperty .
+
+
+###  http://localhost/ontology/crypto#beBlockchainToken
+crypto:beBlockchainToken rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf crypto:be ;
+                         owl:inverseOf crypto:hasToken .
+
+
+###  http://localhost/ontology/crypto#beBlockhainCoin
+crypto:beBlockhainCoin rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf crypto:be ;
+                       owl:inverseOf crypto:hasCoin .
+
+
+###  http://localhost/ontology/crypto#beConsensusAlgorithm
+crypto:beConsensusAlgorithm rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf crypto:be ;
+                            owl:inverseOf crypto:hasConsensusAlgorithm .
+
+
+###  http://localhost/ontology/crypto#do
+crypto:do rdf:type owl:ObjectProperty .
+
+
+###  http://localhost/ontology/crypto#doDevelop
+crypto:doDevelop rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf crypto:do ;
+                 rdfs:domain crypto:Developer ;
+                 rdfs:range crypto:Blockchain .
+
+
+###  http://localhost/ontology/crypto#doMining
+crypto:doMining rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf crypto:do ;
+                rdfs:domain crypto:Miner ;
+                rdfs:range crypto:Coin .
+
+
+###  http://localhost/ontology/crypto#doTest
+crypto:doTest rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf crypto:do ;
+              rdfs:domain crypto:Person ;
+              rdfs:range crypto:Blockchain .
+
+
+###  http://localhost/ontology/crypto#doValidate
+crypto:doValidate rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf crypto:do ;
+                  rdfs:domain crypto:Validator ;
+                  rdfs:range crypto:Coin ,
+                             crypto:Token .
+
+
+###  http://localhost/ontology/crypto#has
+crypto:has rdf:type owl:ObjectProperty ;
+           rdfs:domain crypto:Blockchain ;
+           rdfs:range crypto:BlockchainContent .
+
+
+###  http://localhost/ontology/crypto#hasCoin
+crypto:hasCoin rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf crypto:has ;
+               rdfs:domain crypto:Blockchain ;
+               rdfs:range crypto:Coin .
+
+
+###  http://localhost/ontology/crypto#hasConsensusAlgorithm
+crypto:hasConsensusAlgorithm rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf crypto:has ;
+                             rdfs:domain crypto:Blockchain ;
+                             rdfs:range crypto:ConcensusAlgorithm .
+
+
+###  http://localhost/ontology/crypto#hasToken
+crypto:hasToken rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf crypto:has ;
+                rdfs:domain crypto:Blockchain ;
+                rdfs:range crypto:Token .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://localhost/ontology/crypto#PoS
+crypto:PoS rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf crypto:concensusAlgorithm .
+
+
+###  http://localhost/ontology/crypto#PoW
+crypto:PoW rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf crypto:concensusAlgorithm ;
+           rdfs:domain crypto:Blockchain ;
+           rdfs:range xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#concensusAlgorithm
+crypto:concensusAlgorithm rdf:type owl:DatatypeProperty .
+
+
+###  http://localhost/ontology/crypto#contains
+crypto:contains rdf:type owl:DatatypeProperty .
+
+
+###  http://localhost/ontology/crypto#containsBlocks
+crypto:containsBlocks rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf crypto:contains ;
+                      rdfs:domain crypto:Blockchain ;
+                      rdfs:range xsd:long .
+
+
+###  http://localhost/ontology/crypto#containsNodes
+crypto:containsNodes rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf crypto:contains ;
+                     rdfs:domain crypto:Blockchain ;
+                     rdfs:range xsd:long .
+
+
+###  http://localhost/ontology/crypto#containsSmartContracts
+crypto:containsSmartContracts rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf crypto:contains ;
+                              rdfs:domain crypto:Blockchain ;
+                              rdfs:range xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#make
+crypto:make rdf:type owl:DatatypeProperty .
+
+
+###  http://localhost/ontology/crypto#makeTransaction
+crypto:makeTransaction rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf crypto:make ;
+                       rdfs:domain crypto:Person ;
+                       rdfs:range xsd:double .
+
+
+###  http://localhost/ontology/crypto#price
+crypto:price rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://localhost/ontology/crypto#Blockchain
+crypto:Blockchain rdf:type owl:Class .
+
+
+###  http://localhost/ontology/crypto#BlockchainContent
+crypto:BlockchainContent rdf:type owl:Class .
+
+
+###  http://localhost/ontology/crypto#Coin
+crypto:Coin rdf:type owl:Class ;
+            rdfs:subClassOf crypto:BlockchainContent .
+
+
+###  http://localhost/ontology/crypto#ConcensusAlgorithm
+crypto:ConcensusAlgorithm rdf:type owl:Class ;
+                          rdfs:subClassOf crypto:BlockchainContent .
+
+
+###  http://localhost/ontology/crypto#Developer
+crypto:Developer rdf:type owl:Class ;
+                 rdfs:subClassOf crypto:Person .
+
+
+###  http://localhost/ontology/crypto#HybridBlockchain
+crypto:HybridBlockchain rdf:type owl:Class ;
+                        rdfs:subClassOf crypto:Blockchain .
+
+
+###  http://localhost/ontology/crypto#Miner
+crypto:Miner rdf:type owl:Class ;
+             rdfs:subClassOf crypto:User .
+
+
+###  http://localhost/ontology/crypto#Person
+crypto:Person rdf:type owl:Class .
+
+
+###  http://localhost/ontology/crypto#PrivateBlockchain
+crypto:PrivateBlockchain rdf:type owl:Class ;
+                         rdfs:subClassOf crypto:Blockchain .
+
+
+###  http://localhost/ontology/crypto#PublicBlockchain
+crypto:PublicBlockchain rdf:type owl:Class ;
+                        rdfs:subClassOf crypto:Blockchain .
+
+
+###  http://localhost/ontology/crypto#SimpleUser
+crypto:SimpleUser rdf:type owl:Class ;
+                  rdfs:subClassOf crypto:User .
+
+
+###  http://localhost/ontology/crypto#Token
+crypto:Token rdf:type owl:Class ;
+             rdfs:subClassOf crypto:BlockchainContent .
+
+
+###  http://localhost/ontology/crypto#User
+crypto:User rdf:type owl:Class ;
+            rdfs:subClassOf crypto:Person .
+
+
+###  http://localhost/ontology/crypto#Validator
+crypto:Validator rdf:type owl:Class ;
+                 rdfs:subClassOf crypto:User .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://localhost/ontology/crypto#APT
+crypto:APT rdf:type owl:NamedIndividual ,
+                    crypto:Coin ;
+           crypto:price 10.21 .
+
+
+###  http://localhost/ontology/crypto#Alexey
+crypto:Alexey rdf:type owl:NamedIndividual ,
+                       crypto:SimpleUser ;
+              crypto:doTest crypto:Aptos ;
+              crypto:makeTransaction 109000.0 .
+
+
+###  http://localhost/ontology/crypto#Aptos
+crypto:Aptos rdf:type owl:NamedIndividual ,
+                      crypto:PublicBlockchain ;
+             crypto:hasCoin crypto:APT ;
+             crypto:PoS "true"^^xsd:boolean ;
+             crypto:containsSmartContracts "true"^^xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#BTC
+crypto:BTC rdf:type owl:NamedIndividual ,
+                    crypto:Coin ;
+           crypto:price 65939.88 .
+
+
+###  http://localhost/ontology/crypto#Base
+crypto:Base rdf:type owl:NamedIndividual ,
+                     crypto:PublicBlockchain .
+
+
+###  http://localhost/ontology/crypto#Bitcoin
+crypto:Bitcoin rdf:type owl:NamedIndividual ,
+                        crypto:PublicBlockchain ;
+               crypto:hasCoin crypto:BTC ;
+               crypto:PoW "true"^^xsd:boolean ;
+               crypto:containsBlocks 839487 ;
+               crypto:containsNodes 45000 ;
+               crypto:containsSmartContracts "false"^^xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#ETH
+crypto:ETH rdf:type owl:NamedIndividual ,
+                    crypto:Coin ;
+           crypto:price 3136.99 .
+
+
+###  http://localhost/ontology/crypto#Ethereum
+crypto:Ethereum rdf:type owl:NamedIndividual ,
+                         crypto:PublicBlockchain ;
+                crypto:hasCoin crypto:ETH ;
+                crypto:hasToken crypto:PEPE ;
+                crypto:PoS "true"^^xsd:boolean ;
+                crypto:containsBlocks 19710277 ;
+                crypto:containsNodes 8933 ;
+                crypto:containsSmartContracts "true"^^xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#Jhon
+crypto:Jhon rdf:type owl:NamedIndividual ,
+                     crypto:Miner ;
+            crypto:doMining crypto:BTC .
+
+
+###  http://localhost/ontology/crypto#ORDI
+crypto:ORDI rdf:type owl:NamedIndividual ,
+                     crypto:Token ;
+            crypto:price 49.17 .
+
+
+###  http://localhost/ontology/crypto#PEPE
+crypto:PEPE rdf:type owl:NamedIndividual ,
+                     crypto:Token ;
+            crypto:price 0.00078 .
+
+
+###  http://localhost/ontology/crypto#Ripple
+crypto:Ripple rdf:type owl:NamedIndividual ,
+                       crypto:PrivateBlockchain ;
+              crypto:hasCoin crypto:XRP ;
+              crypto:containsSmartContracts "true"^^xsd:boolean .
+
+
+###  http://localhost/ontology/crypto#Satoshi_Nakomoto
+crypto:Satoshi_Nakomoto rdf:type owl:NamedIndividual ,
+                                 crypto:Developer ;
+                        crypto:doDevelop crypto:Bitcoin .
+
+
+###  http://localhost/ontology/crypto#XRP
+crypto:XRP rdf:type owl:NamedIndividual ,
+                    crypto:Coin ;
+           crypto:price 0.548 .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

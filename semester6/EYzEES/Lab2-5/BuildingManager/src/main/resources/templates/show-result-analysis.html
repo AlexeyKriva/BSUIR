@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #007bff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            color: #007bff;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .object-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .object-list li {
+            margin-bottom: 10px;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header" th:text="${text1}">Исходный текст</div>
+    <form id="data-form" action="/saveAnalysis" method="post">
+        <ul id="object-list" class="object-list">
+            <li th:each="vertex : ${vertexOfAnalysis}">
+                <h5>Корневое слово: </h5>
+                <input type="text" class="vertex-input" value="" th:value="${vertex.word}">
+                <button class="delete-button" onclick="deleteItem(this)">Удалить</button>
+                <ul>
+                    <li th:each="relation : ${vertex.relations}">
+                        <input type="text" class="relation-input" value="" th:value="${relation.word}">
+                        <input type="text" class="relation-input" value="" th:value="${relation.relation}">
+                        <button class="delete-button" onclick="deleteItem(this)">Удалить</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button id="save-button">Сохранить</button>
+    </form>
+</div>
+<script>
+    function deleteItem(button) {
+        button.parentNode.remove();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Analysis</title>
+    <style>
+        /* Ваши стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #007bff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            color: #007bff;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .object-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .object-list li {
+            margin-bottom: 10px;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .save-button {
+            background-color: #FFFFFF;
+            color: #007bff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .save-button:hover {
+            background-color: #007bff;
+        }
+
+        /* Стили для редактируемого input */
+        .editable-input {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: inherit;
+            font-size: inherit;
+            width: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Semantic Analysis</h2>
+        <span th:text="${text2}"></span>
+    </div>
+    <ul class="object-list">
+        <!-- Используйте Thymeleaf для отображения каждого элемента списка -->
+        <li th:each="entity : ${semanticAnalysis.namedEntities}">
+            <!-- Используйте contenteditable для редактирования значения -->
+            <p>Type: <span contenteditable="true" class="editable-input" th:text="${entity.type}"></span></p>
+            <p>Value: <span th:text="${entity.value}"></span></p>
+        </li>
+        <li th:each="relation : ${semanticAnalysis.relationInformation}">
+            <p>Confidence: <span th:text="${relation.confidence}"></span></p>
+            <p>Subject: <span contenteditable="true" class="editable-input" th:text="${relation.subject}"></span></p>
+            <p>Relation: <span contenteditable="true" class="editable-input" th:text="${relation.relation}"></span></p>
+            <p>Object: <span contenteditable="true" class="editable-input" th:text="${relation.object}"></span></p>
+        </li>
+        <ul>
+            <li th:each="subList, index1 : ${semanticAnalysis.semanticAnaphora.namedEntities}">
+                <ul>
+                    <li th:each="item, index2 : ${subList}">
+                        <p th:text="${'Item: ' + item}"></p>
+                        <p th:text="${'в предложении: ' + semanticAnalysis.semanticAnaphora.numbersOfFirstSentence[index1.index][index2.index]}"></p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </ul>
+    <form th:action="@{/saveSemanticAnalysis}" method="post">
+        <button type="submit" class="save-button">Сохранить</button>
+    </form></div>
+</body>
+</html>

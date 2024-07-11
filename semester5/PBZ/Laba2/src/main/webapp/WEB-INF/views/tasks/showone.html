@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Computing</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        p {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #333;
+        }
+        a {
+            font-size: 16px;
+            text-decoration: none;
+            color: blue;
+        }
+        .color1 { color: #FF6347; }
+        .color2 { color: #4682B4; }
+        .color3 { color: #228B22; }
+        .color4 { color: #800080; }
+        .update-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<p><span class="nowrap">Id computing:</span> <span th:text="${output1.getIsId()}" class="color1">ID</span></p>
+<p><span class="nowrap">Name computing:</span> <span th:text="${output1.getIsName()}" class="color2">Name</span></p>
+<p><span class="nowrap">Model computing:</span> <span th:text="${output1.getModel()}" class="color3">Model</span></p>
+<p><span class="nowrap">Acquisition date:</span> <span th:text="${output1.getAcquisitionDate()}" class="color4">Acquisition Date</span></p>
+<p><span class="nowrap">Id office equipment:</span> <span th:text="${output1.getIsId1()}" class="color1">ID</span></p>
+<p><span class="nowrap">Name office equipment:</span> <span th:text="${output1.getIsName1()}" class="color2">Name</span></p>
+<p><span class="nowrap">Model office equipment:</span> <span th:text="${output1.getModel1()}" class="color3">Model</span></p>
+<p><span class="nowrap">Acquisition office equipment:</span> <span th:text="${output1.getAcquisitionDate1()}" class="color4">Acquisition Date</span></p>
+<p><span class="nowrap">Unit number:</span> <span th:text="${output1.getFullNameUnit()}" class="color2">Unit Number</span></p>
+<a href="/tasks/elements/" class="update-link">View all</a>
+</body>
+</html>

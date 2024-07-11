@@ -1,0 +1,9 @@
+﻿  raschetka.cpp
+D:\pioivis\raschetka\raschetka\raschetka.cpp(30,31): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(47,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(50,27): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(70,27): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(74,31): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(89,51): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\raschetka\raschetka\raschetka.cpp(123,29): warning C4018: <: несоответствие типов со знаком и без знака
+  raschetka.vcxproj -> D:\pioivis\raschetka\Debug\raschetka.exe

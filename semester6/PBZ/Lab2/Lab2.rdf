@@ -1,0 +1,505 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://localhost/ontology/crypto/"
+     xml:base="http://localhost/ontology/crypto/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:crypto="http://localhost/ontology/crypto#">
+    <owl:Ontology rdf:about="http://localhost/ontology/crypto"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/ontology/crypto#be -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#be"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#beBlockchainToken -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#beBlockchainToken">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#be"/>
+        <owl:inverseOf rdf:resource="http://localhost/ontology/crypto#hasToken"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#beBlockhainCoin -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#beBlockhainCoin">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#be"/>
+        <owl:inverseOf rdf:resource="http://localhost/ontology/crypto#hasCoin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#beConsensusAlgorithm -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#beConsensusAlgorithm">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#be"/>
+        <owl:inverseOf rdf:resource="http://localhost/ontology/crypto#hasConsensusAlgorithm"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#do -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#do"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#doDevelop -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#doDevelop">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#do"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Developer"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#doMining -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#doMining">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#do"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Miner"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Coin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#doTest -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#doTest">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#do"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Person"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#doValidate -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#doValidate">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#do"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Validator"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Coin"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Token"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#has -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#has">
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#BlockchainContent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#hasCoin -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#hasCoin">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#has"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Coin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#hasConsensusAlgorithm -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#hasConsensusAlgorithm">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#has"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#ConcensusAlgorithm"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#hasToken -->
+
+    <owl:ObjectProperty rdf:about="http://localhost/ontology/crypto#hasToken">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#has"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://localhost/ontology/crypto#Token"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/ontology/crypto#PoS -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#PoS">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#concensusAlgorithm"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#PoW -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#PoW">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#concensusAlgorithm"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#concensusAlgorithm -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#concensusAlgorithm"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#contains -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#contains"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#containsBlocks -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#containsBlocks">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#contains"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#long"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#containsNodes -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#containsNodes">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#contains"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#long"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#containsSmartContracts -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#containsSmartContracts">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#contains"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#make -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#make"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#makeTransaction -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#makeTransaction">
+        <rdfs:subPropertyOf rdf:resource="http://localhost/ontology/crypto#make"/>
+        <rdfs:domain rdf:resource="http://localhost/ontology/crypto#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://localhost/ontology/crypto#price -->
+
+    <owl:DatatypeProperty rdf:about="http://localhost/ontology/crypto#price"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/ontology/crypto#Blockchain -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Blockchain"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#BlockchainContent -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#BlockchainContent"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Coin -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Coin">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#BlockchainContent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#ConcensusAlgorithm -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#ConcensusAlgorithm">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#BlockchainContent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Developer -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Developer">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#HybridBlockchain -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#HybridBlockchain">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Miner -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Miner">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#User"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Person -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Person"/>
+    
+
+
+    <!-- http://localhost/ontology/crypto#PrivateBlockchain -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#PrivateBlockchain">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#PublicBlockchain -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#PublicBlockchain">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#Blockchain"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#SimpleUser -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#SimpleUser">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#User"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Token -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Token">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#BlockchainContent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#User -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#User">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Validator -->
+
+    <owl:Class rdf:about="http://localhost/ontology/crypto#Validator">
+        <rdfs:subClassOf rdf:resource="http://localhost/ontology/crypto#User"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/ontology/crypto#APT -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#APT">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Coin"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.21</crypto:price>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Alexey -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Alexey">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#SimpleUser"/>
+        <crypto:doTest rdf:resource="http://localhost/ontology/crypto#Aptos"/>
+        <crypto:makeTransaction rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">109000.0</crypto:makeTransaction>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Aptos -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Aptos">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#PublicBlockchain"/>
+        <crypto:hasCoin rdf:resource="http://localhost/ontology/crypto#APT"/>
+        <crypto:PoS rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:PoS>
+        <crypto:containsSmartContracts rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:containsSmartContracts>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#BTC -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#BTC">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Coin"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">65939.88</crypto:price>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Base -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Base">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#PublicBlockchain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Bitcoin -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Bitcoin">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#PublicBlockchain"/>
+        <crypto:hasCoin rdf:resource="http://localhost/ontology/crypto#BTC"/>
+        <crypto:PoW rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:PoW>
+        <crypto:containsBlocks rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">839487</crypto:containsBlocks>
+        <crypto:containsNodes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">45000</crypto:containsNodes>
+        <crypto:containsSmartContracts rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</crypto:containsSmartContracts>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#ETH -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#ETH">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Coin"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3136.99</crypto:price>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Ethereum -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Ethereum">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#PublicBlockchain"/>
+        <crypto:hasCoin rdf:resource="http://localhost/ontology/crypto#ETH"/>
+        <crypto:hasToken rdf:resource="http://localhost/ontology/crypto#PEPE"/>
+        <crypto:PoS rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:PoS>
+        <crypto:containsBlocks rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">19710277</crypto:containsBlocks>
+        <crypto:containsNodes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8933</crypto:containsNodes>
+        <crypto:containsSmartContracts rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:containsSmartContracts>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Jhon -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Jhon">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Miner"/>
+        <crypto:doMining rdf:resource="http://localhost/ontology/crypto#BTC"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#ORDI -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#ORDI">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Token"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.17</crypto:price>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#PEPE -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#PEPE">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Token"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00078</crypto:price>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Ripple -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Ripple">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#PrivateBlockchain"/>
+        <crypto:hasCoin rdf:resource="http://localhost/ontology/crypto#XRP"/>
+        <crypto:containsSmartContracts rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</crypto:containsSmartContracts>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#Satoshi_Nakomoto -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#Satoshi_Nakomoto">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Developer"/>
+        <crypto:doDevelop rdf:resource="http://localhost/ontology/crypto#Bitcoin"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://localhost/ontology/crypto#XRP -->
+
+    <owl:NamedIndividual rdf:about="http://localhost/ontology/crypto#XRP">
+        <rdf:type rdf:resource="http://localhost/ontology/crypto#Coin"/>
+        <crypto:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.548</crypto:price>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

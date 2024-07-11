@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Текстовый менеджер</title>
+    <style>
+        /*body {*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    background-image: url('/images/animals.jpg');*/
+        /*    background-size: cover;*/
+        /*    background-position: 50% 10%;*/
+        /*    font-family: Arial, sans-serif;*/
+        /*}*/
+
+        .button-container {
+            text-align: center;
+            margin-top: 30vh;
+        }
+
+        .large-button {
+            padding: 10px 18px;
+            border-radius: 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .large-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .page-title {
+            font-size: 48px;
+            color: #2e6e3d;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-title">
+    <!--КОРПУС ТЕКСТОВ О ЖИВОТНЫХ-->
+</div>
+<div class="button-container">
+    <div style="text-align: center;">
+        <button class="large-button" onclick="location.href='/search'">Провести поиск</button>
+        <button class="large-button" onclick="location.href='/unmarkedHull'">Выбрать неразмеченный корпус</button>
+        <button class="large-button" onclick="location.href='/markedHull'">Выбрать размеченный корпус</button>
+        <button class="large-button" onclick="location.href='/deleteAll'">Очистить размеченный корпус</button>
+        <br><br>
+        <button class="large-button" onclick="location.href='/analysis'">Синтаксический анализ предложения</button>
+        <button class="large-button" onclick="location.href='/getAnalysis'">Просмотр синтаксического анализа предложений</button>
+        <br><br>
+        <button class="large-button" onclick="location.href='/semanticAnalysis'">Семантический анализ предложения</button>
+        <button class="large-button" onclick="location.href='/deleteSemanticAnalysis'">Очистить результат семантического анализа</button>
+        <br><br>
+        <button class="large-button" onclick="location.href='/getSemanticAnalysis'">Просмотр семантического анализа текста</button>
+    </div>
+</div>
+</body>
+</html>

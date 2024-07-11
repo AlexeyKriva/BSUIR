@@ -1,0 +1,8 @@
+﻿  Perevod.cpp
+  QTree.cpp
+D:\pioivis\QTree\QTree\QTree.cpp(27,31): error C2660: v_derevo: функция не принимает 1 аргументов
+D:\pioivis\QTree\QTree\Perevod.h(22,6): message : см. объявление "v_derevo"
+D:\pioivis\QTree\QTree\QTree.cpp(31,31): warning C4018: <: несоответствие типов со знаком и без знака
+D:\pioivis\QTree\QTree\QTree.cpp(53,32): error C2660: v_matricu: функция не принимает 1 аргументов
+D:\pioivis\QTree\QTree\Perevod.h(23,6): message : см. объявление "v_matricu"
+  Создание кода...

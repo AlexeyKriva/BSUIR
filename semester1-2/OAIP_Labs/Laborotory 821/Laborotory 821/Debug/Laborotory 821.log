@@ -1,0 +1,6 @@
+﻿  MyForm.cpp
+D:\OAIP\Laborotory 821\Laborotory 821\MyForm.cpp(7,1): error C2059: синтаксическая ошибка: namespace
+D:\OAIP\Laborotory 821\Laborotory 821\MyForm.cpp(8,1): error C2143: синтаксическая ошибка: отсутствие ";" перед "{"
+D:\OAIP\Laborotory 821\Laborotory 821\MyForm.cpp(8,1): error C2447: {: отсутствует заголовок функции (возможно, используется формальный список старого типа)
+  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+  Создание кода...

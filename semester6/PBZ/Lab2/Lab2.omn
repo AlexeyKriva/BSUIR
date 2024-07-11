@@ -1,0 +1,450 @@
+Prefix: : <http://localhost/ontology/crypto/>
+Prefix: crypto: <http://localhost/ontology/crypto#>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+Ontology: <http://localhost/ontology/crypto>
+
+
+Datatype: xsd:boolean
+
+    
+Datatype: xsd:decimal
+
+    
+Datatype: xsd:double
+
+    
+Datatype: xsd:long
+
+    
+ObjectProperty: crypto:be
+
+    
+ObjectProperty: crypto:beBlockchainToken
+
+    SubPropertyOf: 
+        crypto:be
+    
+    InverseOf: 
+        crypto:hasToken
+    
+    
+ObjectProperty: crypto:beBlockhainCoin
+
+    SubPropertyOf: 
+        crypto:be
+    
+    InverseOf: 
+        crypto:hasCoin
+    
+    
+ObjectProperty: crypto:beConsensusAlgorithm
+
+    SubPropertyOf: 
+        crypto:be
+    
+    InverseOf: 
+        crypto:hasConsensusAlgorithm
+    
+    
+ObjectProperty: crypto:do
+
+    
+ObjectProperty: crypto:doDevelop
+
+    SubPropertyOf: 
+        crypto:do
+    
+    Domain: 
+        crypto:Developer
+    
+    Range: 
+        crypto:Blockchain
+    
+    
+ObjectProperty: crypto:doMining
+
+    SubPropertyOf: 
+        crypto:do
+    
+    Domain: 
+        crypto:Miner
+    
+    Range: 
+        crypto:Coin
+    
+    
+ObjectProperty: crypto:doTest
+
+    SubPropertyOf: 
+        crypto:do
+    
+    Domain: 
+        crypto:Person
+    
+    Range: 
+        crypto:Blockchain
+    
+    
+ObjectProperty: crypto:doValidate
+
+    SubPropertyOf: 
+        crypto:do
+    
+    Domain: 
+        crypto:Validator
+    
+    Range: 
+        crypto:Coin,
+        crypto:Token
+    
+    
+ObjectProperty: crypto:has
+
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        crypto:BlockchainContent
+    
+    
+ObjectProperty: crypto:hasCoin
+
+    SubPropertyOf: 
+        crypto:has
+    
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        crypto:Coin
+    
+    InverseOf: 
+        crypto:beBlockhainCoin
+    
+    
+ObjectProperty: crypto:hasConsensusAlgorithm
+
+    SubPropertyOf: 
+        crypto:has
+    
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        crypto:ConcensusAlgorithm
+    
+    InverseOf: 
+        crypto:beConsensusAlgorithm
+    
+    
+ObjectProperty: crypto:hasToken
+
+    SubPropertyOf: 
+        crypto:has
+    
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        crypto:Token
+    
+    InverseOf: 
+        crypto:beBlockchainToken
+    
+    
+DataProperty: crypto:PoS
+
+    SubPropertyOf: 
+        crypto:concensusAlgorithm
+    
+    
+DataProperty: crypto:PoW
+
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        xsd:boolean
+    
+    SubPropertyOf: 
+        crypto:concensusAlgorithm
+    
+    
+DataProperty: crypto:concensusAlgorithm
+
+    
+DataProperty: crypto:contains
+
+    
+DataProperty: crypto:containsBlocks
+
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        xsd:long
+    
+    SubPropertyOf: 
+        crypto:contains
+    
+    
+DataProperty: crypto:containsNodes
+
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        xsd:long
+    
+    SubPropertyOf: 
+        crypto:contains
+    
+    
+DataProperty: crypto:containsSmartContracts
+
+    Domain: 
+        crypto:Blockchain
+    
+    Range: 
+        xsd:boolean
+    
+    SubPropertyOf: 
+        crypto:contains
+    
+    
+DataProperty: crypto:make
+
+    
+DataProperty: crypto:makeTransaction
+
+    Domain: 
+        crypto:Person
+    
+    Range: 
+        xsd:double
+    
+    SubPropertyOf: 
+        crypto:make
+    
+    
+DataProperty: crypto:price
+
+    
+Class: crypto:Blockchain
+
+    
+Class: crypto:BlockchainContent
+
+    
+Class: crypto:Coin
+
+    SubClassOf: 
+        crypto:BlockchainContent
+    
+    
+Class: crypto:ConcensusAlgorithm
+
+    SubClassOf: 
+        crypto:BlockchainContent
+    
+    
+Class: crypto:Developer
+
+    SubClassOf: 
+        crypto:Person
+    
+    
+Class: crypto:HybridBlockchain
+
+    SubClassOf: 
+        crypto:Blockchain
+    
+    
+Class: crypto:Miner
+
+    SubClassOf: 
+        crypto:User
+    
+    
+Class: crypto:Person
+
+    
+Class: crypto:PrivateBlockchain
+
+    SubClassOf: 
+        crypto:Blockchain
+    
+    
+Class: crypto:PublicBlockchain
+
+    SubClassOf: 
+        crypto:Blockchain
+    
+    
+Class: crypto:SimpleUser
+
+    SubClassOf: 
+        crypto:User
+    
+    
+Class: crypto:Token
+
+    SubClassOf: 
+        crypto:BlockchainContent
+    
+    
+Class: crypto:User
+
+    SubClassOf: 
+        crypto:Person
+    
+    
+Class: crypto:Validator
+
+    SubClassOf: 
+        crypto:User
+    
+    
+Individual: crypto:APT
+
+    Types: 
+        crypto:Coin
+    
+    Facts:  
+     crypto:price  10.21
+    
+    
+Individual: crypto:Alexey
+
+    Types: 
+        crypto:SimpleUser
+    
+    Facts:  
+     crypto:doTest  crypto:Aptos,
+     crypto:makeTransaction  109000.0
+    
+    
+Individual: crypto:Aptos
+
+    Types: 
+        crypto:PublicBlockchain
+    
+    Facts:  
+     crypto:hasCoin  crypto:APT,
+     crypto:PoS  true,
+     crypto:containsSmartContracts  true
+    
+    
+Individual: crypto:BTC
+
+    Types: 
+        crypto:Coin
+    
+    Facts:  
+     crypto:price  65939.88
+    
+    
+Individual: crypto:Base
+
+    Types: 
+        crypto:PublicBlockchain
+    
+    
+Individual: crypto:Bitcoin
+
+    Types: 
+        crypto:PublicBlockchain
+    
+    Facts:  
+     crypto:hasCoin  crypto:BTC,
+     crypto:PoW  true,
+     crypto:containsBlocks  839487,
+     crypto:containsNodes  45000,
+     crypto:containsSmartContracts  false
+    
+    
+Individual: crypto:ETH
+
+    Types: 
+        crypto:Coin
+    
+    Facts:  
+     crypto:price  3136.99
+    
+    
+Individual: crypto:Ethereum
+
+    Types: 
+        crypto:PublicBlockchain
+    
+    Facts:  
+     crypto:hasCoin  crypto:ETH,
+     crypto:hasToken  crypto:PEPE,
+     crypto:PoS  true,
+     crypto:containsBlocks  19710277,
+     crypto:containsNodes  8933,
+     crypto:containsSmartContracts  true
+    
+    
+Individual: crypto:Jhon
+
+    Types: 
+        crypto:Miner
+    
+    Facts:  
+     crypto:doMining  crypto:BTC
+    
+    
+Individual: crypto:ORDI
+
+    Types: 
+        crypto:Token
+    
+    Facts:  
+     crypto:price  49.17
+    
+    
+Individual: crypto:PEPE
+
+    Types: 
+        crypto:Token
+    
+    Facts:  
+     crypto:price  0.00078
+    
+    
+Individual: crypto:Ripple
+
+    Types: 
+        crypto:PrivateBlockchain
+    
+    Facts:  
+     crypto:hasCoin  crypto:XRP,
+     crypto:containsSmartContracts  true
+    
+    
+Individual: crypto:Satoshi_Nakomoto
+
+    Types: 
+        crypto:Developer
+    
+    Facts:  
+     crypto:doDevelop  crypto:Bitcoin
+    
+    
+Individual: crypto:XRP
+
+    Types: 
+        crypto:Coin
+    
+    Facts:  
+     crypto:price  0.548
+    
+    

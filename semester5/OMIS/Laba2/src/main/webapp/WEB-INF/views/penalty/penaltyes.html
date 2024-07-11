@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Email address</th>
+        <th>Description</th>
+        <th>Penalty number</th>
+        <th>Penalty appoint time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="penalty : ${penaltyes}">
+        <td th:text="${penalty.emailAddress}">VALUE</td>
+        <td th:text="${penalty.description}">VALUE</td>
+        <td th:text="${penalty.penaltyNumber}">VALUE</td>
+        <td th:text="${penalty.penaltyAppointTime}">VALUE</td>
+    </tr>
+    </tbody>
+</table>
+<h1></h1>
+<form th:action="@{/penalty/penaltyes}" method="post" th:object="${penalty}">
+    <div>
+        <label for="emailAddress">Email:</label>
+        <input type="text" id="emailAddress" name="email" th:field="*{emailAddress}" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required>
+    </div>
+    <div>
+        <label for="number">Penalty number:</label>
+        <input type="number" id="number" name="penaltyNumber" th:field="*{penaltyNumber}" required>
+    </div>
+    <div>
+        <label for="birthdate">Penalty appoint time:</label>
+        <input type="text" id="birthdate" name="penaltyAppointTime" th:field="*{penaltyAppointTime}" required>
+    </div>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

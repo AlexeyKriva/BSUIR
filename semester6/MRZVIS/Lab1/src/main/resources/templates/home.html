@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ввод чисел</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .centered-content {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 77vh; /* Высота экрана */
+        }
+
+        .rounded-box {
+            height: 350px;
+            width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rounded-box label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .rounded-box input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rounded-box button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .rounded-box button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="centered-content">
+    <div class="rounded-box">
+        <form action="/input-numbers" method="post">
+            <label for="amountOfNumbers">Введите количество пар чисел</label>
+            <input type="number" id="amountOfNumbers" name="amountOfNumbers">
+
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

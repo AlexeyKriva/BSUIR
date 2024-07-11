@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload file page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            color: #000000;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label,
+        button {
+            margin: 20px auto; /* Устанавливаем верхний и нижний отступ в 20px и автоматический отступ по горизонтали для центрирования */
+            padding: 15px 180px;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ffd700, #757575);
+            border: none;
+            display: block;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #ffd700, #757575);
+        }
+
+
+        label::before,
+        button::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #e6e6e6, #ffffff);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        label {
+            background: linear-gradient(45deg, #bdbdbd, #757575);
+        }
+
+        label:hover {
+            background: linear-gradient(45deg, #757575, #bdbdbd);
+        }
+
+        #fileInfo {
+            margin-top: 20px;
+            display: none; /* Скрываем информацию о файле изначально */
+        }
+    </style>
+</head>
+<body>
+<form action="/file/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf" id="fileInput" required onchange="displayFileInfo()">
+    <label for="fileInput">Choose File</label>
+    <div id="fileInfo">Selected file: <span id="fileName"></span><br> File size: <span id="fileSize"></span> KB</div>
+    <br><br>
+    <button type="submit">Upload</button>
+</form>
+
+<script>
+    function displayFileInfo() {
+        const fileInput = document.getElementById('fileInput');
+        const fileInfoContainer = document.getElementById('fileInfo');
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const fileName = file.name;
+            const fileSize = (file.size / 1024).toFixed(2);
+
+            document.getElementById('fileName').innerText = fileName;
+            document.getElementById('fileSize').innerText = fileSize;
+
+            // Показываем информацию о файле после выбора файла
+            fileInfoContainer.style.display = 'block';
+        } else {
+            // Если файл не выбран, скрываем информацию о файле
+            fileInfoContainer.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

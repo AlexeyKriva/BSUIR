@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Content</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .rectangle {
+            background-color: #CCCCCC;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #FFFFFF;
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            color: #fff;        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="rectangle">
+        <input class="search-input" type="text" placeholder="Поиск">
+    </div>
+    <div class="button-container">
+        <a class="button" th:href="@{/getAnalizedWord}" methods="post">Анализировать текст</a>
+        <a class="button" th:href="@{/}">На главную</a>
+    </div>
+</div>
+</body>
+</html>

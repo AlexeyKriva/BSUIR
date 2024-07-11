@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 30px;
+            font-size: 23px;
+            color: #000000; /* Чёрный цвет текста */
+        }
+        .outer-rectangle {
+            margin-bottom: 20px;
+        }
+        .rectangle {
+            border: 1px solid #dddddd;
+            padding: 12px;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #f2f2f2, #e6e6e6);
+            text-align: left;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin: 0;
+            color: #000000; /* Чёрный цвет текста */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+            background: linear-gradient(45deg, #f2f2f2, #e6e6e6);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #000000; /* Чёрный цвет текста */
+        }
+        .submit-button {
+            background: linear-gradient(45deg, #c0c0c0, #ffffff);
+            color: #000000;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(45deg, #d9d9d9, #ffffff);
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            animation: shine 1.5s infinite;
+        }
+        th {
+            background-color: #ffd700;
+            color: #000000; /* Чёрный цвет текста */
+        }
+    </style>
+</head>
+<body>
+<div class="outer-rectangle">
+    <div class="rectangle">
+        <h1>Original Text</h1>
+        <div class="rectangle">
+            <p th:text="${originalText}"></p>
+        </div>
+    </div>
+</div>
+<div class="rectangle">
+    <h1>Scanned Text</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Word</th>
+            <th>Frequency of Occurrence</th>
+            <th>Parameters</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="textLine : ${scannedText}">
+            <td th:text="${textLine.getWord()}"></td>
+            <td th:text="${textLine.getFrequencyOfOccurrence()}"></td>
+            <td th:if="${textLine.isLemma()}"><span style="color: black;" th:text="${textLine.getParameters()}"></span></td>
+            <td th:unless="${textLine.isLemma()}"><input type="text" th:value="${textLine.getParameters()}"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="submit-button" type="submit" formaction="/file">Submit</button>
+</div>
+</body>
+</html>

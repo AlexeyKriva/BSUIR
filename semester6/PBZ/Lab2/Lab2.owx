@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://localhost/ontology/crypto"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://localhost/ontology/crypto">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Blockchain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BlockchainContent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Coin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConcensusAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Developer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HybridBlockchain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Miner"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrivateBlockchain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PublicBlockchain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SimpleUser"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Token"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#User"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Validator"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#be"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#beBlockchainToken"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#beBlockhainCoin"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#beConsensusAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#do"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#doDevelop"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#doMining"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#doTest"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#doValidate"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#has"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasCoin"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsensusAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasToken"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#PoS"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#PoW"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#concensusAlgorithm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#contains"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#containsBlocks"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#containsNodes"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#containsSmartContracts"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#make"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#makeTransaction"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#price"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#APT"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Alexey"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Aptos"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BTC"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Base"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Bitcoin"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ETH"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ethereum"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Jhon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ORDI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PEPE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ripple"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Satoshi_Nakomoto"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#XRP"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Coin"/>
+        <Class IRI="#BlockchainContent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConcensusAlgorithm"/>
+        <Class IRI="#BlockchainContent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Developer"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HybridBlockchain"/>
+        <Class IRI="#Blockchain"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Miner"/>
+        <Class IRI="#User"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrivateBlockchain"/>
+        <Class IRI="#Blockchain"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PublicBlockchain"/>
+        <Class IRI="#Blockchain"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SimpleUser"/>
+        <Class IRI="#User"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Token"/>
+        <Class IRI="#BlockchainContent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#User"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Validator"/>
+        <Class IRI="#User"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Coin"/>
+        <NamedIndividual IRI="#APT"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SimpleUser"/>
+        <NamedIndividual IRI="#Alexey"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PublicBlockchain"/>
+        <NamedIndividual IRI="#Aptos"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Coin"/>
+        <NamedIndividual IRI="#BTC"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PublicBlockchain"/>
+        <NamedIndividual IRI="#Base"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PublicBlockchain"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Coin"/>
+        <NamedIndividual IRI="#ETH"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PublicBlockchain"/>
+        <NamedIndividual IRI="#Ethereum"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Miner"/>
+        <NamedIndividual IRI="#Jhon"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Token"/>
+        <NamedIndividual IRI="#ORDI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Token"/>
+        <NamedIndividual IRI="#PEPE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#PrivateBlockchain"/>
+        <NamedIndividual IRI="#Ripple"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Developer"/>
+        <NamedIndividual IRI="#Satoshi_Nakomoto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Coin"/>
+        <NamedIndividual IRI="#XRP"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#doTest"/>
+        <NamedIndividual IRI="#Alexey"/>
+        <NamedIndividual IRI="#Aptos"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCoin"/>
+        <NamedIndividual IRI="#Aptos"/>
+        <NamedIndividual IRI="#APT"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCoin"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+        <NamedIndividual IRI="#BTC"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCoin"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <NamedIndividual IRI="#ETH"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasToken"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <NamedIndividual IRI="#PEPE"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#doMining"/>
+        <NamedIndividual IRI="#Jhon"/>
+        <NamedIndividual IRI="#BTC"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCoin"/>
+        <NamedIndividual IRI="#Ripple"/>
+        <NamedIndividual IRI="#XRP"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#doDevelop"/>
+        <NamedIndividual IRI="#Satoshi_Nakomoto"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#APT"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10.21</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#makeTransaction"/>
+        <NamedIndividual IRI="#Alexey"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">109000.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#PoS"/>
+        <NamedIndividual IRI="#Aptos"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <NamedIndividual IRI="#Aptos"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#BTC"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">65939.88</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#PoW"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsBlocks"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">839487</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsNodes"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">45000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <NamedIndividual IRI="#Bitcoin"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#ETH"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3136.99</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#PoS"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsBlocks"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">19710277</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsNodes"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8933</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <NamedIndividual IRI="#Ethereum"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#ORDI"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">49.17</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#PEPE"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.00078</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <NamedIndividual IRI="#Ripple"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#XRP"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.548</Literal>
+    </DataPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#beBlockchainToken"/>
+        <ObjectProperty IRI="#be"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#beBlockhainCoin"/>
+        <ObjectProperty IRI="#be"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#beConsensusAlgorithm"/>
+        <ObjectProperty IRI="#be"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#doDevelop"/>
+        <ObjectProperty IRI="#do"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#doMining"/>
+        <ObjectProperty IRI="#do"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#doTest"/>
+        <ObjectProperty IRI="#do"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#doValidate"/>
+        <ObjectProperty IRI="#do"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasCoin"/>
+        <ObjectProperty IRI="#has"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasConsensusAlgorithm"/>
+        <ObjectProperty IRI="#has"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasToken"/>
+        <ObjectProperty IRI="#has"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#beBlockchainToken"/>
+        <ObjectProperty IRI="#hasToken"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#beBlockhainCoin"/>
+        <ObjectProperty IRI="#hasCoin"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#beConsensusAlgorithm"/>
+        <ObjectProperty IRI="#hasConsensusAlgorithm"/>
+    </InverseObjectProperties>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#doDevelop"/>
+        <Class IRI="#Developer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#doMining"/>
+        <Class IRI="#Miner"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#doTest"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#doValidate"/>
+        <Class IRI="#Validator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#has"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasCoin"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasConsensusAlgorithm"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasToken"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#doDevelop"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#doMining"/>
+        <Class IRI="#Coin"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#doTest"/>
+        <Class IRI="#Blockchain"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#doValidate"/>
+        <Class IRI="#Coin"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#doValidate"/>
+        <Class IRI="#Token"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#has"/>
+        <Class IRI="#BlockchainContent"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasCoin"/>
+        <Class IRI="#Coin"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasConsensusAlgorithm"/>
+        <Class IRI="#ConcensusAlgorithm"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasToken"/>
+        <Class IRI="#Token"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#PoS"/>
+        <DataProperty IRI="#concensusAlgorithm"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#PoW"/>
+        <DataProperty IRI="#concensusAlgorithm"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#containsBlocks"/>
+        <DataProperty IRI="#contains"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#containsNodes"/>
+        <DataProperty IRI="#contains"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <DataProperty IRI="#contains"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#makeTransaction"/>
+        <DataProperty IRI="#make"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#PoW"/>
+        <Class IRI="#Blockchain"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#containsBlocks"/>
+        <Class IRI="#Blockchain"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#containsNodes"/>
+        <Class IRI="#Blockchain"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <Class IRI="#Blockchain"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#makeTransaction"/>
+        <Class IRI="#Person"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#PoW"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#containsBlocks"/>
+        <Datatype abbreviatedIRI="xsd:long"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#containsNodes"/>
+        <Datatype abbreviatedIRI="xsd:long"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#containsSmartContracts"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#makeTransaction"/>
+        <Datatype abbreviatedIRI="xsd:double"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

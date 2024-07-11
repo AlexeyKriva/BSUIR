@@ -1,0 +1,307 @@
+Prefix(:=<http://localhost/ontology/crypto/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(crypto:=<http://localhost/ontology/crypto#>)
+
+
+Ontology(<http://localhost/ontology/crypto>
+
+Declaration(Class(crypto:Blockchain))
+Declaration(Class(crypto:BlockchainContent))
+Declaration(Class(crypto:Coin))
+Declaration(Class(crypto:ConcensusAlgorithm))
+Declaration(Class(crypto:Developer))
+Declaration(Class(crypto:HybridBlockchain))
+Declaration(Class(crypto:Miner))
+Declaration(Class(crypto:Person))
+Declaration(Class(crypto:PrivateBlockchain))
+Declaration(Class(crypto:PublicBlockchain))
+Declaration(Class(crypto:SimpleUser))
+Declaration(Class(crypto:Token))
+Declaration(Class(crypto:User))
+Declaration(Class(crypto:Validator))
+Declaration(ObjectProperty(crypto:be))
+Declaration(ObjectProperty(crypto:beBlockchainToken))
+Declaration(ObjectProperty(crypto:beBlockhainCoin))
+Declaration(ObjectProperty(crypto:beConsensusAlgorithm))
+Declaration(ObjectProperty(crypto:do))
+Declaration(ObjectProperty(crypto:doDevelop))
+Declaration(ObjectProperty(crypto:doMining))
+Declaration(ObjectProperty(crypto:doTest))
+Declaration(ObjectProperty(crypto:doValidate))
+Declaration(ObjectProperty(crypto:has))
+Declaration(ObjectProperty(crypto:hasCoin))
+Declaration(ObjectProperty(crypto:hasConsensusAlgorithm))
+Declaration(ObjectProperty(crypto:hasToken))
+Declaration(DataProperty(crypto:PoS))
+Declaration(DataProperty(crypto:PoW))
+Declaration(DataProperty(crypto:concensusAlgorithm))
+Declaration(DataProperty(crypto:contains))
+Declaration(DataProperty(crypto:containsBlocks))
+Declaration(DataProperty(crypto:containsNodes))
+Declaration(DataProperty(crypto:containsSmartContracts))
+Declaration(DataProperty(crypto:make))
+Declaration(DataProperty(crypto:makeTransaction))
+Declaration(DataProperty(crypto:price))
+Declaration(NamedIndividual(crypto:APT))
+Declaration(NamedIndividual(crypto:Alexey))
+Declaration(NamedIndividual(crypto:Aptos))
+Declaration(NamedIndividual(crypto:BTC))
+Declaration(NamedIndividual(crypto:Base))
+Declaration(NamedIndividual(crypto:Bitcoin))
+Declaration(NamedIndividual(crypto:ETH))
+Declaration(NamedIndividual(crypto:Ethereum))
+Declaration(NamedIndividual(crypto:Jhon))
+Declaration(NamedIndividual(crypto:ORDI))
+Declaration(NamedIndividual(crypto:PEPE))
+Declaration(NamedIndividual(crypto:Ripple))
+Declaration(NamedIndividual(crypto:Satoshi_Nakomoto))
+Declaration(NamedIndividual(crypto:XRP))
+############################
+#   Object Properties
+############################
+
+# Object Property: crypto:beBlockchainToken (crypto:beBlockchainToken)
+
+SubObjectPropertyOf(crypto:beBlockchainToken crypto:be)
+InverseObjectProperties(crypto:beBlockchainToken crypto:hasToken)
+
+# Object Property: crypto:beBlockhainCoin (crypto:beBlockhainCoin)
+
+SubObjectPropertyOf(crypto:beBlockhainCoin crypto:be)
+InverseObjectProperties(crypto:beBlockhainCoin crypto:hasCoin)
+
+# Object Property: crypto:beConsensusAlgorithm (crypto:beConsensusAlgorithm)
+
+SubObjectPropertyOf(crypto:beConsensusAlgorithm crypto:be)
+InverseObjectProperties(crypto:beConsensusAlgorithm crypto:hasConsensusAlgorithm)
+
+# Object Property: crypto:doDevelop (crypto:doDevelop)
+
+SubObjectPropertyOf(crypto:doDevelop crypto:do)
+ObjectPropertyDomain(crypto:doDevelop crypto:Developer)
+ObjectPropertyRange(crypto:doDevelop crypto:Blockchain)
+
+# Object Property: crypto:doMining (crypto:doMining)
+
+SubObjectPropertyOf(crypto:doMining crypto:do)
+ObjectPropertyDomain(crypto:doMining crypto:Miner)
+ObjectPropertyRange(crypto:doMining crypto:Coin)
+
+# Object Property: crypto:doTest (crypto:doTest)
+
+SubObjectPropertyOf(crypto:doTest crypto:do)
+ObjectPropertyDomain(crypto:doTest crypto:Person)
+ObjectPropertyRange(crypto:doTest crypto:Blockchain)
+
+# Object Property: crypto:doValidate (crypto:doValidate)
+
+SubObjectPropertyOf(crypto:doValidate crypto:do)
+ObjectPropertyDomain(crypto:doValidate crypto:Validator)
+ObjectPropertyRange(crypto:doValidate crypto:Coin)
+ObjectPropertyRange(crypto:doValidate crypto:Token)
+
+# Object Property: crypto:has (crypto:has)
+
+ObjectPropertyDomain(crypto:has crypto:Blockchain)
+ObjectPropertyRange(crypto:has crypto:BlockchainContent)
+
+# Object Property: crypto:hasCoin (crypto:hasCoin)
+
+SubObjectPropertyOf(crypto:hasCoin crypto:has)
+ObjectPropertyDomain(crypto:hasCoin crypto:Blockchain)
+ObjectPropertyRange(crypto:hasCoin crypto:Coin)
+
+# Object Property: crypto:hasConsensusAlgorithm (crypto:hasConsensusAlgorithm)
+
+SubObjectPropertyOf(crypto:hasConsensusAlgorithm crypto:has)
+ObjectPropertyDomain(crypto:hasConsensusAlgorithm crypto:Blockchain)
+ObjectPropertyRange(crypto:hasConsensusAlgorithm crypto:ConcensusAlgorithm)
+
+# Object Property: crypto:hasToken (crypto:hasToken)
+
+SubObjectPropertyOf(crypto:hasToken crypto:has)
+ObjectPropertyDomain(crypto:hasToken crypto:Blockchain)
+ObjectPropertyRange(crypto:hasToken crypto:Token)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: crypto:PoS (crypto:PoS)
+
+SubDataPropertyOf(crypto:PoS crypto:concensusAlgorithm)
+
+# Data Property: crypto:PoW (crypto:PoW)
+
+SubDataPropertyOf(crypto:PoW crypto:concensusAlgorithm)
+DataPropertyDomain(crypto:PoW crypto:Blockchain)
+DataPropertyRange(crypto:PoW xsd:boolean)
+
+# Data Property: crypto:containsBlocks (crypto:containsBlocks)
+
+SubDataPropertyOf(crypto:containsBlocks crypto:contains)
+DataPropertyDomain(crypto:containsBlocks crypto:Blockchain)
+DataPropertyRange(crypto:containsBlocks xsd:long)
+
+# Data Property: crypto:containsNodes (crypto:containsNodes)
+
+SubDataPropertyOf(crypto:containsNodes crypto:contains)
+DataPropertyDomain(crypto:containsNodes crypto:Blockchain)
+DataPropertyRange(crypto:containsNodes xsd:long)
+
+# Data Property: crypto:containsSmartContracts (crypto:containsSmartContracts)
+
+SubDataPropertyOf(crypto:containsSmartContracts crypto:contains)
+DataPropertyDomain(crypto:containsSmartContracts crypto:Blockchain)
+DataPropertyRange(crypto:containsSmartContracts xsd:boolean)
+
+# Data Property: crypto:makeTransaction (crypto:makeTransaction)
+
+SubDataPropertyOf(crypto:makeTransaction crypto:make)
+DataPropertyDomain(crypto:makeTransaction crypto:Person)
+DataPropertyRange(crypto:makeTransaction xsd:double)
+
+
+
+############################
+#   Classes
+############################
+
+# Class: crypto:Coin (crypto:Coin)
+
+SubClassOf(crypto:Coin crypto:BlockchainContent)
+
+# Class: crypto:ConcensusAlgorithm (crypto:ConcensusAlgorithm)
+
+SubClassOf(crypto:ConcensusAlgorithm crypto:BlockchainContent)
+
+# Class: crypto:Developer (crypto:Developer)
+
+SubClassOf(crypto:Developer crypto:Person)
+
+# Class: crypto:HybridBlockchain (crypto:HybridBlockchain)
+
+SubClassOf(crypto:HybridBlockchain crypto:Blockchain)
+
+# Class: crypto:Miner (crypto:Miner)
+
+SubClassOf(crypto:Miner crypto:User)
+
+# Class: crypto:PrivateBlockchain (crypto:PrivateBlockchain)
+
+SubClassOf(crypto:PrivateBlockchain crypto:Blockchain)
+
+# Class: crypto:PublicBlockchain (crypto:PublicBlockchain)
+
+SubClassOf(crypto:PublicBlockchain crypto:Blockchain)
+
+# Class: crypto:SimpleUser (crypto:SimpleUser)
+
+SubClassOf(crypto:SimpleUser crypto:User)
+
+# Class: crypto:Token (crypto:Token)
+
+SubClassOf(crypto:Token crypto:BlockchainContent)
+
+# Class: crypto:User (crypto:User)
+
+SubClassOf(crypto:User crypto:Person)
+
+# Class: crypto:Validator (crypto:Validator)
+
+SubClassOf(crypto:Validator crypto:User)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: crypto:APT (crypto:APT)
+
+ClassAssertion(crypto:Coin crypto:APT)
+DataPropertyAssertion(crypto:price crypto:APT "10.21"^^xsd:decimal)
+
+# Individual: crypto:Alexey (crypto:Alexey)
+
+ClassAssertion(crypto:SimpleUser crypto:Alexey)
+ObjectPropertyAssertion(crypto:doTest crypto:Alexey crypto:Aptos)
+DataPropertyAssertion(crypto:makeTransaction crypto:Alexey "109000.0"^^xsd:decimal)
+
+# Individual: crypto:Aptos (crypto:Aptos)
+
+ClassAssertion(crypto:PublicBlockchain crypto:Aptos)
+ObjectPropertyAssertion(crypto:hasCoin crypto:Aptos crypto:APT)
+DataPropertyAssertion(crypto:PoS crypto:Aptos "true"^^xsd:boolean)
+DataPropertyAssertion(crypto:containsSmartContracts crypto:Aptos "true"^^xsd:boolean)
+
+# Individual: crypto:BTC (crypto:BTC)
+
+ClassAssertion(crypto:Coin crypto:BTC)
+DataPropertyAssertion(crypto:price crypto:BTC "65939.88"^^xsd:decimal)
+
+# Individual: crypto:Base (crypto:Base)
+
+ClassAssertion(crypto:PublicBlockchain crypto:Base)
+
+# Individual: crypto:Bitcoin (crypto:Bitcoin)
+
+ClassAssertion(crypto:PublicBlockchain crypto:Bitcoin)
+ObjectPropertyAssertion(crypto:hasCoin crypto:Bitcoin crypto:BTC)
+DataPropertyAssertion(crypto:PoW crypto:Bitcoin "true"^^xsd:boolean)
+DataPropertyAssertion(crypto:containsBlocks crypto:Bitcoin "839487"^^xsd:decimal)
+DataPropertyAssertion(crypto:containsNodes crypto:Bitcoin "45000"^^xsd:decimal)
+DataPropertyAssertion(crypto:containsSmartContracts crypto:Bitcoin "false"^^xsd:boolean)
+
+# Individual: crypto:ETH (crypto:ETH)
+
+ClassAssertion(crypto:Coin crypto:ETH)
+DataPropertyAssertion(crypto:price crypto:ETH "3136.99"^^xsd:decimal)
+
+# Individual: crypto:Ethereum (crypto:Ethereum)
+
+ClassAssertion(crypto:PublicBlockchain crypto:Ethereum)
+ObjectPropertyAssertion(crypto:hasCoin crypto:Ethereum crypto:ETH)
+ObjectPropertyAssertion(crypto:hasToken crypto:Ethereum crypto:PEPE)
+DataPropertyAssertion(crypto:PoS crypto:Ethereum "true"^^xsd:boolean)
+DataPropertyAssertion(crypto:containsBlocks crypto:Ethereum "19710277"^^xsd:decimal)
+DataPropertyAssertion(crypto:containsNodes crypto:Ethereum "8933"^^xsd:decimal)
+DataPropertyAssertion(crypto:containsSmartContracts crypto:Ethereum "true"^^xsd:boolean)
+
+# Individual: crypto:Jhon (crypto:Jhon)
+
+ClassAssertion(crypto:Miner crypto:Jhon)
+ObjectPropertyAssertion(crypto:doMining crypto:Jhon crypto:BTC)
+
+# Individual: crypto:ORDI (crypto:ORDI)
+
+ClassAssertion(crypto:Token crypto:ORDI)
+DataPropertyAssertion(crypto:price crypto:ORDI "49.17"^^xsd:decimal)
+
+# Individual: crypto:PEPE (crypto:PEPE)
+
+ClassAssertion(crypto:Token crypto:PEPE)
+DataPropertyAssertion(crypto:price crypto:PEPE "0.00078"^^xsd:decimal)
+
+# Individual: crypto:Ripple (crypto:Ripple)
+
+ClassAssertion(crypto:PrivateBlockchain crypto:Ripple)
+ObjectPropertyAssertion(crypto:hasCoin crypto:Ripple crypto:XRP)
+DataPropertyAssertion(crypto:containsSmartContracts crypto:Ripple "true"^^xsd:boolean)
+
+# Individual: crypto:Satoshi_Nakomoto (crypto:Satoshi_Nakomoto)
+
+ClassAssertion(crypto:Developer crypto:Satoshi_Nakomoto)
+ObjectPropertyAssertion(crypto:doDevelop crypto:Satoshi_Nakomoto crypto:Bitcoin)
+
+# Individual: crypto:XRP (crypto:XRP)
+
+ClassAssertion(crypto:Coin crypto:XRP)
+DataPropertyAssertion(crypto:price crypto:XRP "0.548"^^xsd:decimal)
+
+
+)

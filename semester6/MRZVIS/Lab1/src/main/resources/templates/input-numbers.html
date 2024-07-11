@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание объектов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form action="/conveyor" th:object="${pairs}" method="post">
+    <div th:each="expression, objectStat : *{pairsOfNumbers}">
+        <div th:with="index=${objectStat.index}">
+            <label th:text="'Пара ' + ${index + 1}"></label>
+            <input type="text" th:field="*{pairsOfNumbers[__${index}__].firstNumber}" th:placeholder="'Enter first number'">
+            <span th:if="${#fields.hasErrors('pairsOfNumbers[__${index}__].firstNumber')}" th:errors="*{pairsOfNumbers[__${index}__].firstNumber}"></span>
+
+
+            <input type="text" th:field="*{pairsOfNumbers[__${index}__].secondNumber}" th:placeholder="'Enter second number'">
+            <span th:if="${#fields.hasErrors('pairsOfNumbers[__${index}__].secondNumber')}" th:errors="*{pairsOfNumbers[__${index}__].secondNumber}"></span>
+        </div>
+    </div>
+    <input type="submit" value="Отправить">
+</form>
+</body>
+</html>

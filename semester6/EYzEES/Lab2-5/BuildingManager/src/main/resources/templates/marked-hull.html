@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentences List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007bff;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Sentences List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Words</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sentence : ${markedHull}">
+        <td>
+            <ul>
+                <li th:each="word : ${sentence.listOfWords}">
+                    <span th:text="${word.word}"></span>
+                    <span>(Lemma: <span th:text="${word.lemma}"></span>, Frequency: <span th:text="${word.frequencyOfOccurrence}"></span>, Parameters: <span th:text="${word.parameters}"></span>)</span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

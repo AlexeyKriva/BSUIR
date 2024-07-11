@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #007bff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            color: #007bff;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .object-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .object-list li {
+            margin-bottom: 10px;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        /* Стили для кнопки поиска */
+        .search-button {
+            padding: 8px 16px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Semantic Analysis</h2>
+    </div>
+    <form action="/searchSemantic" method="get">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+
+    <h3>Named Entities:</h3>
+    <ul class="object-list">
+        <li th:each="entity : ${namedEntities}">
+            <p>Type: <span th:text="${entity.type}"></span></p>
+            <p>Value: <span th:text="${entity.value}"></span></p>
+        </li>
+    </ul>
+
+    <h3>Relation Information:</h3>
+    <ul class="object-list">
+        <li th:each="relation : ${relationInformations}">
+            <p>Confidence: <span th:text="${relation.confidence}"></span></p>
+            <p>Subject: <span th:text="${relation.subject}"></span></p>
+            <p>Relation: <span th:text="${relation.relation}"></span></p>
+            <p>Object: <span th:text="${relation.object}"></span></p>
+        </li>
+    </ul>
+
+    <h3>Simple Semantic Anaphora:</h3>
+    <ul class="object-list">
+        <li th:each="anaphora : ${simpleSemanticAnaphora}">
+            <p>Named Entity: <span th:text="${anaphora.namedEntity}"></span></p>
+            <p>Number of Sentence: <span th:text="${anaphora.numberOfSentence}"></span></p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

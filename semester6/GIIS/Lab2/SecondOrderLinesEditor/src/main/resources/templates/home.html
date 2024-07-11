@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор отрезка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            width: 300px;
+            height: 700px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 15px; /* Уменьшено расстояние до canvas */
+            margin-left: 15px; /* Уменьшено расстояние до canvas */
+        }
+
+        label {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<form action="/create" method="post" th:object="${secondOrderLine}">
+    <label for="pointX">x0:</label>
+    <input type="number" id="pointX" th:field="*{pointX}">
+    <span th:if="${#fields.hasErrors('pointX')}" th:errors="*{pointX}" th:class="${#fields.hasErrors('pointX')} ? 'error-message' : ''"></span>
+
+    <label for="pointY">y0:</label>
+    <input type="number" id="pointY" th:field="*{pointY}">
+    <span th:if="${#fields.hasErrors('pointY')}" th:errors="*{pointY}" th:class="${#fields.hasErrors('pointY')} ? 'error-message' : ''"></span>
+
+    <label for="coefficientA">a или R:</label>
+    <input type="number" id="coefficientA" th:field="*{coefficientA}">
+    <span th:if="${#fields.hasErrors('coefficientA')}" th:errors="*{coefficientA}" th:class="${#fields.hasErrors('coefficientA')} ? 'error-message' : ''"></span>
+
+    <label for="coefficientB">b:</label>
+    <input type="number" id="coefficientB" th:field="*{coefficientB}">
+    <span th:if="${#fields.hasErrors('coefficientB')}" th:errors="*{coefficientB}" th:class="${#fields.hasErrors('coefficientB')} ? 'error-message' : ''"></span>
+
+    <label for="typeOfLine">Выберите прямую:</label>
+    <select id="typeOfLine" th:field="*{typeOfLine}">
+        <option th:each="line : ${T(org.editor.secondorderlineseditor.models.TypeOfLine).values()}"
+                th:value="${line}"
+                th:text="${line}">
+        </option>
+    </select>
+
+    <span th:if="${#fields.hasErrors('typeOfLine')}" th:errors="*{typeOfLine}" th:class="${#fields.hasErrors('typeOfLine')} ? 'error-message' : ''"></span>
+
+    <br>
+
+    <button type="button" onclick="drawLine()">Нарисовать прямую</button>
+
+    <br>
+
+    <button type="button" onclick="drawLinePixel()">Нарисовать пиксель</button>
+</form>
+
+<canvas id="myCanvas" width="900" height="700" style="border:1px solid #000;"></canvas>
+
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    let bool = true
+    let arr = []
+
+    function drawLinePixel() {
+        console.log(arr)
+        let typeOfLine = document.getElementById("typeOfLine").value
+        switch (typeOfLine){
+            case "Circle":
+                drawPixelForFigure();
+                break
+            case "Ellipse":
+                drawPixelForFigure();
+                break
+            case "Hyperbola":
+                drawPixelForFigure();
+                break
+            case "Parabola":
+                drawPixelForFigure();
+                break
+        }
+        if (bool) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bool = false
+        }
+        console.log(bool)
+    }
+
+    function drawPixelForFigure() {
+        let pixel = arr.shift()
+        drawPixel(pixel.x, pixel.y)
+    }
+
+    function drawLine() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        arr.length = 0
+        bool = true
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let x = Number(document.getElementById("pointX").value);
+        let y = Number(document.getElementById("pointY").value);
+        let a = Number(document.getElementById("coefficientA").value);
+        let b = Number(document.getElementById("coefficientB").value);
+        let typeOfLine = document.getElementById("typeOfLine").value
+        arr = []
+        bool = true
+        switch (typeOfLine){
+            case "Circle":
+                drawCircle(x,y,a);
+                break
+            case "Ellipse":
+                drawEllipse(x,y,a,b);
+                break
+            case "Hyperbola":
+                drawHyperbola(x,y,a,b);
+                break
+            case "Parabola":
+                drawParabola(x,y,a,b);
+                break
+        }
+    }
+
+    function drawCircle(centerX, centerY, radius) {
+        let x = radius;
+        let y = 0;
+        let radiusError = 1 - x;
+
+        function drawSymmetricPoints(x, y) {
+            arr.push({x: centerX + x, y: centerY + y})
+            drawPixel(centerX + x, centerY + y);
+            arr.push({x: centerX - x, y: centerY + y})
+            drawPixel(centerX - x, centerY + y);
+            arr.push({x: centerX + x, y: centerY - y})
+            drawPixel(centerX + x, centerY - y);
+            arr.push({x: centerX - x, y: centerY - y})
+            drawPixel(centerX - x, centerY - y);
+
+            arr.push({x: centerX + y, y: centerY + x})
+            drawPixel(centerX + y, centerY + x);
+            arr.push({x: centerX - y, y: centerY + x})
+            drawPixel(centerX - y, centerY + x);
+            arr.push({x: centerX + y, y: centerY - x})
+            drawPixel(centerX + y, centerY - x);
+            arr.push({x: centerX - y, y: centerY - x})
+            drawPixel(centerX - y, centerY - x);
+        }
+
+        drawSymmetricPoints(x, y);
+
+        function drawCirclePixels() {
+            if (x > y) {
+                y++;
+
+                if (radiusError < 0) {
+                    radiusError += 2 * y + 1;
+                } else {
+                    x--;
+                    radiusError += 2 * (y - x) + 1;
+                }
+
+                drawSymmetricPoints(x, y);
+
+                setTimeout(drawCirclePixels, 20)
+            }
+        }
+
+        drawCirclePixels()
+    }
+
+    function IncX(x, t, a2, b2, dxt, d2xt) {
+        return {
+            x: x + 1,
+            t: t + dxt,
+            dxt: dxt + d2xt
+        };
+    }
+
+    function IncY(y, t, a2, b2, dyt, d2yt) {
+        return {
+            y: y - 1,
+            t: t + dyt,
+            dyt: dyt + d2yt
+        };
+    }
+
+    function drawEllipse(xc, yc, a, b) {
+        let x = 0, y = b
+        let a2 = a * a
+        let b2 = b * b;
+        let crit1 = -(a2 / 4 + a % 2 + b2)
+        let crit2 = -(b2 / 4 + b % 2 + a2)
+        let crit3 = -(b2 / 4 + b % 2)
+        let t = -a2 * y
+        let dxt = 2 * b2 * x
+        let dyt = -2 * a2 * y
+        let d2xt = 2 * b2, d2yt = 2 * a2
+
+        while (y >= 0 || x <= a)
+        {
+            arr.push({x: xc + x,y: yc + y})
+            drawPixel(xc + x, yc + y)
+            if (x != 0 || y != 0)
+            {
+                arr.push({x: xc - x,y: yc - y})
+                drawPixel(xc - x, yc - y)
+            }
+            if (x != 0 && y != 0)
+            {
+                arr.push({x: xc + x,y: yc - y})
+                drawPixel(xc + x, yc - y);
+                arr.push({x: xc - x,y: yc + y})
+                drawPixel(xc - x, yc + y);
+            }
+            if (t + b2 * x <= crit1 ||
+                t + a2 * y <= crit3) {
+                let result = IncX(x, t, a2, b2, dxt, d2xt)
+                x = result.x
+                t = result.t
+                dxt = result.dxt
+            }
+        else if (t - a2 * y > crit2) {
+                let result = IncY(y, t, a2, b2, dyt, d2yt)
+                y = result.y
+                t = result.t
+                dyt = result.dyt
+            }
+        else
+            {
+                let result = IncX(x, t, a2, b2, dxt, d2xt)
+                x = result.x
+                t = result.t
+                dxt = result.dxt
+                let result1 = IncY(y, t, a2, b2, dyt, d2yt);
+                y = result1.y
+                t = result1.t
+                dyt = result1.dyt
+            }
+        }
+    }
+
+    function drawHyperbola(centerX, centerY, a, b) {
+        const width = ctx.canvas.width;
+        const height = ctx.canvas.height;
+
+        for (let x = 0; x < width; x++) {
+            const xNormalized = (x - centerX) / a;
+            const y = centerY + b * Math.sqrt(1 + xNormalized * xNormalized);
+
+            if (y >= 0 && y < height) {
+                arr.push({x: x, y: y})
+                console.log(x, y)
+                drawPixel(x, y)
+            }
+        }
+
+        for (let x = 0; x < width; x++) {
+            const xNormalized = (x - centerX) / a;
+            const y = centerY - b * Math.sqrt(1 + xNormalized * xNormalized);
+
+            if (y >= 0 && y < height) {
+                arr.push({x: x, y: y})
+                console.log(x, y)
+                drawPixel(x, y)
+            }
+        }
+    }
+
+    function drawParabola(x,y,width,a) {
+        let i = -a
+        function drawParabolaPixels() {
+            if (i <= a) {
+                arr.push({x: x + i * width, y: y - i ** 2})
+                drawPixel(x + i * width, y - i ** 2);
+                i += 0.1
+                setTimeout(drawParabolaPixels, 1)
+            }
+        }
+
+        drawParabolaPixels()
+    }
+
+    function drawPixel(x, y) {
+        ctx.fillRect(x, y, 1, 1);
+        console.log('HERE')
+        ctx.stroke()
+    }
+
+</script>
+</body>
+</html>

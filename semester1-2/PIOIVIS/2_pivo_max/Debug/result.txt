@@ -1,0 +1,286 @@
+Test 01 
+Time Limit
+wrong answer Extra lines! "4" encountered 
+Test 02 
+wrong answer Extra lines! "10" encountered 
+Test 03 
+wrong answer Extra lines! "6" encountered 
+Test 04 
+wrong answer Extra lines! "5" encountered 
+Test 05 
+wrong answer Extra lines! "1" encountered 
+Test 06 
+wrong answer Extra lines! "7" encountered 
+Test 07 
+Time Limit
+wrong answer Extra lines! "6" encountered 
+Test 08 
+Time Limit
+wrong answer Extra lines! "13" encountered 
+Test 09 
+Time Limit
+wrong answer Extra lines! "1" encountered 
+Test 10 
+Time Limit
+wrong answer Extra lines! "1" encountered 
+Test 11 
+Time Limit
+wrong answer Extra lines! "4" encountered 
+Test 12 
+Time Limit
+wrong answer Extra lines! "2" encountered 
+Test 13 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 14 
+Time Limit
+wrong answer Extra lines! "7" encountered 
+Test 15 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 16 
+Time Limit
+wrong answer Extra lines! "11" encountered 
+Test 17 
+Time Limit
+wrong answer Extra lines! "7" encountered 
+Test 18 
+Time Limit
+wrong answer Extra lines! "14" encountered 
+Test 19 
+Time Limit
+wrong answer Extra lines! "5" encountered 
+Test 20 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 21 
+Time Limit
+wrong answer Extra lines! "13" encountered 
+Test 22 
+Time Limit
+wrong answer Extra lines! "7" encountered 
+Test 23 
+Time Limit
+wrong answer Extra lines! "6" encountered 
+Test 24 
+Time Limit
+wrong answer Extra lines! "14" encountered 
+Test 25 
+Time Limit
+wrong answer Extra lines! "2" encountered 
+Test 26 
+Time Limit
+wrong answer Extra lines! "11" encountered 
+Test 27 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 28 
+Time Limit
+wrong answer Extra lines! "13" encountered 
+Test 29 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 30 
+Time Limit
+wrong answer Extra lines! "7" encountered 
+Test 31 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 32 
+Time Limit
+wrong answer Extra lines! "3" encountered 
+Test 33 
+Time Limit
+wrong answer Extra lines! "19" encountered 
+Test 34 
+Time Limit
+wrong answer Extra lines! "19" encountered 
+Test 35 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 36 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 37 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 38 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 39 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 40 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 41 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 42 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 43 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 44 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 45 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 46 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 47 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 48 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 49 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 50 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 51 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 52 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 53 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 54 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 55 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 56 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 57 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 58 
+Time Limit
+wrong answer Extra lines! "17" encountered 
+Test 59 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 60 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 61 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 62 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 63 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 64 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 65 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 66 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 67 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 68 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 69 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 70 
+Time Limit
+wrong answer Extra lines! "16" encountered 
+Test 71 
+Time Limit
+wrong answer Extra lines! "18" encountered 
+Test 72 
+Time Limit
+wrong answer Extra lines! "16" encountered 
+Test 73 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 74 
+Time Limit
+wrong answer Extra lines! "10" encountered 
+Test 75 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 76 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 77 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 78 
+Time Limit
+wrong answer Extra lines! "16" encountered 
+Test 79 
+Time Limit
+wrong answer Extra lines! "10" encountered 
+Test 80 
+Time Limit
+wrong answer Extra lines! "16" encountered 
+Test 81 
+Time Limit
+wrong answer Extra lines! "14" encountered 
+Test 82 
+Time Limit
+wrong answer Extra lines! "16" encountered 
+Test 83 
+Time Limit
+wrong answer Extra lines! "10" encountered 
+Test 84 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 85 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 86 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 87 
+Time Limit
+wrong answer Extra lines! "10" encountered 
+Test 88 
+Time Limit
+wrong answer Extra lines! "8" encountered 
+Test 89 
+Time Limit
+wrong answer Extra lines! "10" encountered 
+Test 90 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 91 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 92 
+Time Limit
+wrong answer Extra lines! "12" encountered 
+Test 93 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 94 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 95 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 96 
+Time Limit
+wrong answer Extra lines! "0" encountered 
+Test 97 
+Time Limit
+wrong answer Extra lines! "0" encountered 

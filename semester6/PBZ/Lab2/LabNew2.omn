@@ -1,0 +1,187 @@
+format-version: 1.2
+data-version: urn:absolute:PublickBlo
+ontology: TEMP
+property_value: Class "crypto:AddedOntology" xsd:string
+property_value: Class "crypto:AddedOntology2" xsd:string
+property_value: Class "crypto:Author" xsd:string
+property_value: Class "crypto:Blockchain" xsd:string
+property_value: Class "crypto:BlockchainContent" xsd:string
+property_value: Class "crypto:Coin" xsd:string
+property_value: Class "crypto:ConcensusAlgorithm" xsd:string
+property_value: Class "crypto:Developer" xsd:string
+property_value: Class "crypto:HybridBlockchain" xsd:string
+property_value: Class "crypto:Mainnet" xsd:string
+property_value: Class "crypto:Miner" xsd:string
+property_value: Class "crypto:Name" xsd:string
+property_value: Class "crypto:Person" xsd:string
+property_value: Class "crypto:Platform" xsd:string
+property_value: Class "crypto:PrivateBlockchain" xsd:string
+property_value: Class "crypto:Protocol" xsd:string
+property_value: Class "crypto:PublicBlockchain" xsd:string
+property_value: Class "crypto:SimpleUser" xsd:string
+property_value: Class "crypto:Token" xsd:string
+property_value: Class "crypto:User" xsd:string
+property_value: Class "crypto:Validator" xsd:string
+property_value: crypto "AddedOntology" xsd:string
+property_value: crypto "AddedOntology2" xsd:string
+property_value: crypto "AddedOntology2," xsd:string
+property_value: crypto "Author" xsd:string
+property_value: crypto "balance  1800000," xsd:string
+property_value: crypto "be" xsd:string
+property_value: crypto "beBlockchainToken" xsd:string
+property_value: crypto "beBlockhainCoin" xsd:string
+property_value: crypto "beConsensusAlgorithm" xsd:string
+property_value: crypto "Blockchain" xsd:string
+property_value: crypto "BlockchainContent" xsd:string
+property_value: crypto "category  \"other\"," xsd:string
+property_value: crypto "Coin" xsd:string
+property_value: crypto "Coin," xsd:string
+property_value: crypto "ConcensusAlgorithm" xsd:string
+property_value: crypto "concensusAlgorithm" xsd:string
+property_value: crypto "contains" xsd:string
+property_value: crypto "containsBlocks  19710277," xsd:string
+property_value: crypto "containsBlocks  839487," xsd:string
+property_value: crypto "containsNodes  45000," xsd:string
+property_value: crypto "containsNodes  8933," xsd:string
+property_value: crypto "containsSmartContracts  false" xsd:string
+property_value: crypto "containsSmartContracts  true" xsd:string
+property_value: crypto "contract  \"['0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359', '0x9b0ccf7c8994e19f39b2b4cf708e0a7df65fa8a3', '0x448a5065aebb8e423f0896e6c5d525c040f59af3', '0xbda109309f9fafa6dd6a9cb9f1df4085b27ee8ef', '0x9b0f70df76165442ca6092939132bbaea77f2d7a', '0xf53ad2c6851052a81b42133467480961b2321c09', '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2']\"," xsd:string
+property_value: crypto "dev_activiry_30d  1364," xsd:string
+property_value: crypto "Developer" xsd:string
+property_value: crypto "do" xsd:string
+property_value: crypto "doDevelop  crypto:Bitcoin" xsd:string
+property_value: crypto "doMining  crypto:BTC" xsd:string
+property_value: crypto "doTest  crypto:Aptos," xsd:string
+property_value: crypto "has" xsd:string
+property_value: crypto "hasAuthor  crypto:MakerDAOAuthor," xsd:string
+property_value: crypto "hasCoin" xsd:string
+property_value: crypto "hasCoin  crypto:APT," xsd:string
+property_value: crypto "hasCoin  crypto:BTC," xsd:string
+property_value: crypto "hasCoin  crypto:ETH," xsd:string
+property_value: crypto "hasCoin  crypto:XRP," xsd:string
+property_value: crypto "hasConsensusAlgorithm" xsd:string
+property_value: crypto "hasMainnet  crypto:Mainnet_contracts_Ethereum," xsd:string
+property_value: crypto "hasPlatform" xsd:string
+property_value: crypto "hasProtocol" xsd:string
+property_value: crypto "hasProtocol  crypto:Ethereum," xsd:string
+property_value: crypto "hasToken" xsd:string
+property_value: crypto "hasToken  crypto:PEPE," xsd:string
+property_value: crypto "long_intro  \"Maker is comprised of a decentralized stablecoin, collateral loans, and community governance.\"," xsd:string
+property_value: crypto "Mainnet" xsd:string
+property_value: crypto "make" xsd:string
+property_value: crypto "makeTransaction  109000.0" xsd:string
+property_value: crypto "Miner" xsd:string
+property_value: crypto "Name" xsd:string
+property_value: crypto "Person" xsd:string
+property_value: crypto "Platform" xsd:string
+property_value: crypto "PoS  true," xsd:string
+property_value: crypto "PoW  true," xsd:string
+property_value: crypto "price  0.00078" xsd:string
+property_value: crypto "price  0.548" xsd:string
+property_value: crypto "price  10.21" xsd:string
+property_value: crypto "price  3136.99" xsd:string
+property_value: crypto "price  49.17" xsd:string
+property_value: crypto "price  65939.88" xsd:string
+property_value: crypto "PrivateBlockchain" xsd:string
+property_value: crypto "Protocol" xsd:string
+property_value: crypto "PublicBlockchain" xsd:string
+property_value: crypto "short_intro  \"Where you can interact with the Dai Credit System\"," xsd:string
+property_value: crypto "SimpleUser" xsd:string
+property_value: crypto "software_license  \"MIT\"," xsd:string
+property_value: crypto "Token" xsd:string
+property_value: crypto "txs_24h  2700," xsd:string
+property_value: crypto "txs_7d  18700," xsd:string
+property_value: crypto "User" xsd:string
+property_value: crypto "users_24h  1700," xsd:string
+property_value: crypto "Validator" xsd:string
+property_value: crypto "volume_24h" xsd:string
+property_value: crypto "volume_24h  730000.3," xsd:string
+property_value: crypto "volume_7d  5200000" xsd:string
+property_value: DataProperty "crypto:AddedOntology" xsd:string
+property_value: DataProperty "crypto:AddedOntology2" xsd:string
+property_value: DataProperty "crypto:balance" xsd:string
+property_value: DataProperty "crypto:category" xsd:string
+property_value: DataProperty "crypto:concensusAlgorithm" xsd:string
+property_value: DataProperty "crypto:contains" xsd:string
+property_value: DataProperty "crypto:containsBlocks" xsd:string
+property_value: DataProperty "crypto:containsNodes" xsd:string
+property_value: DataProperty "crypto:containsSmartContracts" xsd:string
+property_value: DataProperty "crypto:contract" xsd:string
+property_value: DataProperty "crypto:dev_activiry_30d" xsd:string
+property_value: DataProperty "crypto:long_intro" xsd:string
+property_value: DataProperty "crypto:make" xsd:string
+property_value: DataProperty "crypto:makeTransaction" xsd:string
+property_value: DataProperty "crypto:PoS" xsd:string
+property_value: DataProperty "crypto:PoW" xsd:string
+property_value: DataProperty "crypto:price" xsd:string
+property_value: DataProperty "crypto:short_intro" xsd:string
+property_value: DataProperty "crypto:software_license" xsd:string
+property_value: DataProperty "crypto:status" xsd:string
+property_value: DataProperty "crypto:tag" xsd:string
+property_value: DataProperty "crypto:txs_24h" xsd:string
+property_value: DataProperty "crypto:txs_7d" xsd:string
+property_value: DataProperty "crypto:users_24h" xsd:string
+property_value: DataProperty "crypto:volume_24h" xsd:string
+property_value: DataProperty "crypto:volume_7d" xsd:string
+property_value: Datatype "xsd:boolean" xsd:string
+property_value: Datatype "xsd:decimal" xsd:string
+property_value: Datatype "xsd:double" xsd:string
+property_value: Datatype "xsd:integer" xsd:string
+property_value: Datatype "xsd:long" xsd:string
+property_value: Datatype "xsd:string" xsd:string
+property_value: Domain "" xsd:string
+property_value: EquivalentTo "" xsd:string
+property_value: Facts "" xsd:string
+property_value: Individual "crypto:Alexey" xsd:string
+property_value: Individual "crypto:APT" xsd:string
+property_value: Individual "crypto:Aptos" xsd:string
+property_value: Individual "crypto:Base" xsd:string
+property_value: Individual "crypto:Bitcoin" xsd:string
+property_value: Individual "crypto:BTC" xsd:string
+property_value: Individual "crypto:ETH" xsd:string
+property_value: Individual "crypto:Ethereum" xsd:string
+property_value: Individual "crypto:Jhon" xsd:string
+property_value: Individual "crypto:Mainnet_contracts_Ethereum" xsd:string
+property_value: Individual "crypto:MakerDao" xsd:string
+property_value: Individual "crypto:MakerDAOAuthor" xsd:string
+property_value: Individual "crypto:ORDI" xsd:string
+property_value: Individual "crypto:PEPE" xsd:string
+property_value: Individual "crypto:Ripple" xsd:string
+property_value: Individual "crypto:Satoshi_Nakomoto" xsd:string
+property_value: Individual "crypto:XRP" xsd:string
+property_value: InverseOf "" xsd:string
+property_value: ObjectProperty "crypto:AddedOntology" xsd:string
+property_value: ObjectProperty "crypto:AddedOntology2" xsd:string
+property_value: ObjectProperty "crypto:be" xsd:string
+property_value: ObjectProperty "crypto:beBlockchainToken" xsd:string
+property_value: ObjectProperty "crypto:beBlockhainCoin" xsd:string
+property_value: ObjectProperty "crypto:beConsensusAlgorithm" xsd:string
+property_value: ObjectProperty "crypto:do" xsd:string
+property_value: ObjectProperty "crypto:doDevelop" xsd:string
+property_value: ObjectProperty "crypto:doMining" xsd:string
+property_value: ObjectProperty "crypto:doTest" xsd:string
+property_value: ObjectProperty "crypto:doValidate" xsd:string
+property_value: ObjectProperty "crypto:has" xsd:string
+property_value: ObjectProperty "crypto:hasAuthor" xsd:string
+property_value: ObjectProperty "crypto:hasCoin" xsd:string
+property_value: ObjectProperty "crypto:hasConsensusAlgorithm" xsd:string
+property_value: ObjectProperty "crypto:hasMainnet" xsd:string
+property_value: ObjectProperty "crypto:hasPlatform" xsd:string
+property_value: ObjectProperty "crypto:hasProtocol" xsd:string
+property_value: ObjectProperty "crypto:hasToken" xsd:string
+property_value: Ontology "<http://localhost/ontology/crypto>" xsd:string
+property_value: Prefix ": <http://localhost/ontology/crypto/>" xsd:string
+property_value: Prefix "crypto: <http://localhost/ontology/crypto#>" xsd:string
+property_value: Prefix "owl: <http://www.w3.org/2002/07/owl#>" xsd:string
+property_value: Prefix "rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" xsd:string
+property_value: Prefix "rdfs: <http://www.w3.org/2000/01/rdf-schema#>" xsd:string
+property_value: Prefix "xml: <http://www.w3.org/XML/1998/namespace>" xsd:string
+property_value: Prefix "xsd: <http://www.w3.org/2001/XMLSchema#>" xsd:string
+property_value: Range "" xsd:string
+property_value: SubClassOf "" xsd:string
+property_value: SubPropertyOf "" xsd:string
+property_value: Types "" xsd:string
+property_value: xsd "boolean" xsd:string
+property_value: xsd "double" xsd:string
+property_value: xsd "long" xsd:string
+

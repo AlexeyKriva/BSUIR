@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Computing's</title>
+  <style>
+    a {
+      font-size: 20px;
+      text-align: center;
+      display: block;
+      margin-bottom: 10px;
+      color: blue;
+    }
+
+    a[href="/"] {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div th:each="employee : ${employees}">
+  <a th:href="@{/tasks/elements/results1/{unit_number}(unit_number=${employee.getUnitNumber()})}"
+     th:text="${employee.getPost()}">VALUE</a>
+</div>
+<a href="/">Home page</a>
+</body>
+</html>

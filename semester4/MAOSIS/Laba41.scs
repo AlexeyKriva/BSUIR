@@ -1,0 +1,109 @@
+concept_task1<-[*
+geometric_figure<-sc_node_class;;
+triangle<-sc_node_class;;
+right_triangle<-sc_node_class;;
+line_segment<-sc_node_class;;
+length<-sc_node_class;;
+number<-sc_node_class;;
+exact_value<-sc_node_class;;
+measurement<-sc_node_class;;
+angle<-sc_node_class;;
+right_angle<-sc_node_class;;
+acute_angle<-sc_node_class;;
+smallest_angle<-sc_node_class;;
+mathematical_value<-sc_node_class;;
+unknown_value<-sc_node_class;;
+degrees<-sc_node_class;;
+sin_angle<-sc_node_class;;
+
+..node1<-sc_node_class;;
+..node2<-sc_node;;
+
+90_degrees<-sc_node_class;;
+
+12_sm<-sc_node_class;;
+15_sm<-sc_node_class;;
+
+nrel_inclusion<-sc_node_norole_relation;;
+nrel_height<-sc_node_norole_relation;;
+nrel_measurement_in_centimeters<-sc_node_norole_relation;;
+nrel_median<-sc_node_norole_relation;;
+nrel_inner_angle<-sc_node_norole_relation;;
+nrel_side<-sc_node_norole_relation;;
+nrel_side_of_the_angle<-sc_node_norole_relation;;
+nrel_measurement_in_degrees<-sc_node_norole_relation;;
+
+geometric_figure
+   ->triangle;;
+
+triangle
+    => nrel_inclusion: right_triangle
+	(*
+      -> triangleABC;;
+	*);;
+
+angle
+    ->smallest_angle;;
+    => nrel_inclusion: right_angle->angle_C;;
+
+smallest_angle
+    ->acute_angle
+    (*
+        ->node2;;
+    *)
+
+degrees
+    ->node1
+    (*
+        <-angle_C;;
+        <=nrel_measurement_in_degrees: 90;;
+    *)
+
+number
+    ->90;12;15;;
+
+exact_value
+    ->12_sm;;
+    ->15_sm;;
+
+12_sm
+   ->CH;;
+   =>nrel_measurement_in_centimeters: 12;;
+   <-length;;
+   <-exact_value;;
+
+15_sm
+   ->CM;;
+   =>nrel_measurement_in_centimeters: 15;;
+   <-length;;
+   <-exact_value;
+
+triangleABC
+   =>nrel_side: AC;BC;;
+   =>nrel_height: CH;;
+   =>nrel_median: CM;;
+   =>nrel_inner_angle: angle_C; node_2;;
+
+angle_C
+   =>nrel_side_of_the_angle: AC;BC;;
+
+measurement
+   ->nrel_measurement_in_degrees;;
+   ->nrel_measurement_in_centimeters;;
+
+mathematical_value
+   ->sin_angle;;
+
+node_1
+   <-sin_angle;;
+   <-unknown_value;;
+   ->node_2;;
+*];;
+   
+
+
+
+
+
+
+

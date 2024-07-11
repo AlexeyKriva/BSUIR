@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор отрезка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            width: 300px;
+            height: 700px;
+            border: 3px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 15px; /* Уменьшено расстояние до canvas */
+            margin-left: 15px; /* Уменьшено расстояние до canvas */
+        }
+
+        label {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<form action="/create" method="post" th:object="${curve}">
+    <label for="pointX1">x1:</label>
+    <input type="number" id="pointX1" th:field="*{pointX1}">
+    <span th:if="${#fields.hasErrors('pointX1')}" th:errors="*{pointX1}" th:class="${#fields.hasErrors('pointX1')} ? 'error-message' : ''"></span>
+
+    <label for="pointY1">y1:</label>
+    <input type="number" id="pointY1" th:field="*{pointY1}">
+    <span th:if="${#fields.hasErrors('pointY1')}" th:errors="*{pointY1}" th:class="${#fields.hasErrors('pointY1')} ? 'error-message' : ''"></span>
+
+    <label for="pointX2">x2:</label>
+    <input type="number" id="pointX2" th:field="*{pointX2}">
+    <span th:if="${#fields.hasErrors('pointX2')}" th:errors="*{pointX2}" th:class="${#fields.hasErrors('pointX2')} ? 'error-message' : ''"></span>
+
+    <label for="pointY2">y2:</label>
+    <input type="number" id="pointY2" th:field="*{pointY2}">
+    <span th:if="${#fields.hasErrors('pointY2')}" th:errors="*{pointY2}" th:class="${#fields.hasErrors('pointY2')} ? 'error-message' : ''"></span>
+
+    <label for="pointX3">x3:</label>
+    <input type="number" id="pointX3" th:field="*{pointX3}">
+    <span th:if="${#fields.hasErrors('pointX3')}" th:errors="*{pointX3}" th:class="${#fields.hasErrors('pointX3')} ? 'error-message' : ''"></span>
+
+    <label for="pointY3">y3:</label>
+    <input type="number" id="pointY3" th:field="*{pointY3}">
+    <span th:if="${#fields.hasErrors('pointY3')}" th:errors="*{pointY3}" th:class="${#fields.hasErrors('pointY3')} ? 'error-message' : ''"></span>
+
+    <label for="pointX4">x4:</label>
+    <input type="number" id="pointX4" th:field="*{pointX4}">
+    <span th:if="${#fields.hasErrors('pointX4')}" th:errors="*{pointX4}" th:class="${#fields.hasErrors('pointX4')} ? 'error-message' : ''"></span>
+
+    <label for="pointY4">y4:</label>
+    <input type="number" id="pointY4" th:field="*{pointY4}">
+    <span th:if="${#fields.hasErrors('pointY4')}" th:errors="*{pointY4}" th:class="${#fields.hasErrors('pointY4')} ? 'error-message' : ''"></span>
+
+    <label for="algorithm">Выберите алгоритм построения кривой:</label>
+    <select id="algorithm" th:field="*{algorithm}">
+        <option th:each="algorithm : ${T(com.lab3.interpolationandapproximationofcurves.models.Algorithm).values()}"
+                th:value="${algorithm}"
+                th:text="${algorithm}">
+        </option>
+    </select>
+
+    <span th:if="${#fields.hasErrors('algorithm')}" th:errors="*{algorithm}" th:class="${#fields.hasErrors('algorithm')} ? 'error-message' : ''"></span>
+
+    <br>
+
+    <button type="button" onclick="drawLine()">Нарисовать кривую</button>
+
+    <br>
+
+    <button type="button" onclick="drawLinePixel()">Нарисовать пиксель</button>
+</form>
+
+<canvas id="myCanvas" width="900" height="700" style="border:1px solid #000;"></canvas>
+
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    let bool = true
+    let arr = []
+
+    function drawLinePixel() {
+        let algorithm = document.getElementById("algorithm").value
+        switch (algorithm){
+            case "Hermite":
+                drawPixelForFigure();
+                break
+            case "Bezier":
+                drawPixelForFigure();
+                break
+            case "Bspline":
+                drawPixelForFigure();
+                break
+        }
+        if (bool) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bool = false
+        }
+    }
+
+    function drawPixelForFigure() {
+        let pixel = arr.shift()
+        drawPixel(pixel.x, pixel.y)
+    }
+
+    function drawLine() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        arr.length = 0
+        bool = true
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let x1 = Number(document.getElementById("pointX1").value);
+        let y1 = Number(document.getElementById("pointY1").value);
+        let x2 = Number(document.getElementById("pointX2").value);
+        let y2 = Number(document.getElementById("pointY2").value);
+        let x3 = Number(document.getElementById("pointX3").value);
+        let y3 = Number(document.getElementById("pointY3").value);
+        let x4 = Number(document.getElementById("pointX4").value);
+        let y4 = Number(document.getElementById("pointY4").value);
+        let algorithm = document.getElementById("algorithm").value
+        arr = []
+        bool = true
+        switch (algorithm){
+            case "Hermite":
+                algorithmHermit(x1,y1,x2,y2,x3,y3,x4,y4);
+                break
+            case "Bezier":
+                algorithmBezier(x1,y1,x2,y2,x3,y3,x4,y4);
+                break
+            case "Bspline":
+                algorithmBspline(x1,y1,x2,y2,x3,y3,x4,y4);
+                break
+        }
+    }
+
+    function algorithmHermit(x1,y1,x2,y2,x3,y3,x4,y4) {
+        const numPoints = 100
+        for (let t = 0; t <= 1; t += 1 / numPoints) {
+            const h00 = 2 * t ** 3 - 3 * t ** 2 + 1;
+            const h10 = t ** 3 - 2 * t ** 2 + t;
+            const h01 = -2 * t ** 3 + 3 * t ** 2;
+            const h11 = t ** 3 - t ** 2;
+
+            const x = h00 * x1 + h10 * x2 + h01 * x3 + h11 * x4;
+            const y = h00 * y1 + h10 * y2 + h01 * y3 + h11 * y4;
+            drawPixel(x, y)
+            arr.push({ x, y });
+        }
+    }
+
+    function algorithmBezier(x1,y1,x2,y2,x3,y3,x4,y4) {
+        const numPoints = 100
+
+        for (let t = 0; t <= 1; t += 1 / numPoints) {
+            const x =
+                (1 - t) ** 3 * x1 +
+                3 * (1 - t) ** 2 * t * x2 +
+                3 * (1 - t) * t ** 2 * x3 +
+                t ** 3 * x4;
+            const y =
+                (1 - t) ** 3 * y1 +
+                3 * (1 - t) ** 2 * t * y2 +
+                3 * (1 - t) * t ** 2 * y3 +
+                t ** 3 * y4;
+
+            drawPixel(x, y)
+            arr.push({ x, y });
+        }
+    }
+
+    function algorithmBspline(x1,y1,x2,y2,x3,y3,x4,y4) {
+        const degree = 2
+        const numPoints = 100
+        if (degree < 1 || degree > 3) {
+            throw new Error('Invalid degree for B-spline curve');
+        }
+
+        const generateKnots = (n, degree) => {
+            const knots = [];
+            for (let i = 0; i <= n + degree + 1; i++) {
+                knots.push(i);
+            }
+            return knots;
+        };
+
+        const basisFunction = (i, p, knots, t) => {
+            if (p === 0) {
+                return knots[i] <= t && t < knots[i + 1] ? 1 : 0;
+            }
+
+            const numerator1 = t - knots[i];
+            const denominator1 = knots[i + p] - knots[i];
+
+            const term1 =
+                denominator1 !== 0
+                    ? (numerator1 / denominator1) * basisFunction(i, p - 1, knots, t)
+                    : 0;
+
+            const numerator2 = knots[i + p + 1] - t;
+            const denominator2 = knots[i + p + 1] - knots[i + 1];
+
+            const term2 =
+                denominator2 !== 0
+                    ? (numerator2 / denominator2) * basisFunction(i + 1, p - 1, knots, t)
+                    : 0;
+
+            return term1 + term2;
+        };
+
+        const calculateBSplinePoint = (t, degree, controlPoints, knots) => {
+            const n = controlPoints.length - 1;
+            const result = { x: 0, y: 0 };
+
+            for (let i = 0; i <= n; i++) {
+                const basis = basisFunction(i, degree, knots, t);
+                result.x += basis * controlPoints[i].x;
+                result.y += basis * controlPoints[i].y;
+            }
+
+            return result;
+        };
+
+        const n = 3;
+        const knots = generateKnots(n, degree);
+
+        for (
+            let t = knots[degree];
+            t <= knots[n + 1];
+            t += (knots[n + 1] - knots[degree]) / numPoints
+        ) {
+            const controlPoints = [{x: x1, y: y1}, {x: x2, y: y2}, {x: x3, y: y3}, {x: x4, y: y4}]
+            const result = calculateBSplinePoint(t, degree, controlPoints, knots);
+            console.log(result.length, t)
+            drawPixel(result.x, result.y)
+            let xx = result.x
+            let yy = result.y
+            arr.push({x: xx, y: yy})
+        }
+    }
+
+    function drawPixel(x, y) {
+        ctx.fillRect(x, y, 1, 1);
+        console.log('HERE')
+        ctx.stroke()
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/computings/elements}" th:object="${computing}">
+    <label for="id">Enter id: </label>
+    <input type="number" th:field="*{isId}" id="id"/>
+    <br/>
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{isName}" id="name"/>
+    <br/>
+    <label for="model">Enter model: </label>
+    <input type="text" th:field="*{model}" id="model"/>
+    <br/>
+    <label for="acquisition">Enter acquisition date: </label>
+    <input type="text" th:field="*{acquisitionDate}" id="acquisition"/>
+    <br/>
+    <label for="price">Enter price: </label>
+    <input type="text" th:field="*{price}" id="price"/>
+    <br/>
+    <label for="unit">Enter unit number: </label>
+    <input type="number" th:field="*{unitNumber}" id="unit"/>
+    <br/>
+    <label for="transfer">Enter transfer data: </label>
+    <input type="text" th:field="*{transferData}" id="transfer"/>
+    <br/>
+    <input type="submit" value="Add new computing!"/>
+</form>
+
+</body>
+</html>
