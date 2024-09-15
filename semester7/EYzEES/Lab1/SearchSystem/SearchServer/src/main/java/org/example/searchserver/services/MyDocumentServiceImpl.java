@@ -29,7 +29,7 @@ public class MyDocumentServiceImpl implements MyDocumentService {
         return myDocumentRepository.findAll();
     }
 
-    public MyDocument saveMyDocument(MyDocumentDto myDocumentDto) {
+    public MyDocument saveDocument(MyDocumentDto myDocumentDto) {
         MyDocument savingDocument = MY_DOCUMENT_MAPPER.getFromMyDocumentDtoToMyDocument(myDocumentDto);
         return myDocumentRepository.save(savingDocument);
     }

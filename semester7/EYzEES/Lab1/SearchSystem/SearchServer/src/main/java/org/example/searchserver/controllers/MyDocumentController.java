@@ -3,7 +3,6 @@ package org.example.searchserver.controllers;
 import jakarta.validation.Valid;
 import org.example.searchserver.entities.MyDocument;
 import org.example.searchserver.entities.MyDocumentDto;
-import org.example.searchserver.entities.SearchQuery;
 import org.example.searchserver.services.MyDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class MyDocumentController {
 
     @PostMapping
     public ResponseEntity<MyDocument> addNewDocument(@Valid @RequestBody MyDocumentDto myDocumentDto) {
-        return ResponseEntity.ok(myDocumentService.saveMyDocument(myDocumentDto));
+        return ResponseEntity.ok(myDocumentService.saveDocument(myDocumentDto));
     }
 
     @PatchMapping("/{id}")
