@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public class QueryToSearch {
+public class SearchQuery {
     @JsonProperty("content")
     private String content;
     @JsonProperty("properties")

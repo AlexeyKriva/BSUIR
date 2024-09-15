@@ -3,6 +3,7 @@ package org.example.searchserver.controllers;
 import jakarta.validation.Valid;
 import org.example.searchserver.entities.MyDocument;
 import org.example.searchserver.entities.MyDocumentDto;
+import org.example.searchserver.entities.SearchQuery;
 import org.example.searchserver.services.MyDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
