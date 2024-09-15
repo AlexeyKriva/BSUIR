@@ -22,7 +22,6 @@ public class JpaConfig {
     private DataSource dataSource;
 
     @Bean
-    //@DependsOn("flyway")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibarnate.dialect", "org.hibarnate.dialect.PostgreSQLDialect");
@@ -39,7 +38,7 @@ public class JpaConfig {
     }
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager(EntityManagerFactory managerFactory) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory managerFactory) {
         return new JpaTransactionManager(managerFactory);
     }
 }
