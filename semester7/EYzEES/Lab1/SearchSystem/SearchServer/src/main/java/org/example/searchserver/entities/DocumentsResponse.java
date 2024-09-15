@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseToSearchQuery {
+public class DocumentsResponse {
     private List<MyDocument> myDocuments;
 }

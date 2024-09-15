@@ -3,11 +3,14 @@ package org.example.searchserver.controllers;
 import jakarta.validation.Valid;
 import org.example.searchserver.entities.MyDocument;
 import org.example.searchserver.entities.MyDocumentDto;
+import org.example.searchserver.entities.DocumentsResponse;
+import org.example.searchserver.entities.SearchQuery;
 import org.example.searchserver.services.MyDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,5 +44,10 @@ public class MyDocumentController {
     public ResponseEntity<MyDocument> deleteDocument(@PathVariable("id") long id) {
         myDocumentService.deleteDocumentById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/with-properties")
+    public ResponseEntity<DocumentsResponse> getResponseOnSearchQuery(@RequestBody List<SearchQuery> searchQuery) {
+        return ResponseEntity.ok(myDocumentService.getResponseToSearchQuery(searchQuery));
     }
 }

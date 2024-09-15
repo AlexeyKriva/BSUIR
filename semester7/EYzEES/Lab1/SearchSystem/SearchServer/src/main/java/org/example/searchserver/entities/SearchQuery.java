@@ -9,8 +9,10 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor
 public class SearchQuery {
-    @JsonProperty("content")
-    private String content;
-    @JsonProperty("properties")
-    private Map<Object, Object> properties;
+    @JsonProperty("scope")
+    private SearchQueryScope scope;
+    @JsonProperty("text")
+    private String text;
+    @JsonProperty("logical_operator")
+    private SearchQueryLogicalOperator logicalOperator = SearchQueryLogicalOperator.EMPTY;
 }

@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface MyDocumentRepository extends JpaRepository<MyDocument, Long> {
+    static String START_USER_REQUEST = "SELECT * FROM documents d WHERE";
     Optional<MyDocument> findById(long id);
 }
