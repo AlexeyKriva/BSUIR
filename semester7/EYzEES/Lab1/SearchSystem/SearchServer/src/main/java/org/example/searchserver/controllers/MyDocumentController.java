@@ -6,6 +6,7 @@ import org.example.searchserver.entities.MyDocumentDto;
 import org.example.searchserver.entities.DocumentsResponse;
 import org.example.searchserver.entities.SearchQuery;
 import org.example.searchserver.services.MyDocumentService;
+import org.example.searchserver.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/document", produces = "application/json")
+@CrossOrigin(origins = "http://localhost:8081")
 public class MyDocumentController {
     @Autowired
     private MyDocumentService myDocumentService;
+    @Autowired
+    private SearchService searchService;
 
     @GetMapping("/{id}")
     public ResponseEntity<MyDocument> getDocument(@PathVariable("id") long id) {
@@ -46,8 +50,10 @@ public class MyDocumentController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/with-properties")
+    @PostMapping("/with-properties")
     public ResponseEntity<DocumentsResponse> getResponseOnSearchQuery(@RequestBody List<SearchQuery> searchQuery) {
-        return ResponseEntity.ok(myDocumentService.getResponseToSearchQuery(searchQuery));
+        DocumentsResponse documentsResponse = searchService.getResponseToSearchQuery(searchQuery);
+        documentsResponse.print();
+        return ResponseEntity.ok(documentsResponse);
     }
 }

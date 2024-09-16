@@ -13,5 +13,4 @@ public interface MyDocumentService {
     void deleteDocumentById(long id);
     MyDocument getDocumentById(long id);
     List<MyDocument> getAllDocuments();
-    DocumentsResponse getResponseToSearchQuery(List<SearchQuery> searchQueries);
 }

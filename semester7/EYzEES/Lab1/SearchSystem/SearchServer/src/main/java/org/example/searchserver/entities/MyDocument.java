@@ -2,6 +2,7 @@ package org.example.searchserver.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Immutable;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class MyDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

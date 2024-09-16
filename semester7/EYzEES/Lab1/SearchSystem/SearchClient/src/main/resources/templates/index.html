@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Forms</title>
+  <style>
+    /* Ваши стили */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    #container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+    }
+    #form-container {
+      flex: 1;
+      margin-right: 20px;
+    }
+    #response-container {
+      flex: 0 0 800px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .form-container {
+      margin-bottom: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .search-button, .add-form-button, .clear-button, .documentation-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      color: #fff;
+    }
+    .search-button {
+      background-color: #007bff;
+    }
+    .search-button:hover {
+      background-color: #0056b3;
+    }
+    .add-form-button {
+      background-color: #28a745;
+    }
+    .add-form-button:hover {
+      background-color: #218838;
+    }
+    .clear-button {
+      background-color: #dc3545;
+    }
+    .clear-button:hover {
+      background-color: #c82333;
+    }
+    .documentation-button {
+      background-color: #ffc107;
+    }
+    .documentation-button:hover {
+      background-color: #ffc107;
+    }
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+    }
+    select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .autocomplete-suggestions {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-height: 150px;
+      overflow-y: auto;
+      width: calc(100% - 16px);
+      z-index: 1000;
+      display: none;
+    }
+
+    .autocomplete-suggestion {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .autocomplete-suggestion:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="form-container">
+    <h1>Search Forms</h1>
+    <div id="forms">
+      <div class="form-container">
+        <form class="search-form" id="form1">
+          <label for="scope1">Scope:</label>
+          <select id="scope1" name="scope">
+            <option value="TITLE">Title</option>
+            <option value="AUTHOR">Author</option>
+            <option value="CONTENT">Content</option>
+            <option value="PUBLISHED_BEFORE">Published Before</option>
+            <option value="PUBLISHED_AT">Published At</option>
+            <option value="PUBLISHED_AFTER">Published After</option>
+          </select>
+          <br><br>
+
+          <label for="text1">Text:</label>
+          <input type="text" id="text1" name="text" autocomplete="off">
+          <div id="suggestions-container" class="autocomplete-suggestions"></div>
+          <br><br>
+
+          <label for="logical_operator1">Logical Operator:</label>
+          <select id="logical_operator1" name="logical_operator">
+            <option value="AND">AND</option>
+            <option value="OR">OR</option>
+            <option value="NOT">NOT</option>
+            <option value="EMPTY">EMPTY</option>
+          </select>
+          <br><br>
+        </form>
+      </div>
+    </div>
+    <button class="search-button" onclick="submitAllForms()">Search</button>
+    <button class="add-form-button" onclick="addForm()">Add Another Form</button>
+    <button class="clear-button" onclick="clearForms()">Clear All Forms</button>
+    <button class="documentation-button" onclick="redirectToDocs()">Documentation</button>
+  </div>
+
+  <div id="response-container">
+    <div id="response-content">
+    </div>
+  </div>
+</div>
+
+<script>
+  const suggestions = ['who', 'what', 'where', 'when', 'how','is', 'are', 'am', 'many', 'much',
+  'hello', 'world', 'title', 'author', 'name'];
+
+  function showSuggestions(inputElement, suggestions) {
+    const container = document.getElementById('suggestions-container');
+    container.innerHTML = '';
+    suggestions.forEach(suggestion => {
+      const div = document.createElement('div');
+      div.textContent = suggestion;
+      div.classList.add('autocomplete-suggestion');
+      div.onclick = () => {
+        inputElement.value = suggestion;
+        container.innerHTML = '';
+      };
+      container.appendChild(div);
+    });
+    container.style.display = suggestions.length > 0 ? 'block' : 'none';
+  }
+
+  document.getElementById('text1').addEventListener('input', function() {
+    const inputValue = this.value.toLowerCase();
+    const filteredSuggestions = suggestions.filter(suggestion =>
+            suggestion.startsWith(inputValue)
+    );
+    showSuggestions(this, filteredSuggestions);
+  });
+
+  async function submitAllForms() {
+    const forms = document.querySelectorAll('.search-form');
+    const searchQueries = Array.from(forms).map(form => {
+      const formData = new FormData(form);
+      return {
+        scope: formData.get('scope'),
+        text: formData.get('text'),
+        logical_operator: formData.get('logical_operator')
+      };
+    });
+
+    try {
+      const response = await fetch('http://localhost:8080/api/document/with-properties', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(searchQueries),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      const responseContent = document.getElementById('response-content');
+      responseContent.innerHTML = '';
+
+      const documents = result.myDocuments;
+
+      if (Array.isArray(documents) && documents.length > 0) {
+        let table = '<table><thead><tr>';
+
+        const headers = Object.keys(documents[0]).filter(header => header !== 'id');
+        headers.forEach(header => {
+          table += `<th>${header}</th>`;
+        });
+        table += '</tr></thead><tbody>';
+
+        documents.forEach(item => {
+          table += '<tr>';
+          headers.forEach(header => {
+            table += `<td>${item[header]}</td>`;
+          });
+          table += '</tr>';
+        });
+
+        table += '</tbody></table>';
+        responseContent.innerHTML = table;
+      } else {
+        responseContent.innerHTML = '<p>No data available.</p>';
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('response-content').innerHTML = '<p>Error occurred while fetching the data.</p>';
+    }
+  }
+
+  function addForm() {
+    const formsContainer = document.getElementById('forms');
+    const formCount = formsContainer.getElementsByClassName('form-container').length + 1;
+    const newFormContainer = document.createElement('div');
+    newFormContainer.classList.add('form-container');
+
+    newFormContainer.innerHTML = `
+      <form class="search-form" id="form${formCount}">
+        <label for="scope${formCount}">Scope:</label>
+        <select id="scope${formCount}" name="scope">
+          <option value="TITLE">Title</option>
+          <option value="AUTHOR">Author</option>
+          <option value="CONTENT">Content</option>
+          <option value="PUBLISHED_BEFORE">Published Before</option>
+          <option value="PUBLISHED_AT">Published At</option>
+          <option value="PUBLISHED_AFTER">Published After</option>
+        </select>
+        <br><br>
+
+        <label for="text${formCount}">Text:</label>
+        <input type="text" id="text${formCount}" name="text" autocomplete="off">
+        <div id="suggestions-container${formCount}" class="autocomplete-suggestions"></div>
+        <br><br>
+
+        <label for="logical_operator${formCount}">Logical Operator:</label>
+        <select id="logical_operator${formCount}" name="logical_operator">
+          <option value="AND">AND</option>
+          <option value="OR">OR</option>
+          <option value="NOT">NOT</option>
+          <option value="EMPTY">EMPTY</option>
+        </select>
+        <br><br>
+      </form>
+    `;
+    formsContainer.appendChild(newFormContainer);
+
+    // Attach event listener to the new text input
+    document.getElementById(`text${formCount}`).addEventListener('input', function() {
+      const inputValue = this.value.toLowerCase();
+      const filteredSuggestions = suggestions.filter(suggestion =>
+              suggestion.startsWith(inputValue)
+      );
+      showSuggestions(this, filteredSuggestions);
+    });
+  }
+
+  function clearForms() {
+    const formsContainer = document.getElementById('forms');
+    formsContainer.innerHTML = '';
+    addForm();
+    const responseContent = document.getElementById('response-content');
+    responseContent.innerHTML = '';
+  }
+
+  function redirectToDocs() {
+    window.location.href = '/docs';
+  }
+</script>
+</body>
+</html>
