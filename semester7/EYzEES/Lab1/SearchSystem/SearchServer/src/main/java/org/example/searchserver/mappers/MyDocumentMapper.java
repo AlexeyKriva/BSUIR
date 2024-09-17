@@ -8,6 +8,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.ArrayList;
+
 @Mapper
 public interface MyDocumentMapper {
     MyDocumentMapper INSTANCE = Mappers.getMapper(MyDocumentMapper.class);
