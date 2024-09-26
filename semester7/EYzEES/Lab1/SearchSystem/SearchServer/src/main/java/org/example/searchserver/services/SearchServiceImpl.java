@@ -32,7 +32,7 @@ public class SearchServiceImpl implements SearchService {
             if (queryBuilder.isSearchQueryScopeDependsOnTime(searchQuery.getScope())) {
                 query.append(queryBuilder.partOfQueryToCompareTwoDates(searchQuery));
             } else {
-                query.append(" d.").append(searchQuery.getScope().getScope()).append(queryBuilder.partOfQueryToFindTextIntoField(searchQuery));
+                query.append(" d.").append(searchQuery.getScope().getScope()).append(" ").append(queryBuilder.partOfQueryToFindTextIntoField(searchQuery));
             }
         }
         Query documents = entityManager.createNativeQuery(query.toString(), MyDocument.class);

@@ -6,8 +6,10 @@ import org.example.searchserver.entities.MyDocumentDto;
 import org.example.searchserver.entities.DocumentsResponse;
 import org.example.searchserver.entities.SearchQuery;
 import org.example.searchserver.services.MyDocumentService;
+import org.example.searchserver.services.MyDocumentServiceImpl;
 import org.example.searchserver.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8081")
 public class MyDocumentController {
     @Autowired
-    private MyDocumentService myDocumentService;
+    private MyDocumentServiceImpl myDocumentService;
     @Autowired
     private SearchService searchService;
 
@@ -34,7 +36,10 @@ public class MyDocumentController {
     }
 
     @PostMapping
-    public ResponseEntity<MyDocument> addNewDocument(@Valid @RequestBody MyDocumentDto myDocumentDto) {
+    public ResponseEntity<MyDocument> addNewDocument(@RequestBody MyDocumentDto myDocumentDto) {
+        System.out.println("-----------------------------------------------------------");
+        System.out.println(myDocumentDto);
+        System.out.println("-----------------------------------------------------------");
         return ResponseEntity.ok(myDocumentService.saveDocument(myDocumentDto));
     }
 
