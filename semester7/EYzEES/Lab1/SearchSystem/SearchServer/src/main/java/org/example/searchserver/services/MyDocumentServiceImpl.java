@@ -9,6 +9,7 @@ import org.example.searchserver.repositories.MyDocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ public class MyDocumentServiceImpl implements MyDocumentService {
 
     public MyDocument saveDocument(MyDocumentDto myDocumentDto) {
         MyDocument savingDocument = MY_DOCUMENT_MAPPER.getFromMyDocumentDtoToMyDocument(myDocumentDto);
+
         return myDocumentRepository.save(savingDocument);
     }
 

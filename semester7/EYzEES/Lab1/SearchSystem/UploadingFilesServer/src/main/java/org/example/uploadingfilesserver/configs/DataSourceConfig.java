@@ -1,4 +1,4 @@
-package org.example.searchserver.configs;
+package org.example.uploadingfilesserver.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
