@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма загрузки</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      input[type="text"],
+      input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      #response {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #28a745;
+        border-radius: 5px;
+        background-color: #e9ffe9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Форма загрузки</h1>
+    <form id="uploadForm">
+      <label> <input type="checkbox" name="subscribe" value="yes" /> Подписаться на рассылку </label>
+
+      <label for="textInput">Введите текст:</label>
+      <input type="text" id="textInput" name="textInput" required />
+
+      <label for="fileInput">Загрузите файл (.html):</label>
+      <input type="file" id="fileInput" name="fileInput" accept=".html" required />
+
+      <button type="submit">Отправить</button>
+    </form>
+
+    <div id="response" style="display: none"></div>
+
+    <script>
+      document.getElementById("uploadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Отменяем стандартное поведение формы
+
+        const formData = new FormData(this); // Создаем объект FormData из формы
+
+        // Выводим данные формы в консоль
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
+
+        // Закомментируем запрос к серверу
+        /*
+            fetch("http://localhost:3000/submit", {
+                method: "POST",
+                body: formData,
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json(); // Предполагаем, что сервер возвращает JSON
+                }
+                throw new Error("Ошибка при отправке данных");
+            })
+            .then((data) => {
+                console.log("Успех:", data);
+                // Скрываем форму и показываем ответ
+                document.getElementById("uploadForm").style.display = "none";
+                const responseDiv = document.getElementById("response");
+                responseDiv.style.display = "block";
+                responseDiv.innerHTML = `<h2>Ответ сервера:</h2><pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch((error) => {
+                console.error("Ошибка:", error);
+                alert("Произошла ошибка при отправке данных.");
+            });
+            */
+
+        // Для тестирования, просто показываем ответ без отправки
+        document.getElementById("uploadForm").style.display = "none";
+        const responseDiv = document.getElementById("response");
+        responseDiv.style.display = "block";
+        responseDiv.innerHTML = `<h2>Ответ сервера:</h2><pre>${JSON.stringify(
+          Object.fromEntries(formData.entries()),
+          null,
+          2
+        )}</pre>`;
+      });
+    </script>
+  </body>
+</html>

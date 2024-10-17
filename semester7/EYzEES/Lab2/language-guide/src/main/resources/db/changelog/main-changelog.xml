@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="v1-1" author="postgres">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="html_doc"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="html_doc">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(55)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="content" type="varchar(100000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="added_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

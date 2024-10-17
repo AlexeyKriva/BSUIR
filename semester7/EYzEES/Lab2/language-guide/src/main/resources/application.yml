@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: language-guide
+
+  datasource:
+    username: postgres
+    password: 98479847
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/doc-db
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    change-log: classpath:db/changelog/main-changelog.xml
+    default-schema: public
+    contexts: development
+    enabled: true
+
+
+server:
+  port: 8083
