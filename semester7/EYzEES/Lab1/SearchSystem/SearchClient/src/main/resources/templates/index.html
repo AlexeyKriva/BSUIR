@@ -169,6 +169,7 @@
     <button class="clear-button" onclick="clearForms()">Clear All Forms</button>
     <button class="documentation-button" onclick="redirectToDocs()">Documentation</button>
     <button class="updating-button" onclick="redirectToUpdate()">Update database</button>
+    <button class="metrics-button" onclick="redirectToMetrics()">Documentation</button>
   </div>
 
   <div id="response-container">
@@ -324,6 +325,10 @@
 
   function redirectToUpdate() {
     window.location.href = '/update';
+  }
+
+  function redirectToMetrics() {
+    window.location.href = '/metrics';
   }
 </script>
 </body>

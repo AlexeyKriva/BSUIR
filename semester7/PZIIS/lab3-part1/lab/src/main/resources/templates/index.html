@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin: 20px 0; }
+        input { margin: 5px 0; padding: 10px; }
+        button { padding: 10px; }
+    </style>
+</head>
+<body>
+<h1>Управление пользователями</h1>
+
+<h2>Добавить пользователя</h2>
+<form id="addUserForm">
+    <input type="text" id="addUsername" placeholder="Имя пользователя" required>
+    <input type="password" id="addPassword" placeholder="Пароль" required>
+    <input type="text" id="addRole" placeholder="Роль" required>
+    <button type="submit">Добавить</button>
+</form>
+
+<h2>Обновить пользователя</h2>
+<form id="updateUserForm">
+    <input type="text" id="oldUsername" placeholder="Старое имя пользователя" required>
+    <input type="text" id="newUsername" placeholder="Новое имя пользователя">
+    <input type="password" id="newPassword" placeholder="Новый пароль">
+    <input type="text" id="newRole" placeholder="Новая роль">
+    <button type="submit">Обновить</button>
+</form>
+
+<h2>Удалить пользователя</h2>
+<form id="deleteUserForm">
+    <input type="text" id="deleteUsername" placeholder="Имя пользователя" required>
+    <button type="submit">Удалить</button>
+</form>
+
+<h2>Список пользователей</h2>
+<button id="loadUsersBtn">Загрузить пользователей</button>
+<ul id="userList"></ul>
+
+<script>
+    const apiUrl = 'http://localhost:8080/api/admin';
+
+    // Функция для загрузки пользователей
+    async function loadUsers() {
+        const response = await fetch(apiUrl);
+        const users = await response.json();
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        users.forEach(user => {
+            const li = document.createElement('li');
+            li.textContent = user.username;
+            userList.appendChild(li);
+        });
+    }
+
+    // Добавление пользователя
+    document.getElementById('addUserForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const username = document.getElementById('addUsername').value;
+        const password = document.getElementById('addPassword').value;
+        const role = document.getElementById('addRole').value;
+
+        await fetch(`${apiUrl}/add?username=${username}&password=${password}&role=${role}`);
+        loadUsers();
+    });
+
+    // Обновление пользователя
+    document.getElementById('updateUserForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const oldUsername = document.getElementById('oldUsername').value;
+        const newUsername = document.getElementById('newUsername').value || null;
+        const newPassword = document.getElementById('newPassword').value || null;
+        const newRole = document.getElementById('newRole').value || null;
+
+        await fetch(`${apiUrl}/update?oldUsername=${oldUsername}&newUsername=${newUsername}&newPassword=${newPassword}&newRole=${newRole}`);
+        loadUsers();
+    });
+
+    // Удаление пользователя
+    document.getElementById('deleteUserForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const username = document.getElementById('deleteUsername').value;
+
+        await fetch(`${apiUrl}/delete?username=${username}`);
+        loadUsers();
+    });
+
+    // Загрузка пользователей при нажатии на кнопку
+    document.getElementById('loadUsersBtn').addEventListener('click', loadUsers);
+</script>
+</body>
+</html>

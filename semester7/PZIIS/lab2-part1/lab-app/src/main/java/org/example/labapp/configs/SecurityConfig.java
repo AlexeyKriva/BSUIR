@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(httpRequest -> {
                             httpRequest.requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN");
+                            httpRequest.requestMatchers("/actuator/**").hasAnyRole("USER", "ADMIN");
                             httpRequest.requestMatchers("/api/guest/**").hasAnyRole("GUEST", "ADMIN");
                             httpRequest.requestMatchers("/api/admin/**").hasRole("ADMIN");
                         }

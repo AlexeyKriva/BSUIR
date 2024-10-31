@@ -1,22 +1,34 @@
 package org.example.languageguide.services
 
-import com.github.pemistahl.lingua.api.LanguageDetectorBuilder
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import org.apache.tika.language.LanguageIdentifier
+import org.example.languageguide.clients.HuggingfaceClient
 import org.example.languageguide.entities.DocStatistic
 import org.example.languageguide.entities.HtmlDoc
+import org.example.languageguide.entities.LanguageScore
 import org.example.languageguide.entities.SimpleLanguage
 import org.example.languageguide.repositories.HtmlDocRep
 import org.jsoup.Jsoup
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.time.LocalDateTime
 
+
 @Service
-class HtmlDocService(private val htmlDocRep: HtmlDocRep) {
+class HtmlDocService(private val htmlDocRep: HtmlDocRep, val huggingfaceClient: HuggingfaceClient) {
     val N_GRAMM = "n-gramm"
     val NEURAL_NETWORK = "neural_network"
     val ALPHABET = "alphabet"
+
+    @Value("\${huggingface.api.key}")
+    var HUGGING_FACE_API_KEY = "";
+
+    //val objectMapper = ObjectMapper().registerModule(KotlinModule())
 
     companion object {
         var indexOfFile: Int = 1
@@ -127,16 +139,14 @@ class HtmlDocService(private val htmlDocRep: HtmlDocRep) {
         htmlDocRep.deleteAll()
     }
 
-    fun defineLangsFromHtmlDocs(save: Boolean, htmlFiles: MutableList<MultipartFile>, type: String):
+    fun defineLangsFromHtmlDocs(saveOn: String?, htmlFiles: MutableList<MultipartFile>, type: String):
             MutableList<DocStatistic> {
         var htmlDocs: MutableList<HtmlDoc> = mutableListOf()
 
-        if (save) {
-            htmlDocs = saveAllHtmlDocs(htmlFiles)
-        } else {
-            for (htmlFile in htmlFiles) {
-                htmlDocs.add(convertHtmlFileToHtmlDoc(htmlFile))
-            }
+        val save = saveOn != null
+
+        for (htmlFile in htmlFiles) {
+            htmlDocs.add(convertHtmlFileToHtmlDoc(htmlFile))
         }
 
         var docsStatistics: MutableList<DocStatistic> = mutableListOf()
@@ -146,8 +156,18 @@ class HtmlDocService(private val htmlDocRep: HtmlDocRep) {
             if (type.lowercase() == N_GRAMM) {
                 lang = checkLanguage(LanguageIdentifier(htmlDoc.content).language)
             } else if (type.lowercase() == NEURAL_NETWORK) {
-                val detector = LanguageDetectorBuilder.fromAllLanguages().build()
-                lang = detector.detectLanguageOf(htmlDoc.content).name
+                val content = htmlDoc.content.lowercase()
+                val requestBody = mapOf("inputs" to content)
+                val authorizationHeader = "Bearer $HUGGING_FACE_API_KEY"
+
+                val response: String = huggingfaceClient.detectLanguage(requestBody, authorizationHeader);
+
+                val builder = GsonBuilder()
+                val gson = builder.create()
+                val result: List<List<LanguageScore>> =
+                    gson.fromJson(response, object : TypeToken<List<List<LanguageScore>>>() {}.type)
+
+                lang = checkLanguage(result[0][0].label)
             } else if (type.lowercase() == ALPHABET) {
                 lang = alphabetMethod(htmlDoc.content.lowercase())
             } else {
@@ -155,16 +175,28 @@ class HtmlDocService(private val htmlDocRep: HtmlDocRep) {
             }
 
             val docStatistic = DocStatistic(htmlDoc, analyzeTextStatistic(htmlDoc.content), lang)
-            saveDocStatistic(docStatistic)
+            if (save) {
+                saveDocStatistic(docStatistic)
+            }
             docsStatistics.add(docStatistic)
         }
 
         return docsStatistics;
     }
 
+    fun <T> getListType(classType: Class<T>): ParameterizedType {
+        return object : ParameterizedType {
+            override fun getActualTypeArguments(): Array<Type> = arrayOf(classType)
+            override fun getRawType(): Type = List::class.java
+            override fun getOwnerType(): Type? = null
+        }
+    }
+
     fun saveDocStatistic(docStatistic: DocStatistic): Unit {
-        val file = File("/Users/aliaksei/Desktop/BSUIR/semester7/EYzEES/Lab2/language-guide/files/" +
-                "docStatistic${indexOfFile++}.txt");
+        val file = File(
+            "/Users/aliaksei/Desktop/BSUIR/semester7/EYzEES/Lab2/language-guide/files/" +
+                    "docStatistic${indexOfFile++}.txt"
+        );
 
         if (!file.exists()) {
             file.createNewFile()
@@ -180,8 +212,9 @@ class HtmlDocService(private val htmlDocRep: HtmlDocRep) {
             if (letter.isLetter()) {
                 letterCounts[letter.toString()] = letterCounts.getOrDefault(letter.toString(), 0) + 1
                 if (!alphabetFrequencies.getValue(SimpleLanguage.ENGLISH).containsKey(letter.toString()) &&
-                    alphabetFrequencies.getValue(SimpleLanguage.FRENCH).containsKey(letter.toString())) {
-                        return SimpleLanguage.FRENCH.name
+                    alphabetFrequencies.getValue(SimpleLanguage.FRENCH).containsKey(letter.toString())
+                ) {
+                    return SimpleLanguage.FRENCH.name
                 }
             }
         }

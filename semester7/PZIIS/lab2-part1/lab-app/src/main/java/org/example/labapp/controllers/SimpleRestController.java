@@ -1,15 +1,13 @@
 package org.example.labapp.controllers;
 
+import org.example.labapp.MemoryDump;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin(origins = "http://localhost:8081")
 public class SimpleRestController {
     private InMemoryUserDetailsManager userDetailsManager;
     private List<UserDetails> users = new ArrayList<>();
@@ -109,6 +108,13 @@ public class SimpleRestController {
         }
 
         return new ResponseEntity<>("pushDown should be true to off web-app", HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/admin/dump")
+    public ResponseEntity<String> createSystemDump() {
+        MemoryDump.createHeapDump("heap_dump_after_add.hprof");
+
+        return new ResponseEntity<>("Dump was succesfully created", HttpStatus.CREATED);
     }
 
     @GetMapping("/user")

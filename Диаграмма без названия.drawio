@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="Страница — 1" id="_X8dH74YkmOjoIFhXxiv">
+    <mxGraphModel dx="910" dy="612" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-9" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-1" target="vKoYRzZuY3sHaTfCLtLb-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-1" value="Загрузка файлов на сервер" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-31" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-10" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-2" target="vKoYRzZuY3sHaTfCLtLb-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-2" value="Парсинг файлов для понятного системе вида" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="189" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-11" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-3" target="vKoYRzZuY3sHaTfCLtLb-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-3" value="Отправка извлечённых текстов в ApcheTika" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="189" y="162" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-12" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-4" target="vKoYRzZuY3sHaTfCLtLb-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-4" value="Определение языка" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="189" y="273" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-14" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-5" target="vKoYRzZuY3sHaTfCLtLb-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-15" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-5" target="vKoYRzZuY3sHaTfCLtLb-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-5" value="Создание объекта с текстом, статистикой и определённым языком" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="382" y="162" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-6" value="Отправка результата на фронтенд" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="382" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-13" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="vKoYRzZuY3sHaTfCLtLb-7" target="vKoYRzZuY3sHaTfCLtLb-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-7" value="Вычисление данных для статистики" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="382" y="273" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKoYRzZuY3sHaTfCLtLb-8" value="Сохрание отчётов в виде txt файлов" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="582" y="162" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

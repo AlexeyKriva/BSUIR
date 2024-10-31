@@ -1,21 +1,16 @@
 package org.example.languageguide.controllers
 
-import org.example.languageguide.entities.HtmlDoc
 import org.example.languageguide.entities.DocStatistic
+import org.example.languageguide.entities.HtmlDoc
 import org.example.languageguide.services.HtmlDocService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping(value = ["/docs"])
+@CrossOrigin(origins = ["http://localhost:8084"])
 class HtmlDocRestController(private var htmlDocService: HtmlDocService) {
     @GetMapping
     fun getAllHtmlDocuments(): ResponseEntity<MutableList<HtmlDoc>> {
@@ -42,7 +37,7 @@ class HtmlDocRestController(private var htmlDocService: HtmlDocService) {
     }
 
     @PostMapping("/lang")
-    fun defineLangsFromHtmlDocsNGramm(@RequestParam("save") save: Boolean,
+    fun defineLangsFromHtmlDocsNGramm(@RequestParam("save", required = false) save: String?,
                                 @RequestParam("htmlFiles") htmlFiles: MutableList<MultipartFile>,
                                       @RequestParam("type") type: String):
             ResponseEntity<MutableList<DocStatistic>> {

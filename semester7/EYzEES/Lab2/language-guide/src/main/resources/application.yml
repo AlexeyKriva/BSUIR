@@ -18,6 +18,9 @@ spring:
     contexts: development
     enabled: true
 
+huggingface:
+  api:
+    key: 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
 
 server:
   port: 8083
