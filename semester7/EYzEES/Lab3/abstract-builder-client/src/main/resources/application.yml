@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: abstract-builder-client
+
+server:
+  port: 8113

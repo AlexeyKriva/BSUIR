@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: multilayer-neural-network
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+server:
+  port: 8333

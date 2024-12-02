@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация проекта</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .section p {
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Документация проекта</h1>
+    <p>Добро пожаловать в документацию вашего проекта!</p>
+</header>
+
+<nav>
+    <a href="#overview">Обзор</a>
+    <a href="#usage">Использование</a>
+    <a href="#api">API</a>
+</nav>
+
+<div class="content">
+    <section id="overview" class="section">
+        <h2>Обзор</h2>
+        <p>Этот проект предназначен для решения задач, связанных с автоматическим переводом текста с английского на
+            немецкий и наоборот. Он использует API для перевода текста между различными языками.
+            Также на выходе будет строится синтаксическое дерево, а пары слов будут сохранятся в словаре.
+            Также API предоставляет возможность подсчёта слов в предложении и определения части речи слова.</p>
+    </section>
+
+    <section id="usage" class="section">
+        <h2>Использование</h2>
+        <p>После запуска сервера, вы можете посетить следующие страницы:</p>
+        <ul>
+            <li><strong>/home</strong> - Страница, на которой пользователь вводит текст для перевода, а также указывает
+                язык текста и язык, на который пользователь хочет перевести исходный текст.</li>
+            <li><strong>/vocabulary</strong> - Открытие страницы, позхволяющей пользователю получать все пары слов из
+                словаря, добавлять в словарь новые пары, обновлять текущие пары, удалять текщуие пары слов, а также
+                находить пары слов по id и по id запроса.</li>
+            <li><strong>/documentation</strong> - Страница, на которой Вы находитесь сейчас. Данная страница служит
+                документацией к проекту.</li>
+        </ul>
+    </section>
+
+    <section id="api" class="section">
+        <h2>API</h2>
+        <p>Проект предоставляет API для перевода текста. Вот основные эндпоинты:</p>
+        <ul>
+            <li><strong>POST /api/translate</strong> - Перевод текста с одного языка на другой.</li>
+            <li><strong>GET /api/vocabulary</strong> - Получение словаря.</li>
+            <li><strong>GET /api/translate/{id}</strong> - Получение пары слов из словаря по id.</li>
+            <li><strong>GET /api/translate/requests{requestId}</strong> - Получение пар слов из словаря по id запроса.
+            </li>
+            <li><strong>POST /api/vocabulary</strong> - Добавление пары слов в словарь.</li>
+            <li><strong>PUT /api/vocabulary/{id}</strong> - Обновление пары слов по id.</li>
+            <li><strong>DELETE /api/vocabulary/{id}</strong> - Удаление пары слов из словаря по id.</li>
+            <li><strong>DELETE /api/vocabulary</strong> - Удаление всего словаря.</li>
+        </ul>
+    </section>
+</div>
+
+</body>
+</html>

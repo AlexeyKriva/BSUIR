@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Форма загрузки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .formWrapper {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: opacity 0.5s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #218838;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            background-color: #e9ffe9;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: none;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        #response.show {
+            opacity: 1;
+            display: block;
+        }
+
+        #backButton {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="formWrapper" id="formWrapper">
+    <h1 id="formHeader">Форма загрузки</h1>
+    <form id="uploadForm">
+        <label for="source">Введите текст:</label>
+        <input type="text" id="source" name="source" required/>
+        <label for="from">Введите исходный язык:</label>
+        <input type="text" id="from" name="from" required/>
+        <label for="to">Язык для перевода:</label>
+        <input type="text" id="to" name="to" required/>
+        <button type="submit">Отправить</button>
+        <button type="button" class="secondary-button" onclick="goToVocabulary()">Словарь</button>
+        <button type="button" class="secondary-button" onclick="goToDocumentation()">Документация</button>
+    </form>
+</div>
+
+<div id="response" class="hidden"></div>
+
+<button id="backButton" onclick="goBack()">Вернуться к форме</button>
+
+<script>
+    document.getElementById("uploadForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const source = document.getElementById("source").value;
+        const from = document.getElementById("from").value;
+        const to = document.getElementById("to").value;
+
+        const requestData = {
+            source: source,
+            from: from,
+            to: to
+        };
+
+        const formWrapper = document.getElementById("formWrapper");
+        const responseDiv = document.getElementById("response");
+        const backButton = document.getElementById("backButton");
+
+        formWrapper.style.display = "none";
+
+        fetch('http://localhost:8090/api/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка в параметрах запроса.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const responseDiv = document.getElementById("response");
+                responseDiv.innerHTML = `
+        <h2>Перевод текста</h2>
+        <p><strong>Исходный язык:</strong> ${data.from}</p>
+        <p><strong>Целевой язык:</strong> ${data.to}</p>
+        <p><strong>Исходный текст:</strong></p>
+        <blockquote>${data.source}</blockquote>
+        <p><strong>Переведённый текст:</strong></p>
+        <blockquote>${data.target}</blockquote>
+        <p><strong>Количество слов в исходном тексте:</strong> ${data.sourceWordsNumber}</p>
+        <p><strong>Количество слов в переведённом тексте:</strong> ${data.targetWordsNumber}</p>
+        <h3>Информация о частях речи:</h3>
+        <ul>
+            ${data.grammarInfos && data.grammarInfos.length > 0 ? data.grammarInfos.map(gi => `
+          <li>
+            <p><strong>Слово:</strong> ${gi.word}</p>
+            <p><strong>Часть речи:</strong> ${gi.pos}</p>
+            <p><strong>Описание части речи:</strong> ${gi.posDecoding}</p>
+          </li>
+        `).join('')
+                    : '<em>Не указано</em>'}
+        </ul>
+        <h3>Словарь:</h3>
+        <ul>
+        ${data.vocabulary && data.vocabulary.length > 0 ? data.vocabulary.map(vp => `
+            <li>
+            <p><strong>Английское слово:</strong> ${vp.enWord}</p>
+            <p><strong>Немецкое слово:</strong> ${vp.deWord}</p>
+            <p><strong>Частота в английском:</strong> ${vp.frequencyEn}</p>
+            <p><strong>Частота в немецком:</strong> ${vp.frequencyDe}</p>
+          </li>
+        `).join('')
+                    : '<em>Не указано</em>'}
+        </ul>
+        <h3>Дерево синтаксического разбора:</h3>
+        ${data.tree ? data.tree : '<em>Не указано</em>'}
+    `;
+                responseDiv.classList.remove("hidden");
+                responseDiv.style.display = "block";
+                setTimeout(() => {
+                    responseDiv.classList.add("show");
+                }, 1);
+                backButton.style.display = "block";
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                if (error.response && error.response.json) {
+                    error.response.json().then(err => {
+                        responseDiv.innerHTML = `<h2>Ошибка:</h2><pre>${JSON.stringify(err, null, 2)}</pre>`;
+                    }).catch(() => {
+                        responseDiv.innerHTML = `<h2>Ошибка:</h2><pre>${error.message || 'Неизвестная ошибка'}</pre>`;
+                    });
+                } else {
+                    responseDiv.innerHTML = `<h2>Ошибка:</h2><pre>${error.message || 'Неизвестная ошибка'}</pre>`;
+                    responseDiv.style.display = "block"; // Если вдруг стиль display скрывает блок
+                    responseDiv.style.visibility = "visible";
+                    responseDiv.style.opacity = "1";
+                    responseDiv.style.color = "red"; // Временный цвет для проверки
+
+                    responseDiv.innerHTML = `<h2>Ошибка:</h2><pre>${error.message || 'Неизвестная ошибка'}</pre>`;
+                }
+                responseDiv.classList.remove("hidden");
+                responseDiv.style.display = "block";
+                backButton.style.display = "block";
+            });
+    });
+
+    function goBack() {
+        const formWrapper = document.getElementById("formWrapper");
+        const responseDiv = document.getElementById("response");
+        const backButton = document.getElementById("backButton");
+
+        responseDiv.classList.remove("show");
+        setTimeout(() => {
+            responseDiv.classList.add("hidden");
+            responseDiv.style.display = "none";
+            formWrapper.style.opacity = 0;
+            formWrapper.style.display = "block";
+            setTimeout(() => {
+                formWrapper.style.opacity = 1;
+            }, 50);
+        }, 100);
+        backButton.style.display = "none";
+        document.getElementById("uploadForm").reset();
+    }
+
+    function goToVocabulary() {
+        window.location.href = "/vocabulary"; // Укажите здесь ссылку на страницу "Словарь"
+    }
+
+    function goToDocumentation() {
+        window.location.href = "/documentation"; // Укажите здесь ссылку на страницу "Документация"
+    }
+</script>
+</body>
+</html>

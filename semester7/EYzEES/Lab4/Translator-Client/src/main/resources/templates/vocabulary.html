@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Форма управления словарем</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .formWrapper {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #218838;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #1e7e34;
+        }
+
+        .secondary-button {
+            background-color: #1e7e34;
+        }
+
+        .secondary-button:hover {
+            background-color: #1e7e34;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            background-color: #e9ffe9;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="formWrapper" id="formWrapper">
+    <h1>Управление словарем</h1>
+    <form id="vocabularyForm">
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id"/>
+
+        <label for="requestId">Request ID:</label>
+        <input type="number" id="requestId" name="requestId" required/>
+
+        <label for="enWord">Английское слово:</label>
+        <input type="text" id="enWord" name="enWord" required/>
+
+        <label for="deWord">Немецкое слово:</label>
+        <input type="text" id="deWord" name="deWord" required/>
+
+        <label for="frequencyEn">Частота (английское):</label>
+        <input type="number" id="frequencyEn" name="frequencyEn" required/>
+
+        <label for="frequencyDe">Частота (немецкое):</label>
+        <input type="number" id="frequencyDe" name="frequencyDe" required/>
+
+        <div>
+            <button type="submit" id="submitButton" >Добавить</button>
+            <button type="button" class="secondary-button" onclick="getVocabulary()">Словарь</button>
+            <button type="button" class="secondary-button" onclick="updateVocabulary()">Обновить</button>
+            <button type="button" class="secondary-button" onclick="deleteVocabulary()">Удалить</button>
+            <button type="button" class="secondary-button" onclick="deleteAllVocabulary()">Удались весь словарь</button>
+            <button type="button" class="secondary-button" onclick="findVocabulary()">Найти</button>
+            <button type="button" class="secondary-button" onclick="goToHome()">Домой</button>
+        </div>
+    </form>
+</div>
+
+<div id="response"></div>
+
+<script>
+    // Функция для обработки добавления нового элемента
+    document.getElementById("vocabularyForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const vocabularyData = {
+            requestId: document.getElementById("requestId").value,
+            enWord: document.getElementById("enWord").value,
+            deWord: document.getElementById("deWord").value,
+            frequencyEn: document.getElementById("frequencyEn").value,
+            frequencyDe: document.getElementById("frequencyDe").value,
+        };
+
+        fetch('http://localhost:8090/api/vocabulary', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(vocabularyData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                showResponse(data);
+            })
+            .catch(error => {
+                showError(error);
+            });
+    });
+
+    // Функция для получения всех элементов словаря
+    function getVocabulary() {
+        fetch('http://localhost:8090/api/vocabulary', {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then(data => {
+                showResponse(data);
+            })
+            .catch(error => {
+                showError(error);
+            });
+    }
+
+    // Функция для обновления элемента словаря
+    function updateVocabulary() {
+        const id = document.getElementById("id").value;
+
+        const vocabularyData = {
+            requestId: document.getElementById("requestId").value,
+            enWord: document.getElementById("enWord").value,
+            deWord: document.getElementById("deWord").value,
+            frequencyEn: document.getElementById("frequencyEn").value,
+            frequencyDe: document.getElementById("frequencyDe").value,
+        };
+
+        // Обновленный URL с передачей id в параметре
+        fetch(`http://localhost:8090/api/vocabulary/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(vocabularyData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                showResponse(data);
+            })
+            .catch(error => {
+                showError(error);
+            });
+    }
+
+
+    // Функция для удаления элемента словаря
+    function deleteVocabulary() {
+        const id = document.getElementById("id").value;
+
+        fetch(`http://localhost:8090/api/vocabulary/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.json())
+            .then(data => {
+                showResponse(data);
+            })
+            .catch(error => {
+                showError(error);
+            });
+    }
+
+    // Функция для удаления всех элементов словаря
+    function deleteAllVocabulary() {
+
+        fetch(`http://localhost:8090/api/vocabulary`, {
+            method: 'DELETE',
+        })
+            .then(response => response.json())
+            .then(data => {
+                showResponse(data);
+            })
+            .catch(error => {
+                showError(error);
+            });
+    }
+
+    // Функция для нахождения элемента словаря по ID
+    function findVocabulary() {
+        const id = document.getElementById("id").value;
+        const requestId = document.getElementById("requestId").value;
+
+        if (id !== "") {
+            fetch(`http://localhost:8090/api/vocabulary/${id}`, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    showResponse(data);
+                })
+                .catch(error => {
+                    showError(error);
+                });
+        } else {
+            fetch(`http://localhost:8090/api/vocabulary/requests/${requestId}`, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    showResponse(data);
+                })
+                .catch(error => {
+                    showError(error);
+                });
+        }
+    }
+
+    // Функция для отображения успешного ответа
+    function showResponse(data) {
+        const responseDiv = document.getElementById("response");
+        responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        responseDiv.style.display = "block";
+    }
+
+    // Функция для отображения ошибки
+    function showError(error) {
+        const responseDiv = document.getElementById("response");
+        responseDiv.innerHTML = `<p style="color: red;">Ошибка: ${error}</p>`;
+        responseDiv.style.display = "block";
+    }
+
+    function goToHome() {
+        window.location.href = "/home"; // Укажите здесь ссылку на страницу "Словарь"
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+Source:
+Trotz die schwer Regen , die Kinder aufgeregt gerannt gegenüber die Park , lachend und Spielen , sehnsüchtig zu Reichweite die Spielplatz Dabei ist sie/Sie könnte Genießen deren Favorit Spiele und Tätigkeiten unter die dunkel Himmel .
+===================================================
+From:
+deutsch
+===================================================
+To:
+english
+===================================================
+Target:
+Despite the severe Rain , the Children Excited Runned compared to the Park , Laughing and Play , yearning to Range the Playground Where: is they / They could Enjoy of which: Favorite Games and Activities under the Dark Heaven .
+===================================================
+SourceWordsNumber
+35
+===================================================
+TargetWordsNumber
+35
+===================================================
+Words: 
+[org.example.translator.entities.VocabularyPair@1c090, org.example.translator.entities.VocabularyPair@4b, org.example.translator.entities.VocabularyPair@59, org.example.translator.entities.VocabularyPair@e9a, org.example.translator.entities.VocabularyPair@179f6, org.example.translator.entities.VocabularyPair@6bdca3c, org.example.translator.entities.VocabularyPair@354bb3, org.example.translator.entities.VocabularyPair@b13f7d39, org.example.translator.entities.VocabularyPair@5a750e0, org.example.translator.entities.VocabularyPair@d49, org.example.translator.entities.VocabularyPair@5cd1ad5b, org.example.translator.entities.VocabularyPair@4e, org.example.translator.entities.VocabularyPair@ca03c293, org.example.translator.entities.VocabularyPair@a443ba90, org.example.translator.entities.VocabularyPair@7a1b3c0c, org.example.translator.entities.VocabularyPair@3ea1c9bb, org.example.translator.entities.VocabularyPair@abbeb5e0, org.example.translator.entities.VocabularyPair@674395c, org.example.translator.entities.VocabularyPair@5c2e2aa, org.example.translator.entities.VocabularyPair@c92cdf41, org.example.translator.entities.VocabularyPair@364e47, org.example.translator.entities.VocabularyPair@62ea5e1e, org.example.translator.entities.VocabularyPair@df6, org.example.translator.entities.VocabularyPair@80622dda, org.example.translator.entities.VocabularyPair@5d932e0, org.example.translator.entities.VocabularyPair@6bdbd06, org.example.translator.entities.VocabularyPair@dc40603e]
+===================================================
+Tree:
+<ul><li>ROOT<ul><li>SINV<ul><li>S<ul><li>NP<ul><li>NNP<ul><li>Trotz</li></ul></li></ul></li><li>VP<ul><li>VBP<ul><li>die</li></ul></li><li>NP<ul><li>NN<ul><li>schwer</li></ul></li><li>NNP<ul><li>Regen</li></ul></li></ul></li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>VP<ul><li>VBP<ul><li>die</li></ul></li><li>SBAR<ul><li>S<ul><li>NP<ul><li>NML<ul><li>NNP<ul><li>Kinder</li></ul></li><li>NN<ul><li>aufgeregt</li></ul></li></ul></li><li>NN<ul><li>gerannt</li></ul></li><li>NN<ul><li>gegenüber</li></ul></li></ul></li><li>VP<ul><li>VBP<ul><li>die</li></ul></li></ul></li></ul></li></ul></li></ul></li><li>NP<ul><li>NP<ul><li>NNP<ul><li>Park</li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>NP<ul><li>NP<ul><li>NN<ul><li>lachend</li></ul></li><li>NN<ul><li>und</li></ul></li><li>NN<ul><li>Spielen</li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>NP<ul><li>NP<ul><li>NN<ul><li>sehnsüchtig</li></ul></li></ul></li><li>SBAR<ul><li>S<ul><li>NP<ul><li>NNP<ul><li>zu</li></ul></li><li>NNP<ul><li>Reichweite</li></ul></li></ul></li><li>VP<ul><li>VBP<ul><li>die</li></ul></li><li>SBAR<ul><li>S<ul><li>NP<ul><li>NP<ul><li>NNP<ul><li>Spielplatz</li></ul></li><li>NNP<ul><li>Dabei</li></ul></li><li>NN<ul><li>ist</li></ul></li><li>NML<ul><li>NN<ul><li>sie</li></ul></li><li>HYPH<ul><li>/</li></ul></li><li>NN<ul><li>Sie</li></ul></li></ul></li><li>NN<ul><li>könnte</li></ul></li></ul></li><li>NP<ul><li>NNP<ul><li>Genießen</li></ul></li><li>NNP<ul><li>deren</li></ul></li><li>NNP<ul><li>Favorit</li></ul></li><li>NNP<ul><li>Spiele</li></ul></li><li>NNP<ul><li>und</li></ul></li><li>NNP<ul><li>Tätigkeiten</li></ul></li><li>NNP<ul><li>unter</li></ul></li></ul></li></ul></li><li>VP<ul><li>VBP<ul><li>die</li></ul></li><li>NP<ul><li>NNP<ul><li>dunkel</li></ul></li><li>NNP<ul><li>Himmel</li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li>.<ul><li>.</li></ul></li></ul></li></ul></li></ul>

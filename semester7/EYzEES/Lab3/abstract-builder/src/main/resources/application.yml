@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: abstract-builder
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          huggingface:
+            url: https://api-inference.huggingface.co/models
+
+huggingface:
+  api:
+    key: "Bearer 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"
+
+server:
+  port: 8112
+
+full:
+  file-storage:
+    path: /Users/aliaksei/Desktop/BSUIR/semester7/EYzEES/Lab3/abstract-builder/file-storage

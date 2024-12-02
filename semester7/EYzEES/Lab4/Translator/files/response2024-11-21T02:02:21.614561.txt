@@ -1,0 +1,23 @@
+Source:
+Despite the heavy rain, the children excitedly ran across the park, laughing and playing, eager to reach the playground where they could enjoy their favorite games and activities under the dark sky.
+===================================================
+From:
+english
+===================================================
+To:
+deutsch
+===================================================
+Target:
+Trotz die schwer Regen , die Kinder aufgeregt gerannt gegenüber die Park , lachend und Spielen , sehnsüchtig zu Reichweite die Spielplatz Dabei ist sie/Sie könnte Genießen deren Favorit Spiele und Tätigkeiten unter die dunkel Himmel .
+===================================================
+SourceWordsNumber
+32
+===================================================
+TargetWordsNumber
+32
+===================================================
+Words: 
+[org.example.translator.entities.VocabularyPair@1c090, org.example.translator.entities.VocabularyPair@179f6, org.example.translator.entities.VocabularyPair@1bd40, org.example.translator.entities.VocabularyPair@354bb3, org.example.translator.entities.VocabularyPair@5a750e0, org.example.translator.entities.VocabularyPair@5e8f0e6, org.example.translator.entities.VocabularyPair@5f54ac46, org.example.translator.entities.VocabularyPair@6a442f7, org.example.translator.entities.VocabularyPair@7a1b3c0c, org.example.translator.entities.VocabularyPair@e294d04d, org.example.translator.entities.VocabularyPair@e9a, org.example.translator.entities.VocabularyPair@3ea1c9bb, org.example.translator.entities.VocabularyPair@abbeb5e0, org.example.translator.entities.VocabularyPair@675d992, org.example.translator.entities.VocabularyPair@5c2e2aa, org.example.translator.entities.VocabularyPair@6937579, org.example.translator.entities.VocabularyPair@5bced57, org.example.translator.entities.VocabularyPair@ab2eac9e, org.example.translator.entities.VocabularyPair@c00a453b, org.example.translator.entities.VocabularyPair@364e47, org.example.translator.entities.VocabularyPair@62ea5e1e, org.example.translator.entities.VocabularyPair@80622dda, org.example.translator.entities.VocabularyPair@5d932e0, org.example.translator.entities.VocabularyPair@6bdbd06, org.example.translator.entities.VocabularyPair@2eef95, org.example.translator.entities.VocabularyPair@346409, org.example.translator.entities.VocabularyPair@1b83e]
+===================================================
+Tree:
+null

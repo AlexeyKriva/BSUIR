@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: lab9
+
+huggingface:
+  api:
+    key: "Bearer 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"
+
+server:
+  port: 8092
+
+model:
+  path: /Users/aliaksei/Downloads/vosk-model-en-us-0.22

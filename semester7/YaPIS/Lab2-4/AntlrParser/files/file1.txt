@@ -1,0 +1,40 @@
+local function int sum(int a, int b) {
+    return a + b;
+}
+
+local function float sum(float a, float b) {
+    return a + b;
+}
+
+local function int func() {
+    int k = 1;
+    return k;
+}
+
+local function float sum1(float a, element b) {ù
+    int k1 = func();
+    return a + b;
+}
+
+local function string func() {
+    return "1";
+}
+
+local function elementSet elemSet() {
+    elementSet elem = elementSet();
+
+    return elem;
+}
+
+global function element newFunc() {
+    if (10 == 10 && true == true) {
+        write(100);
+    }
+
+    if (100 > 100.0) {
+        read(200);
+    }
+
+    element elem1 = element(10);
+    return elem1;
+}

@@ -1,0 +1,23 @@
+Source:
+Despite the heavy rain, the children excitedly ran across the park, laughing and playing, eager to reach the playground where they could enjoy their favorite games and activities under the dark sky.
+===================================================
+From:
+english
+===================================================
+To:
+deutsch
+===================================================
+Target:
+Trotz die schwer Regen , die Kinder aufgeregt gerannt gegenüber die Park , lachend und Spielen , sehnsüchtig zu Reichweite die Spielplatz Dabei ist sie/Sie könnte Genießen deren Favorit Spiele und Tätigkeiten unter die dunkel Himmel .
+===================================================
+SourceWordsNumber
+32
+===================================================
+TargetWordsNumber
+32
+===================================================
+Words: 
+[org.example.translator.entities.VocabularyPair@1c090, org.example.translator.entities.VocabularyPair@179f6, org.example.translator.entities.VocabularyPair@1bd40, org.example.translator.entities.VocabularyPair@354bb3, org.example.translator.entities.VocabularyPair@5a750e0, org.example.translator.entities.VocabularyPair@5cd1ad5b, org.example.translator.entities.VocabularyPair@5e8f0e6, org.example.translator.entities.VocabularyPair@5f54ac46, org.example.translator.entities.VocabularyPair@6a442f7, org.example.translator.entities.VocabularyPair@7a1b3c0c, org.example.translator.entities.VocabularyPair@e294d04d, org.example.translator.entities.VocabularyPair@e9a, org.example.translator.entities.VocabularyPair@3ea1c9bb, org.example.translator.entities.VocabularyPair@abbeb5e0, org.example.translator.entities.VocabularyPair@675d992, org.example.translator.entities.VocabularyPair@5c2e2aa, org.example.translator.entities.VocabularyPair@6937579, org.example.translator.entities.VocabularyPair@5bced57, org.example.translator.entities.VocabularyPair@ab2eac9e, org.example.translator.entities.VocabularyPair@364e47, org.example.translator.entities.VocabularyPair@62ea5e1e, org.example.translator.entities.VocabularyPair@80622dda, org.example.translator.entities.VocabularyPair@5d932e0, org.example.translator.entities.VocabularyPair@6bdbd06, org.example.translator.entities.VocabularyPair@2eef95, org.example.translator.entities.VocabularyPair@346409, org.example.translator.entities.VocabularyPair@1b83e]
+===================================================
+Tree:
+<ul><li>ROOT<ul><li>S<ul><li>PP<ul><li>IN<ul><li>Despite</li></ul></li><li>NP<ul><li>DT<ul><li>the</li></ul></li><li>JJ<ul><li>heavy</li></ul></li><li>NN<ul><li>rain</li></ul></li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>NP<ul><li>DT<ul><li>the</li></ul></li><li>NNS<ul><li>children</li></ul></li></ul></li><li>ADVP<ul><li>RB<ul><li>excitedly</li></ul></li></ul></li><li>VP<ul><li>VBD<ul><li>ran</li></ul></li><li>S<ul><li>PP<ul><li>IN<ul><li>across</li></ul></li><li>NP<ul><li>DT<ul><li>the</li></ul></li><li>NN<ul><li>park</li></ul></li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>S<ul><li>VP<ul><li>VBG<ul><li>laughing</li></ul></li><li>CC<ul><li>and</li></ul></li><li>VBG<ul><li>playing</li></ul></li></ul></li></ul></li><li>,<ul><li>,</li></ul></li><li>ADJP<ul><li>JJ<ul><li>eager</li></ul></li><li>S<ul><li>VP<ul><li>TO<ul><li>to</li></ul></li><li>VP<ul><li>VB<ul><li>reach</li></ul></li><li>NP<ul><li>DT<ul><li>the</li></ul></li><li>NN<ul><li>playground</li></ul></li></ul></li><li>SBAR<ul><li>WHADVP<ul><li>WRB<ul><li>where</li></ul></li></ul></li><li>S<ul><li>NP<ul><li>PRP<ul><li>they</li></ul></li></ul></li><li>VP<ul><li>MD<ul><li>could</li></ul></li><li>VP<ul><li>VB<ul><li>enjoy</li></ul></li><li>NP<ul><li>PRP$<ul><li>their</li></ul></li><li>JJ<ul><li>favorite</li></ul></li><li>NNS<ul><li>games</li></ul></li><li>CC<ul><li>and</li></ul></li><li>NNS<ul><li>activities</li></ul></li></ul></li><li>PP<ul><li>IN<ul><li>under</li></ul></li><li>NP<ul><li>DT<ul><li>the</li></ul></li><li>JJ<ul><li>dark</li></ul></li><li>NN<ul><li>sky</li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li>.<ul><li>.</li></ul></li></ul></li></ul></li></ul>

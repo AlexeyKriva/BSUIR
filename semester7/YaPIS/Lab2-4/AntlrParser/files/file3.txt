@@ -1,0 +1,16 @@
+global function int sum(float a, int b) {
+    boolea1n k = true;
+    int o = b + b;
+    int p = b * b;
+    k = false;
+    return p;
+}
+
+global function int sum(int a, int b) {
+    int c = a + b;
+    return c
+}
+
+global finction int diff(elementSet a, int b) {
+}
+

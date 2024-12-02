@@ -1,0 +1,49 @@
+global class CustomElement {
+    global constructor() {}
+    global constructor(element elem) {
+        element elem1 = element();
+        element customElement = elem1;
+    }
+    local element customElement = element(10, "custom");
+}
+
+global function void main1() {
+    int i = 0;
+    if (i == 0) {
+        i += 1;
+    } else {
+        i *= 2;
+    }
+
+    elementSet elemSet = elementSet(customElements(element(3, "custom")), customElements(15, "new element"));
+
+    i *= (int) "10";
+
+    element newElement = element(i, "myElement");
+
+    for (int j = 0; j < i; j += 1) {
+        while (j > 5) {
+            elemSet.addElement(CustomElement(element(j, "fromCycle")));
+        }
+        break;
+    }
+
+    float number = newElement.getValue;
+    number %= 3.0;
+
+    switch(number) {
+        case 1: int dt = 1;
+        case 2: int k = 2;
+        case 3: int ty = 3;
+    }
+
+    read(number);
+
+    if (1 == 1 && 100 % 10 == 10) {
+        read("Hello world!");
+    }
+}
+
+global function int sum(int a, int b) {
+    return a + b;
+}

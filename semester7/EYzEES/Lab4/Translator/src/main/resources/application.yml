@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: translator
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/translator_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 98479847
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          translator-model:
+            url: https://api-inference.huggingface.co/models
+
+huggingface:
+  api:
+    key: "Bearer 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"
+
+server:
+  port: 8090

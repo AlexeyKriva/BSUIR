@@ -1,0 +1,23 @@
+Source:
+Despite the heavy rain, the children excitedly ran across the park, laughing and playing, eager to reach the playground where they could enjoy their favorite games and activities under the dark sky.
+===================================================
+From:
+english
+===================================================
+To:
+deutsch
+===================================================
+Target:
+Trotz die schwer Regen , die Kinder aufgeregt gerannt gegenüber die Park , lachend und Spielen , sehnsüchtig zu Reichweite die Spielplatz Dabei ist sie/Sie könnte Genießen deren Favorit Spiele und Tätigkeiten unter die dunkel Himmel .
+===================================================
+SourceWordsNumber
+32
+===================================================
+TargetWordsNumber
+32
+===================================================
+Words: 
+[VocabularyPair(id=null, requestId=13, enWord=the, deWord=und, frequencyEn=5, frequencyDe=2), VocabularyPair(id=null, requestId=13, enWord=the, deWord=die, frequencyEn=5, frequencyDe=5), VocabularyPair(id=null, requestId=13, enWord=and, deWord=und, frequencyEn=2, frequencyDe=2), VocabularyPair(id=null, requestId=13, enWord=and, deWord=deren, frequencyEn=2, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=across, deWord=gegenüber, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=eager, deWord=sehnsüchtig, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=children, deWord=Kinder, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=their, deWord=Sie, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=favorite, deWord=könnte, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=sky, deWord=unter, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=playground, deWord=Spielplatz, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=where, deWord=Dabei, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=laughing, deWord=lachend, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=park, deWord=Park, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=they, deWord=ist, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=under, deWord=Spiele, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=rain, deWord=Regen, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=ran, deWord=gerannt, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=Despite, deWord=Trotz, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=heavy, deWord=schwer, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=playing, deWord=Spielen, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=dark, deWord=Tätigkeiten, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=games, deWord=Genießen, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=enjoy, deWord=/, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=to, deWord=zu, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=excitedly, deWord=aufgeregt, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=could, deWord=sie, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=reach, deWord=Reichweite, frequencyEn=1, frequencyDe=1), VocabularyPair(id=null, requestId=13, enWord=activities, deWord=Favorit, frequencyEn=1, frequencyDe=1)]
+===================================================
+Tree:
+null
