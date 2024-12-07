@@ -38,7 +38,12 @@ public class SynapseService {
 
         double randomWeight = LEFT_BORDER + (RIGHT_BORDER - LEFT_BORDER) * random.nextDouble();
 
-        return randomWeight;
+        return roundToPrecision(randomWeight);
+    }
+
+    private double roundToPrecision(double value) {
+        BigDecimal roundedValue = BigDecimal.valueOf(value);
+        return roundedValue.setScale(NUMBER_OF_DIGITS_AFTER_DOT, RoundingMode.HALF_UP).doubleValue();
     }
 
     public double roundRandomWeight(double randomWeight) {

@@ -6,7 +6,6 @@
 package com.software.bsuir.multilayerneuralnetwork.services;
 
 import com.software.bsuir.multilayerneuralnetwork.entities.ImageVector;
-import com.software.bsuir.multilayerneuralnetwork.entities.Neuron;
 import com.software.bsuir.multilayerneuralnetwork.entities.Pixel;
 import com.software.bsuir.multilayerneuralnetwork.entities.ImageRectangle;
 import com.software.bsuir.multilayerneuralnetwork.exceptions.FileIsNotImageException;
@@ -81,7 +80,7 @@ public class ImageService {
 
     @SneakyThrows
     private void saveBufferedImageToFile(BufferedImage image) {
-        File imageFile = new File(TOTAL_PATH_TO_IMAGE + LocalDateTime.now() + ".png");
+        File imageFile = new File(TOTAL_PATH_TO_IMAGE + "_" + LocalDateTime.now() + ".bmp");
         ImageIO.write(image, "png", imageFile);
     }
 

@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.software.bsuir.multilayerneuralnetwork.exceptions.ExceptionMessage.RECIRCULATION_NETWORK_IS_NOT_INIT_MESSAGE;
 
@@ -23,7 +22,6 @@ public class RecirculationNetwork {
     private final ImageService imageService;
     private final SynapseService synapseService;
     private final NeuronService neuronService;
-    private final PixelService pixelService;
 
     private static Integer numberOfEpochs;
     private static Double learningRate;
@@ -99,7 +97,7 @@ public class RecirculationNetwork {
 
             List<ImageVector> referenceVectors = imageService.splitImageIntoVectors(image);
 
-            while (totalError > 0.1) {
+            while (totalError > 0.05) {
 
                 List<ImageVector> outputVectors = throughNeurones(referenceVectors, true);
 
@@ -118,17 +116,17 @@ public class RecirculationNetwork {
         List<ImageVector> outputVectors = new ArrayList<>();
 
         for (ImageVector referenceVector : referenceVectors) {
-            ImageVector outputVectorFirstLayer = throwOneNeuronLayer(referenceVector.getPixelsVector(),
-                    synapsesFirstLayer);
-
-            ImageVector outputVectorSecondLayer = throwOneNeuronLayer(outputVectorFirstLayer.getPixelsVector(),
-                    synapsesSecondLayer);
+            ImageVector outputVectorFirstLayer = throwOneNeuronLayer(referenceVector.getPixelsVector(), synapsesFirstLayer);
+            ImageVector outputVectorSecondLayer = throwOneNeuronLayer(outputVectorFirstLayer.getPixelsVector(), synapsesSecondLayer);
 
             if (isTrain) {
+                List<Double> secondLayerErrors = computeLayerErrors(referenceVector, outputVectorSecondLayer);
+
                 synapsesSecondLayer = adjustingWeights(referenceVector, outputVectorSecondLayer, synapsesSecondLayer,
-                        outputVectorFirstLayer);
+                        outputVectorFirstLayer, null, null);
+
                 synapsesFirstLayer = adjustingWeights(outputVectorSecondLayer, outputVectorFirstLayer, synapsesFirstLayer,
-                        referenceVector);
+                        referenceVector, synapsesSecondLayer, secondLayerErrors);
             }
 
             outputVectors.add(outputVectorSecondLayer);
@@ -136,6 +134,18 @@ public class RecirculationNetwork {
 
         return outputVectors;
     }
+
+    private List<Double> computeLayerErrors(ImageVector referenceVector, ImageVector predictedVector) {
+        List<Double> errors = new ArrayList<>();
+        for (int i = 0; i < referenceVector.getPixelsVector().size(); i++) {
+            double errorRed = predictedVector.getPixelsVector().get(i).getRedValue() - referenceVector.getPixelsVector().get(i).getRedValue();
+            double errorGreen = predictedVector.getPixelsVector().get(i).getGreenValue() - referenceVector.getPixelsVector().get(i).getGreenValue();
+            double errorBlue = predictedVector.getPixelsVector().get(i).getBlueValue() - referenceVector.getPixelsVector().get(i).getBlueValue();
+            errors.add(errorRed + errorGreen + errorBlue);
+        }
+        return errors;
+    }
+
 
     public ImageVector throwOneNeuronLayer(List<Pixel> pixelVector, List<List<Synapse>> synapses) {
         List<Neuron> neurons = new ArrayList<>();
@@ -180,18 +190,29 @@ public class RecirculationNetwork {
     }
 
     public List<List<Synapse>> adjustingWeights(ImageVector referenceVector, ImageVector predictedVector,
-                                                List<List<Synapse>> synapses, ImageVector inputVector) {
+                                                List<List<Synapse>> synapses, ImageVector inputVector,
+                                                List<List<Synapse>> nextLayerSynapses, List<Double> nextLayerErrors) {
         List<List<Synapse>> newSynapses = new ArrayList<>();
-
         List<Pixel> reference = referenceVector.getPixelsVector();
         List<Pixel> predicted = predictedVector.getPixelsVector();
-
         List<Synapse> synapsesForNeuron = new ArrayList<>();
 
         for (int i = 0; i < reference.size(); i++) {
-            double errorRed = predicted.get(i).getRedValue() - reference.get(i).getRedValue();
-            double errorGreen = predicted.get(i).getGreenValue() - reference.get(i).getGreenValue();
-            double errorBlue = predicted.get(i).getBlueValue() - reference.get(i).getBlueValue();
+            double errorRed = 0.0;
+            double errorGreen = 0.0;
+            double errorBlue = 0.0;
+
+            if (nextLayerSynapses != null && nextLayerErrors != null) {
+                for (int j = 0; j < nextLayerSynapses.size(); j++) {
+                    errorRed += nextLayerSynapses.get(j).get(i * 3).getWeight() * nextLayerErrors.get(j);
+                    errorGreen += nextLayerSynapses.get(j).get(i * 3 + 1).getWeight() * nextLayerErrors.get(j);
+                    errorBlue += nextLayerSynapses.get(j).get(i * 3 + 2).getWeight() * nextLayerErrors.get(j);
+                }
+            } else {
+                errorRed = predicted.get(i).getRedValue() - reference.get(i).getRedValue();
+                errorGreen = predicted.get(i).getGreenValue() - reference.get(i).getGreenValue();
+                errorBlue = predicted.get(i).getBlueValue() - reference.get(i).getBlueValue();
+            }
 
             double newWeightRed = synapses.get(0).get(3 * i).getWeight() - learningRate * errorRed *
                     inputVector.getPixelsVector().get(i).getRedValue();
@@ -207,12 +228,7 @@ public class RecirculationNetwork {
 
         newSynapses.add(synapsesForNeuron);
 
-        synapses = newSynapses;
-
-//        System.out.println("=============================================================");
-//        synapseService.printSynapses(synapses);
-//        System.out.println("=============================================================");
-
-        return synapses;
+        return newSynapses;
     }
+
 }

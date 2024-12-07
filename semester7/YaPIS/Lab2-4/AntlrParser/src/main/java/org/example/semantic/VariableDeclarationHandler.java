@@ -1,4 +1,4 @@
-package org.example.semantic;
+package org.example.syntax.semantic;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.example.MyParser;

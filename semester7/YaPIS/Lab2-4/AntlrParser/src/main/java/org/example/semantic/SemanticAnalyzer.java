@@ -1,4 +1,4 @@
-package org.example.semantic;
+package org.example.syntax.semantic;
 
 import lombok.Getter;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -11,13 +11,13 @@ import org.example.declarations.ScopeType;
 
 import java.util.*;
 
-import static org.example.semantic.ClassDeclarationHandler.classScope;
-import static org.example.semantic.ClassDeclarationHandler.isClassWasDeclared;
-import static org.example.semantic.FunctionDeclarationHandler.isFunctionWasDeclared;
-import static org.example.semantic.FunctionDeclarationHandler.scope;
-import static org.example.semantic.IfStatementDeclarationHandler.ifStatementDeclaration;
-import static org.example.semantic.VariableDeclarationHandler.*;
-import static org.example.semantic.ReturnDeclarationHandler.*;
+import static org.example.syntax.semantic.ClassDeclarationHandler.classScope;
+import static org.example.syntax.semantic.ClassDeclarationHandler.isClassWasDeclared;
+import static org.example.syntax.semantic.FunctionDeclarationHandler.isFunctionWasDeclared;
+import static org.example.syntax.semantic.FunctionDeclarationHandler.scope;
+import static org.example.syntax.semantic.IfStatementDeclarationHandler.ifStatementDeclaration;
+import static org.example.syntax.semantic.VariableDeclarationHandler.*;
+import static org.example.syntax.semantic.ReturnDeclarationHandler.*;
 
 @Getter
 public class SemanticAnalyzer extends MyParserBaseListener {
@@ -81,9 +81,9 @@ public class SemanticAnalyzer extends MyParserBaseListener {
 
         String returnType = ctx.type().getText();
 
-        String scope = FunctionDeclarationHandler.scope(ctx.LOCAL(), ctx.GLOBAL());
+        String scope = scope(ctx.LOCAL(), ctx.GLOBAL());
 
-        if (FunctionDeclarationHandler.isFunctionWasDeclared(functionDeclarations, functionName, variables)) {
+        if (isFunctionWasDeclared(functionDeclarations, functionName, variables)) {
             System.err.println("Ошибка: функция " + functionName + " уже определена.");
         } else {
             functionDeclarations.add(new MyFunctionDeclaration(functionName, variables, returnType, scope,
