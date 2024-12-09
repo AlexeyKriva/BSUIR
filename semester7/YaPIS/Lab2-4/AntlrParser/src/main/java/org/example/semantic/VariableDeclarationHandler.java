@@ -1,8 +1,7 @@
-package org.example.syntax.semantic;
+package org.example.semantic;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.example.MyParser;
-import org.example.declarations.MyFunctionDeclaration;
 import org.example.declarations.MyVariableDeclaration;
 import org.example.declarations.ScopeType;
 
@@ -12,8 +11,6 @@ import java.util.List;
 
 import static org.example.semantic.ClassDeclarationHandler.findClassTypeByName;
 import static org.example.semantic.FunctionDeclarationHandler.findFunctionTypeByName;
-import static org.example.semantic.FunctionDeclarationHandler.isFunctionWasDeclared;
-import static org.example.semantic.ReturnDeclarationHandler.returnDeclaration;
 
 public class VariableDeclarationHandler {
     public static List<MyVariableDeclaration> buildParameters(List<MyParser.ParameterContext> parameterContexts,
@@ -50,12 +47,13 @@ public class VariableDeclarationHandler {
                     globalVariableDeclarations);
 
             if (isVariableDeclared(varName, variableDeclarations, globalVariableDeclarations)) {
-                System.err.println("Ошибка: переменная " + varName + " уже определена в текущей области видимости.");
+                throw new RuntimeException("Ошибка: переменная " + varName +
+                        " уже определена в текущей области видимости.");
             } else {
                 variableDeclarations.add(new MyVariableDeclaration(varName, varType, scopeName, scopeType, varValue));
             }
         } else {
-            System.err.println("Ошибка: идентификатор переменной не найден.");
+            throw new RuntimeException("Ошибка: идентификатор переменной не найден.");
         }
     }
 
@@ -109,11 +107,12 @@ public class VariableDeclarationHandler {
                             findVariableValueByName(expressionVariables.get(1), variableDeclarations,
                                     globalVariableDeclarations);
                 } else {
-                    System.err.println("Переменной " + varName + " присваивается выражение с разными типами данных.");
+                    throw new RuntimeException("Переменной " + varName +
+                            " присваивается выражение с разными типами данных.");
                 }
             } else {
-                System.err.println("Переменная " + expressionVariables.get(0) + " или/и " + expressionVariables.get(1)
-                        + " не объявлена(ы).");
+                throw new RuntimeException("Переменная " + expressionVariables.get(0) + " или/и " +
+                        expressionVariables.get(1) + " не объявлена(ы).");
             }
         } else if (ctx.primary() != null) {
             boolean isDot = false;
@@ -172,19 +171,18 @@ public class VariableDeclarationHandler {
         } else if (ctx.ID() != null && ctx.LPAREN() != null) {
             isMethod = true;
 
-            if (varType.equals(FunctionDeclarationHandler.findFunctionTypeByName(ctx.ID().getText(), SemanticAnalyzer.functionDeclarations)) ||
-            varType.equals(ClassDeclarationHandler.findClassTypeByName(ctx.ID().getText(), SemanticAnalyzer.classDeclarations))) {
+            if (varType.equals(findFunctionTypeByName(ctx.ID().getText(), SemanticAnalyzer.functionDeclarations)) ||
+            varType.equals(findClassTypeByName(ctx.ID().getText(), SemanticAnalyzer.classDeclarations))) {
                 return ctx.ID().getText();
             }
         }
 
         if (!isMethod) {
-            System.err.println("Переменная/метод " + varName + " типа " + varType + " не может принять/вернуть данное значение.");
+            throw new RuntimeException("Переменная/метод " + varName + " типа " + varType +
+                    " не может принять/вернуть данное значение.");
         } else {
-            System.err.println("Метод " + ctx.ID().getText() + " имеет тип отличный от " + varType + " .");
+            throw new RuntimeException("Метод " + ctx.ID().getText() + " имеет тип отличный от " + varType + " .");
         }
-
-        return "unknown";
     }
 
     public static String getVariableType(MyParser.PrimaryContext ctx, List<MyVariableDeclaration> variableDeclarations,
@@ -234,9 +232,7 @@ public class VariableDeclarationHandler {
             }
         }
 
-        System.err.println("Переменная " + varName + " не найдена.");
-
-        return "null";
+        throw new RuntimeException("Переменная " + varName + " не найдена.");
     }
 
     public static String findVariableTypeByName(String varName, List<MyVariableDeclaration> variableDeclarations,
@@ -253,8 +249,6 @@ public class VariableDeclarationHandler {
             }
         }
 
-        System.err.println("Неизвестный тип данных переменной " + varName + ".");
-
-        return "unknown";
+        throw new RuntimeException("Неизвестный тип данных переменной " + varName + ".");
     }
 }

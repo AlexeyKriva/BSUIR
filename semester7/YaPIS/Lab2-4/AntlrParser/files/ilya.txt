@@ -1,0 +1,41 @@
+string str1 = "Hello";
+string str2 = "World";
+
+if (str1 == str2) {
+    write("Strings are equal");
+} else {
+    write("Strings are different");
+}
+
+string inputString = "MyLanguage";
+int length = inputString.length();
+write("Length of input string: " + length);
+
+string fullString = "Hello, World!";
+string substring = "World";
+
+local function string test() {
+    return "Hello world";
+}
+
+local function string sum(int a, int b) {
+    return "test";
+}
+
+local function string sum(float a, float b) {
+    return "test1";
+}
+
+local function int sum1(float a, float b) {
+    return 5;
+}
+
+if (fullString == substring) {
+    write("The string contains: " + substring);
+}
+
+int k = 5;
+
+if (k == 5){
+    write("Substring not found.");
+}

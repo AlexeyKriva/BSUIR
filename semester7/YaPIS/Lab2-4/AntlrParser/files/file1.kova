@@ -11,13 +11,11 @@ local function int func() {
     return k;
 }
 
-local function float sum1(float a, element b) {ù
+int mg = 100;
+
+local function float sum1(float a, float b) {
     int k1 = func();
     return a + b;
-}
-
-local function string func() {
-    return "1";
 }
 
 local function elementSet elemSet() {
@@ -26,15 +24,18 @@ local function elementSet elemSet() {
     return elem;
 }
 
+local int age = 29;
+
 global function element newFunc() {
     if (10 == 10 && true == true) {
         write(100);
     }
 
-    if (100 > 100.0) {
-        read(200);
-    }
-
     element elem1 = element(10);
     return elem1;
+}
+
+global function void main() {
+    int a = 333;
+    age+=1;
 }

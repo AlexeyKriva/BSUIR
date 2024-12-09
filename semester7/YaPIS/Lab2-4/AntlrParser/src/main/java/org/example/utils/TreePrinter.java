@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils;
 
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.tree.ParseTree;

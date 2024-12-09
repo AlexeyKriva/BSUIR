@@ -1,4 +1,4 @@
-package org.example.syntax.semantic;
+package org.example.semantic;
 
 import org.example.MyParser;
 import org.example.declarations.MyVariableDeclaration;
@@ -14,11 +14,11 @@ public class IfStatementDeclarationHandler {
                                               List<MyVariableDeclaration> globalVariableDeclarations) {
         int counter = 0;
         if (ctx.expression() != null && !ctx.expression().isEmpty()) {
-            if (!VariableDeclarationHandler.getVariableType(ctx.expression().get(0).primary(), variableDeclarations,
-                    globalVariableDeclarations).equals(VariableDeclarationHandler.getVariableType(
+            if (!getVariableType(ctx.expression().get(0).primary(), variableDeclarations,
+                    globalVariableDeclarations).equals(getVariableType(
                     ctx.expression().get(1).primary(), variableDeclarations,
                     globalVariableDeclarations))) {
-                System.err.println("Разные типы данных в блоке if.");
+                throw new RuntimeException("Разные типы данных в блоке if.");
             }
         } else {
             ifStatementDeclaration(ctx.comparativeExpression().get(counter++), variableDeclarations,

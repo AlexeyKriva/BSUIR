@@ -1,0 +1,94 @@
+local function elementSet plus(elementSet elements) {
+    for (int i = 0; i < 20; i += 2) {
+        string strName1 = (string) i;
+        elements.addElement(element(i, strName1));
+    }
+
+    return elements;
+}
+
+local function elementSet minus(elementSet elements) {
+    for (int i = 30; i >= 0; i -= 3) {
+        string strName2 = (string) i;
+        elements.addElement(element(i, strName2));
+    }
+
+    return elements;
+}
+
+global function int sum(elementSet elements) {
+    int summa = 0;
+
+    for (int i = 0; i < elements.getSize(); i += 1) {
+        element current = elements.get(i);
+
+        summa += current.getValue();
+    }
+
+    return summa;
+}
+
+local function element max(elementSet elements) {
+    element maxElement = elements.get(0);
+
+    int i = 1;
+
+    while (i < elements.getSize()) {
+        int maxVal = maxElement.getValue();
+        element currentElementMax = elements.get(i);
+        int valMax = currentElementMax.getValue();
+        if (maxVal < valMax) {
+            maxElement = currentElementMax;
+        }
+
+        i += 1;
+    }
+
+    return maxElement;
+}
+
+local function element min(elementSet elements) {
+    element minElement = elements.get(0);
+
+    int j = 1;
+
+    while (j < elements.getSize()) {
+        int minVal = minElement.getValue();
+        element currentElementMin = elements.get(j);
+        int valMin = currentElementMin.getValue();
+        if (minVal > valMin) {
+            minElement = currentElementMin;
+        }
+
+        j += 1;
+    }
+
+    return minElement;
+}
+
+global function void main() {
+    elementSet elements = elementSet();
+    elements.addElement(element(10, "first"));
+
+    plus(elements);
+    minus(elements);
+
+    writenl("Elements of set:");
+    writenl(elements);
+
+    writenl("Total sum:");
+    int totalSum = sum(elements);
+    write(totalSum);
+
+    writenl();
+
+    writenl("Max element");
+    element maximum = max(elements);
+    write(maximum);
+
+    writenl();
+
+    writenl("Min element");
+    element minimum = min(elements);
+    write(minimum);
+}

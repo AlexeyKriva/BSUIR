@@ -1,0 +1,13 @@
+local function int func() {
+    int k = 1;
+    return k;
+}
+
+local function string func() {
+    int s = 50;
+    return "1";
+}
+
+global function void main() {
+    int a = 333;
+}

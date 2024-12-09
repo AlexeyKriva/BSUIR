@@ -1,4 +1,4 @@
-package org.example.syntax.semantic;
+package org.example.semantic;
 
 import lombok.Getter;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -11,13 +11,9 @@ import org.example.declarations.ScopeType;
 
 import java.util.*;
 
-import static org.example.syntax.semantic.ClassDeclarationHandler.classScope;
-import static org.example.syntax.semantic.ClassDeclarationHandler.isClassWasDeclared;
-import static org.example.syntax.semantic.FunctionDeclarationHandler.isFunctionWasDeclared;
-import static org.example.syntax.semantic.FunctionDeclarationHandler.scope;
-import static org.example.syntax.semantic.IfStatementDeclarationHandler.ifStatementDeclaration;
-import static org.example.syntax.semantic.VariableDeclarationHandler.*;
-import static org.example.syntax.semantic.ReturnDeclarationHandler.*;
+import static org.example.semantic.IfStatementDeclarationHandler.ifStatementDeclaration;
+import static org.example.semantic.VariableDeclarationHandler.*;
+import static org.example.semantic.ReturnDeclarationHandler.*;
 
 @Getter
 public class SemanticAnalyzer extends MyParserBaseListener {
@@ -27,9 +23,22 @@ public class SemanticAnalyzer extends MyParserBaseListener {
 
     private ScopeType currentScopeType = ScopeType.ALL;
     private String currentScopeName = "all";
+    private final String FUNCTION_MAIN = "main";
+    private final String VOID_TYPE = "void";
+    private final String SCOPE_NAME = "global";
 
     public void analyze(ParseTree tree) {
         visit(tree);
+
+        for (MyFunctionDeclaration functionDeclaration : functionDeclarations) {
+            if (functionDeclaration.getName().equals(FUNCTION_MAIN) &&
+                    functionDeclaration.getReturnType().equals(VOID_TYPE) &&
+                    functionDeclaration.getScope().equals(SCOPE_NAME)) {
+                return;
+            }
+        }
+
+        throw new RuntimeException("Нет глобальной функции Main с возвращаемым типом - void");
     }
 
     private void visit(ParseTree node) {
@@ -39,7 +48,7 @@ public class SemanticAnalyzer extends MyParserBaseListener {
 
             handleFunctionDeclaration((MyParser.FunctionDeclarationContext) node);
         } else if (node instanceof MyParser.ClassDeclarationContext) {
-           handleClassDeclaration((MyParser.ClassDeclarationContext) node);
+            handleClassDeclaration((MyParser.ClassDeclarationContext) node);
         } else if (node instanceof MyParser.StatementContext) {
             currentScopeName = "all";
             currentScopeType = ScopeType.ALL;
@@ -58,10 +67,10 @@ public class SemanticAnalyzer extends MyParserBaseListener {
 
         currentScopeName = className;
 
-        String scope = classScope(ctx.LOCAL(), ctx.GLOBAL());
+        String scope = ClassDeclarationHandler.classScope(ctx.LOCAL(), ctx.GLOBAL());
 
-        if (isClassWasDeclared(className, classDeclarations)) {
-            System.err.println("Ошибка: класс " + className + " уже определен.");
+        if (ClassDeclarationHandler.isClassWasDeclared(className, classDeclarations)) {
+            throw new RuntimeException("Ошибка: класс " + className + " уже определен.");
         } else {
             classDeclarations.add(new MyClassDeclaration(className));
         }
@@ -73,21 +82,24 @@ public class SemanticAnalyzer extends MyParserBaseListener {
         currentScopeName = functionName;
 
         List<MyVariableDeclaration> variables = new ArrayList<>();
+        List<MyVariableDeclaration> parameters = new ArrayList<>();
 
         if (ctx.parameterList() != null) {
             variables = buildParameters(ctx.parameterList().parameter(), currentScopeName,
+                    currentScopeType);
+            parameters = buildParameters(ctx.parameterList().parameter(), currentScopeName,
                     currentScopeType);
         }
 
         String returnType = ctx.type().getText();
 
-        String scope = scope(ctx.LOCAL(), ctx.GLOBAL());
+        String scope = FunctionDeclarationHandler.scope(ctx.LOCAL(), ctx.GLOBAL());
 
-        if (isFunctionWasDeclared(functionDeclarations, functionName, variables)) {
-            System.err.println("Ошибка: функция " + functionName + " уже определена.");
+        if (FunctionDeclarationHandler.isFunctionWasDeclared(functionDeclarations, functionName, parameters)) {
+            throw new RuntimeException("Ошибка: функция " + functionName + " уже определена.");
         } else {
             functionDeclarations.add(new MyFunctionDeclaration(functionName, variables, returnType, scope,
-                    false));
+                    false, parameters));
 
             handleBlockStatements(ctx.block().statement(), functionDeclarations, variables);
         }
@@ -96,7 +108,7 @@ public class SemanticAnalyzer extends MyParserBaseListener {
     private void handleBlockStatements(List<MyParser.StatementContext> statementContexts,
                                        List<MyFunctionDeclaration> functionDeclarations,
                                        List<MyVariableDeclaration> variableDeclarations) {
-        for (MyParser.StatementContext statementContext: statementContexts) {
+        for (MyParser.StatementContext statementContext : statementContexts) {
             handleStatement(statementContext, functionDeclarations, variableDeclarations);
         }
     }
@@ -107,7 +119,7 @@ public class SemanticAnalyzer extends MyParserBaseListener {
         if (statementContext.variableDeclaration() != null) {
             handleVariableDeclaration(statementContext.variableDeclaration(), variableDeclarations,
                     globalVariableDeclarations, currentScopeName, currentScopeType);
-       } else if (statementContext.assignment() != null) {
+        } else if (statementContext.assignment() != null) {
             checkVariableTypeAndFindVariableValue(statementContext.assignment().expression(),
                     statementContext.assignment().ID().getText(),
                     findVariableTypeByName(statementContext.assignment().ID().getText(), variableDeclarations,

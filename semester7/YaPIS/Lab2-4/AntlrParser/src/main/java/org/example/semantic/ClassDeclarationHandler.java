@@ -35,8 +35,6 @@ public class ClassDeclarationHandler {
             }
         }
 
-        System.err.println("Класс или метод" + className + " не объявлен.");
-
-        return "unknown";
+        throw new RuntimeException("Класс или метод" + className + " не объявлен.");
     }
 }

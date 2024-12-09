@@ -2,14 +2,12 @@ package org.example.launch;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import org.example.translator.CodeTranslator;
-import org.example.translator.TranslatorFile;
 import org.example.utils.FileService;
 import org.example.MyLexer;
 import org.example.MyParser;
 import org.example.semantic.SemanticAnalyzer;
 
-public class KovaCompiler {
+public class Compiler {
     public static final String PATH =
             "/Users/aliaksei/Desktop/BSUIR/semester7/YaPIS/Lab2-4/AntlrParser/files/ilya.txt";
 

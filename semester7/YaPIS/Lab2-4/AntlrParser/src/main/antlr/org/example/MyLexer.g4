@@ -45,7 +45,6 @@ FUNCTION : 'function' ;
 FINAL : 'final' ;
 VOID : 'void' ;
 RETURN : 'return' ;
-MAIN : 'main' ;
 IF : 'if' ;
 ELSE : 'else' ;
 SWITCH : 'switch' ;

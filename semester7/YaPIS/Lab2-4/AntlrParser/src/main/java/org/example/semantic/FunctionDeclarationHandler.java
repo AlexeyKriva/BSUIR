@@ -25,12 +25,12 @@ public class FunctionDeclarationHandler {
             if (functionDeclaration.getName().equals(functionName)) {
                 int coincidence = 0;
 
-                if (parameters.isEmpty() && functionDeclaration.getVariables().isEmpty()) {
+                if (parameters.isEmpty() && functionDeclaration.getParameters().isEmpty()) {
                     return true;
                 }
 
                 for (int i = 0; i < parameters.size(); i++) {
-                    if (parameters.get(i).getType().equals(functionDeclaration.getVariables().get(i).getType())) {
+                    if (parameters.get(i).getType().equals(functionDeclaration.getParameters().get(i).getType())) {
                         coincidence++;
                     }
                 }
@@ -56,7 +56,7 @@ public class FunctionDeclarationHandler {
         }
 
         if (findClassTypeByName(functionName, SemanticAnalyzer.classDeclarations).equals("unknown")) {
-            System.err.println("Метод или класс " + functionName + " не объявлен.");
+            throw new RuntimeException("Метод или класс " + functionName + " не объявлен.");
         }
 
         return "unknown";

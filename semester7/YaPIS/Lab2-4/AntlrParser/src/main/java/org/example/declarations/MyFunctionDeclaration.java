@@ -15,4 +15,5 @@ public class MyFunctionDeclaration {
     private String returnType;
     private String scope;
     private Boolean inClass;
+    private List<MyVariableDeclaration> parameters;
 }

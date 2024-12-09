@@ -10,7 +10,7 @@ program : (functionDeclaration | statement | classDeclaration)* EOF ;
 
 // Правило для объявления функции
 functionDeclaration
-    : (GLOBAL | LOCAL) FUNCTION type (ID | MAIN) LPAREN parameterList? RPAREN block
+    : (GLOBAL | LOCAL) FUNCTION type ID LPAREN parameterList? RPAREN block
     ;
 
 
@@ -140,6 +140,8 @@ comparativeExpression
 // Выражение
 expression
     : primary (DOT ID)?
+    | ID DOT ID LPAREN argumentList? RPAREN
+    | ID DOT methodCall
     | expression PLUS expression
     | expression MINUS expression
     | expression MULT expression
