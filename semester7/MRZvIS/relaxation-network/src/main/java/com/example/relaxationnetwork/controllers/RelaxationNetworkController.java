@@ -1,14 +1,12 @@
 package com.example.relaxationnetwork.controllers;
 
-import com.example.relaxationnetwork.entities.AssociationPair;
 import com.example.relaxationnetwork.services.RelaxationNetwork;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -17,17 +15,25 @@ public class RelaxationNetworkController {
     private final RelaxationNetwork relaxationNetwork;
 
     @PostMapping("/train")
-    public List<List<Double>> train(@RequestBody AssociationPair associationPair) {
-        return relaxationNetwork.train(associationPair.getInput(), associationPair.getOutput());
+    public List<List<Integer>> train(
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("text") String text
+    ) {
+        return relaxationNetwork.train(image, text);
     }
 
     @PostMapping("/forward")
-    public List<List<Double>> forward(@RequestBody List<List<Double>> input) {
-        return relaxationNetwork.forward(input);
+    public Map<String, String> forward(@RequestParam("image") MultipartFile image) {
+        return relaxationNetwork.forward(image);
     }
 
     @PostMapping("/backward")
-    public List<List<Double>> backward(@RequestBody List<List<Double>> output) {
+    public List<List<Integer>> backward(@RequestBody List<List<Integer>> output) {
         return relaxationNetwork.backward(output);
+    }
+
+    @PostMapping("/test")
+    public void test(@RequestParam("image") MultipartFile image) {
+        relaxationNetwork.test(image);
     }
 }

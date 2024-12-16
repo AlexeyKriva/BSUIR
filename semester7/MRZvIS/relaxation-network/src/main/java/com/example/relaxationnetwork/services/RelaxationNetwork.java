@@ -1,63 +1,109 @@
 package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class RelaxationNetwork {
     private final MatrixService matrixService;
+    private final TextService textService;
+    private final BinaryService binaryService;
+    private final ImageService imageService;
 
-    @Autowired
-    public RelaxationNetwork(MatrixService matrixService) {
-        this.matrixService = matrixService;
-        weights = matrixService.fillMatrix(rows, cols);
+    private final int MAX_ITER = 50;
+    private List<List<Integer>> pixelValues = new ArrayList<>();
+    private List<List<Integer>> encodedText = new ArrayList<>();
+
+    private List<List<Integer>> weights = new ArrayList<>();
+
+    public void test(MultipartFile image) {
+        List<Integer> values = imageService.getPixelValues(image);
+
+        imageService.restoreAndSaveImage(values);
     }
 
-    private static final int rows = 2;
-    private static final int cols = 2;
+    public List<List<Integer>> train(MultipartFile image, String text) {
+        pixelValues.add(imageService.getPixelValues(image));
+        encodedText.add(textService.encodeText(text, ImageService.whitePixels, ImageService.blackPixels));
 
-    private List<List<Double>> weights;
-
-    public double activation(double weightedSum) {
-        return (Math.pow(Math.E, weightedSum) - Math.pow(Math.E, -weightedSum)) /
-                Math.pow(Math.E, weightedSum) + Math.pow(Math.E, -weightedSum);
-    }
-
-    public List<List<Double>> train(List<List<Double>> input, List<List<Double>> output) {
-        if (input.get(0).size() != output.size()) {
-            throw new RuntimeException("Входная и выходная матрица не могут быть перемножены.");
-        }
-
-        weights = matrixService.multiply(input, output);
+        weights = matrixService.multiply(matrixService.transpose(pixelValues), encodedText);
 
         return weights;
     }
 
-    public List<List<Double>> forward(List<List<Double>> input) {
-        return multiplyWithActivation(input, weights);
+    public Map<String, String> forward(MultipartFile image) {
+        if (weights.isEmpty()) {
+            throw new RuntimeException("Матрица весов не инициализирована!!!");
+        }
+
+        List<List<Integer>> forwardOutput = new ArrayList<>();
+        List<List<Integer>> backOutput = new ArrayList<>();
+        backOutput.add(imageService.getPixelValues(image));
+
+        int i = 0;
+        while (i < MAX_ITER) {
+            forwardOutput = matrixService.multiplyWithActivation(backOutput, weights);
+
+            if (isTextsMatched(forwardOutput, encodedText)) {// && isImagesMatched(backOutput, matrixService.transpose(pixelValues))) {
+                String targetText = textService.decodeText(forwardOutput);
+                String sourceText = textService.decodeText(encodedText);
+
+                imageService.restoreAndSaveImage(backOutput.get(0));
+                imageService.restoreAndSaveImage(pixelValues.get(0));
+
+                return Map.of(sourceText, targetText);
+            }
+
+            System.out.println(i);
+
+            backOutput = matrixService.multiplyWithActivation(forwardOutput, matrixService.transpose(weights));
+            i++;
+        }
+
+        imageService.restoreAndSaveImage(backOutput.get(0));
+
+        return null;
     }
 
-    public List<List<Double>> backward(List<List<Double>> output) {
-        return multiplyWithActivation(output, matrixService.transpose(weights));
+    public List<List<Integer>> backward(List<List<Integer>> output) {
+        if (weights.isEmpty()) {
+            throw new RuntimeException("Матрица весов не инициализирована!!!");
+        }
+
+        return matrixService.multiplyWithActivation(output, matrixService.transpose(weights));
     }
 
-    public List<List<Double>> multiplyWithActivation(List<List<Double>> matrixA, List<List<Double>> matrixB) {
-        List<List<Double>> outputMatrix = matrixService.fillMatrix(matrixA.size(), matrixB.get(0).size());
+    public boolean isTextsMatched(List<List<Integer>> predicted, List<List<Integer>> reference) {
+        int coincidence = 0;
 
-        for (int i = 0; i < matrixA.size(); i++) {
-            for (int j = 0; j < matrixB.get(0).size(); j++) {
-                for (int k = 0; k < matrixA.get(0).size(); k++) {
-                    outputMatrix.get(i).set(j, outputMatrix.get(i).get(j) + matrixA.get(i).get(k) *
-                            matrixB.get(k).get(j));
-                }
-                outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j)));
+        for (int i = 0; i < predicted.get(0).size(); i++) {
+            if (reference.get(0).get(i).equals(predicted.get(0).get(i))) {
+                coincidence++;
             }
         }
 
-        return outputMatrix;
+        return predicted.get(0).size() == reference.get(0).size() && coincidence == reference.get(0).size();
     }
+
+//    public boolean isImagesMatched(List<List<Integer>> predicted, List<List<Integer>> reference) {
+//        int coincidence = 0;
+//
+//        for (int i = 0; i < predicted.get(0).size(); i++) {
+//            if (reference.get(0).get(i).equals(predicted.get(0).get(i))) {
+//                coincidence++;
+//            }
+//        }
+//
+//        System.out.println(coincidence);
+//        System.out.println(reference.get(0).size() * 0.98);
+//
+//        return predicted.get(0).size() == reference.get(0).size() && (double) coincidence > (double)
+//                reference.get(0).size() * 0.98;
+//    }
 }
