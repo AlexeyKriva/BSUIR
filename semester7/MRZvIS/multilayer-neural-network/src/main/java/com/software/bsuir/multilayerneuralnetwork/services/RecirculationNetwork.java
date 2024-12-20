@@ -21,31 +21,59 @@ import static com.software.bsuir.multilayerneuralnetwork.exceptions.ExceptionMes
 public class RecirculationNetwork {
     private final ImageService imageService;
     private final SynapseService synapseService;
-    private final NeuronService neuronService;
+    private final MatrixService matrixService;
+    private final PixelService pixelService;
 
-    private static Integer numberOfEpochs;
-    private static Double learningRate;
+    private final static double MAX_ERROR = 300.0;
+    private static int numberOfEpochs;
+    private static double learningRate;
     private static List<List<Synapse>> synapsesFirstLayer;
     private static List<List<Synapse>> synapsesSecondLayer;
+    private static int numRows;
+    private static int numCols;
+    private static final int FACTOR = 2;
+    private static final int DIVIDER = 3;
+    private static double iterError = 0.0;
+    private static double NUMBER_OF_BITS = 8;
 
-    public void initRecirculationNetwork(int userNumberOfEpochs, double userLearningRate, int numRows, int numCols) {
-        if (learningRate == null) {
-            synapsesFirstLayer = synapseService.buildRandomSynapses(1, numRows * numCols);
-            synapsesSecondLayer = synapseService.buildRandomSynapses(1, numRows * numCols);
+    public void initNetwork(int userNumberOfEpochs, double userLearningRate, int initNumRows,
+                            int initNumCols) {
+        if (learningRate == 0) {
+            synapsesFirstLayer = synapseService.buildRandomSynapses(ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL *
+                            initNumRows * initNumCols,
+                    ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * initNumRows * initNumCols *
+                            FACTOR / DIVIDER);
+
+            List<List<Double>> weightsLayer1 = synapsesFirstLayer.stream()
+                    .map(row -> row.stream()
+                            .map(Synapse::getWeight)
+                            .toList())
+                    .toList();
+
+            List<List<Double>> transposedWeightsLayer1 = matrixService.transpose(weightsLayer1);
+
+            synapsesSecondLayer = transposedWeightsLayer1.stream()
+                    .map(weights -> weights.stream()
+                            .map(Synapse::new)
+                            .toList())
+                    .toList();
         }
 
         numberOfEpochs = userNumberOfEpochs;
 
         learningRate = userLearningRate;
 
-        imageService.initRectangleSize(numRows, numCols);
+        imageService.initRectangleSize(initNumRows, initNumCols);
+
+        numRows = initNumRows;
+        numCols = initNumCols;
     }
 
-    private Boolean isRecirculationNetworkInit() {
-        if (!isParametersOfRecirculationNetworkInit()) {
+    private Boolean isNetworkInit() {
+        if (!isParametersInit()) {
             StringBuilder parameters = new StringBuilder();
 
-            if (learningRate == null) {
+            if (learningRate == 0) {
                 parameters.append("learningRate ");
             }
 
@@ -65,12 +93,12 @@ public class RecirculationNetwork {
         return true;
     }
 
-    private Boolean isParametersOfRecirculationNetworkInit() {
-        return learningRate != null && synapsesFirstLayer != null;
+    private Boolean isParametersInit() {
+        return learningRate != 0 && synapsesFirstLayer != null;
     }
 
-    public Double compressImage(MultipartFile image) {
-        isRecirculationNetworkInit();
+    public CompressionMetrics compressAndRestore(MultipartFile image) {
+        isNetworkInit();
 
         List<ImageVector> referenceVectors = imageService.splitImageIntoVectors(image);
 
@@ -80,93 +108,118 @@ public class RecirculationNetwork {
 
         imageService.buildImageToFile(predictedRectangles);
 
-        double totalError = calcErrorPercentage(referenceVectors, outputVectors);
+        CompressionMetrics compressionMetrics = new CompressionMetrics(
+                iterError,
+                (double) (predictedRectangles.size() * Math.pow(numRows * numCols *
+                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL, 2) * NUMBER_OF_BITS *
+                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL) /
+                        (double) ((ImageService.imageHeight * ImageService.imageWidth *
+                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * NUMBER_OF_BITS +
+                        numRows * numCols * FACTOR / DIVIDER * NUMBER_OF_BITS + ImageService.imageHeight *
+                        ImageService.imageWidth * NUMBER_OF_BITS + numRows * numCols * NUMBER_OF_BITS) *
+                        NUMBER_OF_BITS)
+        );
 
-        return totalError;
+        return compressionMetrics;
     }
 
-    public Double trainToCompressImage(MultipartFile image) {
+    public CompressionMetrics trainToCompressAndRestore(MultipartFile image) {
         double totalError = 0;
 
         List<ImageRectangle> predictedRectangles = new ArrayList<>();
 
         for (int epoch = 0; epoch < numberOfEpochs; epoch++) {
-            isRecirculationNetworkInit();
+            isNetworkInit();
 
             totalError = 100000000;
 
             List<ImageVector> referenceVectors = imageService.splitImageIntoVectors(image);
 
-            while (totalError > 0.05) {
+            while (totalError > MAX_ERROR) {
 
                 List<ImageVector> outputVectors = throughNeurones(referenceVectors, true);
 
                 predictedRectangles = imageService.buildPredicted(outputVectors);
 
-                totalError = calcErrorPercentage(referenceVectors, outputVectors);
+                totalError = iterError;
+                iterError = 0.0;
+
+                System.out.println("current error: " + totalError);
             }
         }
 
+        iterError = totalError;
         imageService.buildImageToFile(predictedRectangles);
 
-        return totalError;
+        CompressionMetrics compressionMetrics = new CompressionMetrics(
+                totalError,
+                (double) (predictedRectangles.size() * Math.pow(numRows * numCols *
+                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL, 2) * NUMBER_OF_BITS *
+                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL) /
+                        (double) ((ImageService.imageHeight * ImageService.imageWidth *
+                                ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * NUMBER_OF_BITS +
+                                numRows * numCols * FACTOR / DIVIDER * NUMBER_OF_BITS + ImageService.imageHeight *
+                                ImageService.imageWidth * NUMBER_OF_BITS + numRows * numCols * NUMBER_OF_BITS) *
+                                NUMBER_OF_BITS)
+                );
+
+        return compressionMetrics;
     }
 
     public List<ImageVector> throughNeurones(List<ImageVector> referenceVectors, boolean isTrain) {
         List<ImageVector> outputVectors = new ArrayList<>();
 
+        List<List<Double>> predictedSecondLayer;
+
+        int count = 0;
+
+        //double totalError = 0;
+
         for (ImageVector referenceVector : referenceVectors) {
-            ImageVector outputVectorFirstLayer = throwOneNeuronLayer(referenceVector.getPixelsVector(), synapsesFirstLayer);
-            ImageVector outputVectorSecondLayer = throwOneNeuronLayer(outputVectorFirstLayer.getPixelsVector(), synapsesSecondLayer);
+//            double currentError = 100000000;
+//
+//            while (currentError > MAX_ERROR) {
+                List<List<Double>> weightsLayer1 = synapsesFirstLayer.stream()
+                        .map(row -> row.stream()
+                                .map(Synapse::getWeight)
+                                .toList())
+                        .toList();
 
-            if (isTrain) {
-                List<Double> secondLayerErrors = computeLayerErrors(referenceVector, outputVectorSecondLayer);
+                List<List<Double>> weightsLayer2 = synapsesSecondLayer.stream()
+                        .map(row -> row.stream()
+                                .map(Synapse::getWeight)
+                                .toList())
+                        .toList();
 
-                synapsesSecondLayer = adjustingWeights(referenceVector, outputVectorSecondLayer, synapsesSecondLayer,
-                        outputVectorFirstLayer, null, null);
+                List<List<Double>> references = List.of(referenceVector.getPixelsVector().stream()
+                        .flatMap(pixel -> List.of(pixel.getRedValue(), pixel.getGreenValue(), pixel.getBlueValue()).stream())
+                        .toList());
 
-                synapsesFirstLayer = adjustingWeights(outputVectorSecondLayer, outputVectorFirstLayer, synapsesFirstLayer,
-                        referenceVector, synapsesSecondLayer, secondLayerErrors);
-            }
+                List<List<Double>> predictedFirstLayer = throwNeuronLayer(references, weightsLayer1);
 
-            outputVectors.add(outputVectorSecondLayer);
+                predictedSecondLayer = throwNeuronLayer(predictedFirstLayer, weightsLayer2);
+
+                if (isTrain) {
+                    iterError += backPropagation(predictedFirstLayer, predictedSecondLayer, weightsLayer1, weightsLayer2, references);
+                }
+//                } else {
+//                    totalError += currentError * 2;
+//                    errors += totalError;
+//                    break;
+//                }
+//            }
+
+            outputVectors.add(new ImageVector(
+                    pixelService.fromRgbAndCoords(predictedSecondLayer, referenceVector.getPixelsVector())
+            ));
+            //System.out.println(++count);
         }
 
         return outputVectors;
     }
 
-    private List<Double> computeLayerErrors(ImageVector referenceVector, ImageVector predictedVector) {
-        List<Double> errors = new ArrayList<>();
-        for (int i = 0; i < referenceVector.getPixelsVector().size(); i++) {
-            double errorRed = predictedVector.getPixelsVector().get(i).getRedValue() - referenceVector.getPixelsVector().get(i).getRedValue();
-            double errorGreen = predictedVector.getPixelsVector().get(i).getGreenValue() - referenceVector.getPixelsVector().get(i).getGreenValue();
-            double errorBlue = predictedVector.getPixelsVector().get(i).getBlueValue() - referenceVector.getPixelsVector().get(i).getBlueValue();
-            errors.add(errorRed + errorGreen + errorBlue);
-        }
-        return errors;
-    }
-
-
-    public ImageVector throwOneNeuronLayer(List<Pixel> pixelVector, List<List<Synapse>> synapses) {
-        List<Neuron> neurons = new ArrayList<>();
-
-        for (int i = 0; i < pixelVector.size(); i++) {
-            Pixel currentPixel = pixelVector.get(i);
-
-            neurons.add(new Neuron(
-                    Pixel.builder()
-                            .coordX(currentPixel.getCoordX())
-                            .coordY(currentPixel.getCoordY())
-                            .redValue(currentPixel.getRedValue() * synapses.get(0).get(3 * i).getWeight())
-                            .greenValue(currentPixel.getGreenValue() * synapses.get(0).get(3 * i + 1).getWeight())
-                            .blueValue(currentPixel.getBlueValue() * synapses.get(0).get(3 * i + 2).getWeight())
-                            .build(),
-                    new Pixel()));
-        }
-
-        neurons = neuronService.calcOutput(neurons);
-
-        return neuronService.getOutputs(neurons);
+    public List<List<Double>> throwNeuronLayer(List<List<Double>> colors, List<List<Double>> weights) {
+        return matrixService.multiply(colors, weights);
     }
 
     public double calcErrorPercentage(List<ImageVector> referencePixels, List<ImageVector> predictedPixels) {
@@ -185,50 +238,54 @@ public class RecirculationNetwork {
             }
         }
 
-        return Math.sqrt(sumSquaredError / (ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL *
-                ImageService.imageHeight * ImageService.imageWidth));
+        return sumSquaredError;
     }
 
-    public List<List<Synapse>> adjustingWeights(ImageVector referenceVector, ImageVector predictedVector,
-                                                List<List<Synapse>> synapses, ImageVector inputVector,
-                                                List<List<Synapse>> nextLayerSynapses, List<Double> nextLayerErrors) {
-        List<List<Synapse>> newSynapses = new ArrayList<>();
-        List<Pixel> reference = referenceVector.getPixelsVector();
-        List<Pixel> predicted = predictedVector.getPixelsVector();
-        List<Synapse> synapsesForNeuron = new ArrayList<>();
+    public Double backPropagation(List<List<Double>> predictLayer1,
+                                  List<List<Double>> predictLayer2,
+                                  List<List<Double>> weightsLayer1,
+                                  List<List<Double>> weightsLayer2,
+                                  List<List<Double>> references) {
+        List<List<Double>> errorsLayer2 = matrixService.subtract(predictLayer2, references);
 
-        for (int i = 0; i < reference.size(); i++) {
-            double errorRed = 0.0;
-            double errorGreen = 0.0;
-            double errorBlue = 0.0;
+        List<List<Double>> newWeightsLayer2 = matrixService.subtract(
+                weightsLayer2, matrixService.transpose(
+                        matrixService.multiplyByNumber(
+                                matrixService.multiply(
+                                        matrixService.transpose(errorsLayer2), predictLayer1
+                                ), learningRate
+                        )
+                )
+        );
 
-            if (nextLayerSynapses != null && nextLayerErrors != null) {
-                for (int j = 0; j < nextLayerSynapses.size(); j++) {
-                    errorRed += nextLayerSynapses.get(j).get(i * 3).getWeight() * nextLayerErrors.get(j);
-                    errorGreen += nextLayerSynapses.get(j).get(i * 3 + 1).getWeight() * nextLayerErrors.get(j);
-                    errorBlue += nextLayerSynapses.get(j).get(i * 3 + 2).getWeight() * nextLayerErrors.get(j);
-                }
-            } else {
-                errorRed = predicted.get(i).getRedValue() - reference.get(i).getRedValue();
-                errorGreen = predicted.get(i).getGreenValue() - reference.get(i).getGreenValue();
-                errorBlue = predicted.get(i).getBlueValue() - reference.get(i).getBlueValue();
-            }
+        synapsesSecondLayer = newWeightsLayer2.stream()
+                .map(weights -> weights.stream()
+                        .map(Synapse::new)
+                        .toList())
+                .toList();
 
-            double newWeightRed = synapses.get(0).get(3 * i).getWeight() - learningRate * errorRed *
-                    inputVector.getPixelsVector().get(i).getRedValue();
-            double newWeightGreen = synapses.get(0).get(3 * i + 1).getWeight() - learningRate * errorGreen *
-                    inputVector.getPixelsVector().get(i).getGreenValue();
-            double newWeightBlue = synapses.get(0).get(3 * i + 2).getWeight() - learningRate * errorBlue *
-                    inputVector.getPixelsVector().get(i).getBlueValue();
+        List<List<Double>> errorsLayer1 = matrixService.multiply(errorsLayer2, matrixService.transpose(
+                newWeightsLayer2
+        ));
 
-            synapsesForNeuron.add(new Synapse(newWeightRed));
-            synapsesForNeuron.add(new Synapse(newWeightGreen));
-            synapsesForNeuron.add(new Synapse(newWeightBlue));
-        }
+        List<List<Double>> newWeightsLayer1 = matrixService.subtract(
+                weightsLayer1, matrixService.multiplyByNumber(
+                        matrixService.multiply(
+                                matrixService.transpose(references), errorsLayer1
+                        ), learningRate
+                )
+        );
 
-        newSynapses.add(synapsesForNeuron);
+        synapsesFirstLayer = newWeightsLayer1.stream()
+                .map(weights -> weights.stream()
+                        .map(Synapse::new)
+                        .toList())
+                .toList();
 
-        return newSynapses;
+        return errorsLayer2.stream()
+                .mapToDouble(row -> row.stream()
+                        .mapToDouble(val -> Math.pow(val, 2))
+                        .sum())
+                .sum();
     }
-
 }

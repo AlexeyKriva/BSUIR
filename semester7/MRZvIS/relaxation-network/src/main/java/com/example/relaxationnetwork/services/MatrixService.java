@@ -9,8 +9,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MatrixService {
-    public List<List<Double>> multiply(List<List<Double>> matrixA, List<List<Double>> matrixB) {
-        List<List<Double>> outputMatrix = fillMatrix(matrixA.size(), matrixB.get(0).size());
+    public List<List<Integer>> sum(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
+        List<List<Integer>> outputMatrix = new ArrayList<>();
+
+        for (int i = 0; i < matrixA.size(); i++) {
+            outputMatrix.add(new ArrayList<>());
+            for (int j = 0; j < matrixA.get(0).size(); j++) {
+                outputMatrix.get(i).add(matrixA.get(i).get(j) + matrixB.get(i).get(j));
+            }
+        }
+
+        return outputMatrix;
+    }
+
+    public List<List<Integer>> multiply(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
+        List<List<Integer>> outputMatrix = fillZeroMatrix(matrixA.size(), matrixB.get(0).size());
 
         for (int i = 0; i < matrixA.size(); i++) {
             for (int j = 0; j < matrixB.get(0).size(); j++) {
@@ -24,24 +37,24 @@ public class MatrixService {
         return outputMatrix;
     }
 
-    public List<List<Double>> fillMatrix(int rows, int cols) {
-        List<List<Double>> outputMatrix = new ArrayList<>();
+    public List<List<Integer>> fillZeroMatrix(int rows, int cols) {
+        List<List<Integer>> outputMatrix = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
             outputMatrix.add(new ArrayList<>());
             for (int j = 0; j < cols; j++) {
-                outputMatrix.get(i).add(0.0);
+                outputMatrix.get(i).add(0);
             }
         }
 
         return outputMatrix;
     }
 
-    public List<List<Double>> transpose(List<List<Double>> matrix) {
-        List<List<Double>> transposed = new ArrayList<>();
+    public List<List<Integer>> transpose(List<List<Integer>> matrix) {
+        List<List<Integer>> transposed = new ArrayList<>();
 
         for (int i = 0; i < matrix.get(0).size(); i++) {
-            List<Double> newRow = new ArrayList<>();
+            List<Integer> newRow = new ArrayList<>();
 
             for (int j = 0; j < matrix.size(); j++) {
                 newRow.add(matrix.get(j).get(i));
@@ -52,24 +65,36 @@ public class MatrixService {
         return transposed;
     }
 
-    public List<List<Double>> multiplyByNumber(List<List<Double>> matrix, double num) {
-        List<List<Double>> outputMatrix = new ArrayList<>();
+    public List<List<Integer>> multiplyWithActivation(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
+        List<List<Integer>> outputMatrix = fillZeroMatrix(matrixA.size(), matrixB.get(0).size());
 
-        for (List<Double> row : matrix) {
-            List<Double> newRow = new ArrayList<>();
-
-            for (Double number : row) {
-                newRow.add(number * num);
+        for (int i = 0; i < matrixA.size(); i++) {
+            for (int j = 0; j < matrixB.get(0).size(); j++) {
+                for (int k = 0; k < matrixA.get(0).size(); k++) {
+                    outputMatrix.get(i).set(j, outputMatrix.get(i).get(j) + matrixA.get(i).get(k) *
+                            matrixB.get(k).get(j));
+                }
+                outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j)));
             }
-            outputMatrix.add(newRow);
         }
 
         return outputMatrix;
     }
 
-    public void print(List<List<Double>> matrix) {
-        for (List<Double> row: matrix) {
-            for (double number: row) {
+    public int activation(int weightedSum) {
+        //System.out.println("weight: " + weightedSum);
+        if (weightedSum > 0) {
+            return 1;
+        } else if (weightedSum < 0) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    public void print(List<List<Integer>> matrix) {
+        for (List<Integer> row: matrix) {
+            for (int number: row) {
                 System.out.print(number + " ");
             }
 

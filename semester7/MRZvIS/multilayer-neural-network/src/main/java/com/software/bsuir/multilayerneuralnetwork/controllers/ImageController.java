@@ -5,16 +5,13 @@
 */
 package com.software.bsuir.multilayerneuralnetwork.controllers;
 
-import com.software.bsuir.multilayerneuralnetwork.entities.*;
+import com.software.bsuir.multilayerneuralnetwork.entities.CompressionMetrics;
 import com.software.bsuir.multilayerneuralnetwork.services.RecirculationNetwork;
-import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/images")
@@ -29,21 +26,21 @@ public class ImageController {
             @RequestParam("numRows") Integer numRows,
             @RequestParam("numCols") Integer numCols
     ) {
-        recirculationNetwork.initRecirculationNetwork(numberOfEpochs, learningRate, numRows, numCols);
+        recirculationNetwork.initNetwork(numberOfEpochs, learningRate, numRows, numCols);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @PostMapping("/trains/compress")
-    public ResponseEntity<Double> trainCompressImage(
+    @PostMapping("/train-compression")
+    public ResponseEntity<CompressionMetrics> trainCompressImage(
             @RequestParam("image") MultipartFile image
     ) {
-        return ResponseEntity.ok(recirculationNetwork.trainToCompressImage(image));
+        return ResponseEntity.ok(recirculationNetwork.trainToCompressAndRestore(image));
     }
 
     @PostMapping("/compress")
-    public ResponseEntity<Double> compressImage(
+    public ResponseEntity<CompressionMetrics> compressImage(
             @RequestParam("image") MultipartFile image
     ) {
-        return ResponseEntity.ok(recirculationNetwork.compressImage(image));
+        return ResponseEntity.ok(recirculationNetwork.compressAndRestore(image));
     }
 }
