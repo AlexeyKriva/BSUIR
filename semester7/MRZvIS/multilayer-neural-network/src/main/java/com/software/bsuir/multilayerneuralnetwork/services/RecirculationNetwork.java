@@ -24,7 +24,7 @@ public class RecirculationNetwork {
     private final MatrixService matrixService;
     private final PixelService pixelService;
 
-    private final static double MAX_ERROR = 1000.0;
+    private final static double MAX_ERROR = 3000.0;
     private static int numberOfEpochs;
     private static double learningRate;
     private static List<List<Synapse>> synapsesFirstLayer;
@@ -41,7 +41,7 @@ public class RecirculationNetwork {
         if (learningRate == 0) {
             synapsesFirstLayer = synapseService.buildRandomSynapses(ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL *
                             initNumRows * initNumCols,
-                    17);
+                    16);
 
             List<List<Double>> weightsLayer1 = synapsesFirstLayer.stream()
                     .map(row -> row.stream()

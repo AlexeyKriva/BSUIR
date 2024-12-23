@@ -1,10 +1,14 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 2: Реализовать модель двунаправленной ассоциативной памяти
+*/
 package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -15,124 +19,34 @@ public class RelaxationNetwork {
     private final TextService textService;
 
     private List<List<Integer>> weights;
-    private List<List<List<Integer>>> rusMatrixes = new ArrayList<>();
-    private List<List<List<Integer>>> engMatrixes = new ArrayList<>();
-//    Source: ЀЀайер
-//    Target: `amn
+    private List<List<List<Integer>>> picturesMatrixes = new ArrayList<>();
+    private List<List<List<Integer>>> numbersMatrixes = new ArrayList<>();
 
-    private static final int FIRST_LAYER_NEURONES = 77;
-    private static final int SECOND_LAYER_NEURONES = 44;
+    private final int MAX_ITER = 100;
+    private final int BITE = 5;
 
-    private final int MAX_ITER = 10;
-
-    public List<List<Integer>> train(List<String> russian, List<String> english) {
-        if (russian.size() != english.size()) {
-            throw new RuntimeException("Не все слова имеют ассоциации");
-        }
-
-        russian = russian.stream().map(String::toLowerCase).toList();
-        english = english.stream().map(String::toLowerCase).toList();
-
-        weights = matrixService.fillZeroMatrix(FIRST_LAYER_NEURONES, SECOND_LAYER_NEURONES);
-
-        for (int i = 0; i < russian.size(); i++) {
-            String rus = russian.get(i);
-            String eng = english.get(i);
-
-            rusMatrixes.add(textService.encodeText(rus, FIRST_LAYER_NEURONES));
-            engMatrixes.add(textService.encodeText(eng, SECOND_LAYER_NEURONES));
-
-            weights = matrixService.sum(weights, matrixService.multiply(matrixService.transpose(rusMatrixes.get(i)), engMatrixes.get(i)));
-            //FileService.saveMatrixToFile(weights, i);
-        }
-
-        //matrixService.print(weights);
-
-        return weights;
-    }
-
-    public List<List<Integer>> testTrain(List<List<String>> pictures, List<String> numbers) {
+    public List<List<Integer>> train(List<List<String>> pictures, List<String> numbers) {
         if (pictures.size() != numbers.size()) {
             throw new RuntimeException("Не все слова имеют ассоциации");
         }
 
-        weights = matrixService.fillZeroMatrix(15, 3);
+        weights = matrixService.fillZeroMatrix(15, BITE);
 
         for (int i = 0; i < pictures.size(); i++) {
             List<String> picture = pictures.get(i);
             String number = numbers.get(i);
 
-            System.out.println("Picture: " + picture);
-            rusMatrixes.add(textService.encodePicture(picture));
-            matrixService.print(rusMatrixes.get(i));
-            System.out.println("\n\n\n");
-            System.out.println("Number: " + number);
-            engMatrixes.add(textService.toBinary(number));
-            matrixService.print(engMatrixes.get(i));
-            System.out.println("\n\n\n");
+            picturesMatrixes.add(textService.encodePicture(picture));
+            numbersMatrixes.add(textService.toBinary(number, BITE));
 
-            weights = matrixService.sum(weights, matrixService.multiply(matrixService.transpose(rusMatrixes.get(i)), engMatrixes.get(i)));
-            //FileService.saveMatrixToFile(weights, i);
+            weights = matrixService.sum(weights, matrixService.multiply(matrixService.transpose(picturesMatrixes.get(i)),
+                    numbersMatrixes.get(i)));
         }
-
-        System.out.println("Weights: ");
-        matrixService.print(weights);
 
         return weights;
     }
 
-    public Map<String, String> forward(String russian) {
-        if (weights.isEmpty()) {
-            throw new RuntimeException("Матрица весов не инициализирована!!!");
-        }
-
-        List<List<Integer>> previousRussian = new ArrayList<>();
-        List<List<Integer>> previousEnglish = new ArrayList<>();
-        List<List<Integer>> lastRussian = textService.encodeText(russian, FIRST_LAYER_NEURONES);
-        List<List<Integer>> lastEnglish = new ArrayList<>();
-
-//        System.out.println("Last russian:");
-//        matrixService.print(lastRussian);
-
-        int i = 0;
-        while (i < MAX_ITER) {
-            lastEnglish = matrixService.multiplyWithActivation(lastRussian, weights);
-            //matrixService.print(lastEnglish);
-            lastRussian = matrixService.multiplyWithActivation(lastEnglish, matrixService.transpose(weights));
-
-            System.out.println("Last russian:");
-            matrixService.print(lastRussian);
-            System.out.println("Last english:");
-            matrixService.print(lastEnglish);
-//            System.out.println("Last english: " + textService.decodeText(lastEnglish, SECOND_LAYER_NEURONES));
-//            System.out.println("Last russian: " + textService.decodeText(lastRussian, FIRST_LAYER_NEURONES));
-            //matrixService.print(lastRussian);
-            i++;
-            //System.out.println("STEP #" + i);
-
-
-            if (!previousRussian.isEmpty() && !previousEnglish.isEmpty() &&
-                    isNetworkFindResult(previousRussian, previousEnglish, lastRussian, lastEnglish)) {
-                String targetText = textService.decodeText(lastEnglish, SECOND_LAYER_NEURONES);
-                String sourceText = textService.decodeText(lastRussian, FIRST_LAYER_NEURONES);
-//                System.out.println("Target: " + targetText);
-//                System.out.println("Source: " + sourceText);
-                if (sourceText.equals(russian)) {
-                    return Map.of(targetText, russian, sourceText, russian);
-                }
-            }
-
-            previousRussian = lastRussian;
-            previousEnglish = lastEnglish;
-        }
-
-        //System.out.println("Russia predicte: " + lastRussian);
-        //System.out.println("English predicte: " + lastEnglish);
-
-        return Map.of("ошибка", "сеть не может найти ассоциацию");
-    }
-
-    public Map<String, List<String>> testForward(List<String> picture) {
+    public Map<String, List<String>> forward(List<String> picture) {
         if (weights.isEmpty()) {
             throw new RuntimeException("Матрица весов не инициализирована!!!");
         }
@@ -145,84 +59,83 @@ public class RelaxationNetwork {
         int i = 0;
         while (i < MAX_ITER) {
             lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
-            //matrixService.print(lastEnglish);
             lastPicture = matrixService.multiplyWithActivation(lastNumber, matrixService.transpose(weights));
+            lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
 
-//            System.out.println("Last russian:");
-//            matrixService.print(lastPicture);
-//            System.out.println("Last english:");
-//            matrixService.print(lastNumber);
-//            System.out.println("Last english: " + textService.decodeText(lastEnglish, SECOND_LAYER_NEURONES));
-//            System.out.println("Last russian: " + textService.decodeText(lastRussian, FIRST_LAYER_NEURONES));
-            //matrixService.print(lastRussian);
-            i++;
-            System.out.println("STEP #" + i);
-
+            System.out.println("STEP #" + (i++));
 
             if (!previousPicture.isEmpty() && !previousNumber.isEmpty() &&
                     isNetworkFindResult(previousPicture, previousNumber, lastPicture, lastNumber)) {
-                System.out.println("Number:");
                 matrixService.print(lastNumber);
-                String targetText = textService.fromBinary(lastNumber);
-                List<String> sourceText = textService.decodePicture(lastPicture);
-//                System.out.println("Target: " + targetText);
-//                System.out.println("Source: " + sourceText);
-                //if (sourceText.equals(picture)) {
-                    return Map.of(targetText, picture, "исходное изображение", sourceText);
-                //}
+                String targetNumber = textService.fromBinary(lastNumber);
+                List<String> sourcePicture = textService.decodePicture(lastPicture);
+
+                return Map.of("найденная цифра", List.of(targetNumber), "найденное изображение", sourcePicture,
+                        "посланное изображение", picture, "количество итераций", List.of(String.valueOf(i)));
             }
 
             previousPicture = lastPicture;
             previousNumber = lastNumber;
         }
 
-        //System.out.println("Russia predicte: " + lastRussian);
-        //System.out.println("English predicte: " + lastEnglish);
-
-        return null;
+        return Map.of("ошибка", List.of("сеть не может найти ассоциацию"), "посланное изображение",
+                textService.decodePicture(lastPicture));
     }
 
-    public boolean isNetworkFindResult(List<List<Integer>> previousRussian, List<List<Integer>> previousEnglish,
-                                       List<List<Integer>> lastRussian, List<List<Integer>> lastEnglish) {
+    public Map<String, List<String>> backward(String number) {
+        if (weights.isEmpty()) {
+            throw new RuntimeException("Матрица весов не инициализирована!!!");
+        }
+
+        List<List<Integer>> previousPicture = new ArrayList<>();
+        List<List<Integer>> previousNumber = new ArrayList<>();
+        List<List<Integer>> lastPicture = new ArrayList<>();
+        List<List<Integer>> lastNumber = textService.toBinary(number, BITE);
+
+        int i = 0;
+        while (i < MAX_ITER) {
+            lastPicture = matrixService.multiplyWithActivation(lastNumber, matrixService.transpose(weights));
+            lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
+
+            System.out.println("STEP #" + (i++));
+
+            if (!previousPicture.isEmpty() && !previousNumber.isEmpty() &&
+                    isNetworkFindResult(previousPicture, previousNumber, lastPicture, lastNumber)) {
+                matrixService.print(lastNumber);
+                String targetNumber = textService.fromBinary(lastNumber);
+                List<String> sourcePicture = textService.decodePicture(lastPicture);
+
+                return Map.of("найденное изображение", sourcePicture, "найденная цифра", List.of(targetNumber),
+                        "посланная цифра", List.of(number), "количество итераций", List.of(String.valueOf(i)));
+            }
+
+            previousPicture = lastPicture;
+            previousNumber = lastNumber;
+        }
+
+        return Map.of("ошибка", List.of("сеть не может найти ассоциацию"), "посланная цифра",
+                List.of(textService.fromBinary(lastNumber)));
+    }
+
+    public boolean isNetworkFindResult(List<List<Integer>> previousPicture, List<List<Integer>> previousNumber,
+                                       List<List<Integer>> lastPicture, List<List<Integer>> lastNumber) {
         int coincidenceRussian = 0;
 
-        for (int i = 0; i < previousRussian.get(0).size(); i++) {
-            if (previousRussian.get(0).get(i).equals(lastRussian.get(0).get(i))) {
+        for (int i = 0; i < previousPicture.get(0).size(); i++) {
+            if (previousPicture.get(0).get(i).equals(lastPicture.get(0).get(i))) {
                 coincidenceRussian++;
             }
         }
 
         int coincidenceEnglish = 0;
 
-        for (int i = 0; i < previousEnglish.get(0).size(); i++) {
-            if (previousEnglish.get(0).get(i).equals(lastEnglish.get(0).get(i))) {
+        for (int i = 0; i < previousNumber.get(0).size(); i++) {
+            if (previousNumber.get(0).get(i).equals(lastNumber.get(0).get(i))) {
                 coincidenceEnglish++;
             }
         }
 
-        return coincidenceRussian == lastRussian.get(0).size() &&
-                coincidenceEnglish == lastEnglish.get(0).size();
-    }
-
-    public Map<String, String> backward(String english) {
-        return Map.of();
-    }
-
-    public void test(String text) {
-        List<List<Integer>> list = new ArrayList<>(Arrays.asList(
-                new ArrayList<>(Arrays.asList(
-                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1,
-                1, -1, -1, -1, -1, 1, 1, 1, 1, 1, -1,
-                1, -1, -1, -1, -1, 1, 1, 1, -1, 1, 1,
-                1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1
-                ))));
-        System.out.println(textService.decodeText(list, 88));
-        for (char a: text.toCharArray()) {
-            textService.getLetterIndex(a);
-        }
+        return coincidenceRussian == lastPicture.get(0).size() &&
+                coincidenceEnglish == lastNumber.get(0).size();
     }
 }

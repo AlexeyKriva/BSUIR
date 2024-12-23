@@ -1,3 +1,8 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 2: Реализовать модель двунаправленной ассоциативной памяти
+*/
 package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
@@ -5,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class MatrixService {
     public List<List<Integer>> sum(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
         List<List<Integer>> outputMatrix = new ArrayList<>();
@@ -74,22 +79,25 @@ public class MatrixService {
                     outputMatrix.get(i).set(j, outputMatrix.get(i).get(j) + matrixA.get(i).get(k) *
                             matrixB.get(k).get(j));
                 }
-                outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j)));
+//                if (i == 0 && j == 0) {
+                    outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j), 0));
+//                }
+//                } else if (i == ){
+//
+//                }
             }
         }
 
         return outputMatrix;
     }
 
-    public int activation(int weightedSum) {
-        //System.out.println("weight: " + weightedSum);
-        if (weightedSum > 0) {
+    public int activation(int weightedSum, int preWeightedSum) {
+        System.out.println(weightedSum);
+        if (weightedSum >= 0) {
             return 1;
-        } else if (weightedSum < 0) {
+        } else {
             return -1;
         }
-
-        return 0;
     }
 
     public void print(List<List<Integer>> matrix) {
@@ -101,5 +109,27 @@ public class MatrixService {
             System.out.println();
         }
         System.out.println("=========================================================================================");
+    }
+
+    public boolean isThereSuchMatrix(List<List<Integer>> target, List<List<List<Integer>>> sources) {
+        for (List<List<Integer>> matrix: sources) {
+            int coincidence = 0;
+
+            for (int i = 0; i < target.size(); i++) {
+                for (int j = 0; j < target.get(i).size(); j++) {
+                    if (Objects.equals(target.get(i).get(j), matrix.get(i).get(j))) {
+                        coincidence++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            if (coincidence == target.size() * target.get(0).size()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

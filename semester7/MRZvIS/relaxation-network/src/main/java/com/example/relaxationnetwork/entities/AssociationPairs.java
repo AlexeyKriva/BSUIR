@@ -1,3 +1,8 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 2: Реализовать модель двунаправленной ассоциативной памяти
+*/
 package com.example.relaxationnetwork.entities;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssociationPairs {
-    private List<String> russian;
-    private List<String> english;
+    private List<List<String>> pictures;
+    private List<String> numbers;
 }
