@@ -1,6 +1,6 @@
 /*
 Лабораторная работа №1 по дисциплине МРЗВИС
-Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичес
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
 Вариант 1: Реализовать модель линейной рециркуляционной сети с постоянным коэффициентом обучения с ненормированными весами
 */
 package com.software.bsuir.multilayerneuralnetwork.services;
@@ -24,15 +24,15 @@ public class RecirculationNetwork {
     private final MatrixService matrixService;
     private final PixelService pixelService;
 
-    private final static double MAX_ERROR = 300.0;
+    private final static double MAX_ERROR = 1000.0;
     private static int numberOfEpochs;
     private static double learningRate;
     private static List<List<Synapse>> synapsesFirstLayer;
     private static List<List<Synapse>> synapsesSecondLayer;
     private static int numRows;
     private static int numCols;
-    private static final int FACTOR = 2;
-    private static final int DIVIDER = 3;
+    private static final int FACTOR = 1;
+    private static final int DIVIDER = 6;
     private static double iterError = 0.0;
     private static double NUMBER_OF_BITS = 8;
 
@@ -41,8 +41,7 @@ public class RecirculationNetwork {
         if (learningRate == 0) {
             synapsesFirstLayer = synapseService.buildRandomSynapses(ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL *
                             initNumRows * initNumCols,
-                    ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * initNumRows * initNumCols *
-                            FACTOR / DIVIDER);
+                    17);
 
             List<List<Double>> weightsLayer1 = synapsesFirstLayer.stream()
                     .map(row -> row.stream()
@@ -110,20 +109,17 @@ public class RecirculationNetwork {
 
         CompressionMetrics compressionMetrics = new CompressionMetrics(
                 iterError,
-                (double) (predictedRectangles.size() * Math.pow(numRows * numCols *
-                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL, 2) * NUMBER_OF_BITS *
-                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL) /
-                        (double) ((ImageService.imageHeight * ImageService.imageWidth *
-                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * NUMBER_OF_BITS +
-                        numRows * numCols * FACTOR / DIVIDER * NUMBER_OF_BITS + ImageService.imageHeight *
-                        ImageService.imageWidth * NUMBER_OF_BITS + numRows * numCols * NUMBER_OF_BITS) *
-                        NUMBER_OF_BITS)
+                (double) (ImageService.imageHeight * ImageService.imageWidth * 3 * 8 * 8) /
+                        (double) ((numRows * numCols * 3 * FACTOR / DIVIDER * numRows * numCols * 3 * FACTOR / DIVIDER *
+                                8 * 8 + numRows * numCols * 3 * numRows * numCols * 3 * FACTOR / DIVIDER * 8 + 16 + 16)
+                                * 8)
         );
 
         return compressionMetrics;
     }
 
     public CompressionMetrics trainToCompressAndRestore(MultipartFile image) {
+        int count = 0;
         double totalError = 0;
 
         List<ImageRectangle> predictedRectangles = new ArrayList<>();
@@ -145,6 +141,8 @@ public class RecirculationNetwork {
                 iterError = 0.0;
 
                 System.out.println("current error: " + totalError);
+
+                System.out.println("count=" + (++count));
             }
         }
 
@@ -153,15 +151,11 @@ public class RecirculationNetwork {
 
         CompressionMetrics compressionMetrics = new CompressionMetrics(
                 totalError,
-                (double) (predictedRectangles.size() * Math.pow(numRows * numCols *
-                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL, 2) * NUMBER_OF_BITS *
-                        ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL) /
-                        (double) ((ImageService.imageHeight * ImageService.imageWidth *
-                                ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * NUMBER_OF_BITS +
-                                numRows * numCols * FACTOR / DIVIDER * NUMBER_OF_BITS + ImageService.imageHeight *
-                                ImageService.imageWidth * NUMBER_OF_BITS + numRows * numCols * NUMBER_OF_BITS) *
-                                NUMBER_OF_BITS)
-                );
+                (double) (ImageService.imageHeight * ImageService.imageWidth * 3 * 8 * 8) /
+                        (double) ((numRows * numCols * 3 * FACTOR / DIVIDER * numRows * numCols * 3 * FACTOR / DIVIDER *
+                                8 * 8 + numRows * numCols * 3 * numRows * numCols * 3 * FACTOR / DIVIDER * 8 + 16 + 16)
+                                * 8)
+        );
 
         return compressionMetrics;
     }
@@ -281,6 +275,8 @@ public class RecirculationNetwork {
                         .map(Synapse::new)
                         .toList())
                 .toList();
+
+        //for (int i = 0; i < errorsLayer2.size(); i++)
 
         return errorsLayer2.stream()
                 .mapToDouble(row -> row.stream()
