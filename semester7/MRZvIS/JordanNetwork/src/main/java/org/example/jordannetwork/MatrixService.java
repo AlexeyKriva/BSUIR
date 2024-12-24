@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MatrixService {
-    public static List<List<Double>> sum(List<List<Double>> matrixA, List<List<Double>> matrixB) {
+    public static List<List<Double>> sumMatrix(List<List<Double>> matrixA, List<List<Double>> matrixB) {
         List<List<Double>> outputMatrix = new ArrayList<>();
 
         for (int i = 0; i < matrixA.size(); i++) {
@@ -27,7 +27,7 @@ public class MatrixService {
         return outputMatrix;
     }
 
-    public static List<List<Double>> multiply(List<List<Double>> matrixA, List<List<Double>> matrixB) {
+    public static List<List<Double>> multiplyMatrix(List<List<Double>> matrixA, List<List<Double>> matrixB) {
         List<List<Double>> outputMatrix = fillZeroMatrix(matrixA.size(), matrixB.get(0).size());
 
         for (int i = 0; i < matrixA.size(); i++) {
@@ -58,12 +58,12 @@ public class MatrixService {
     public static List<Double> initLayer(int size) {
         List<Double> layer = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            layer.add(0.0);
+            layer.add(1.0);
         }
         return layer;
     }
 
-    public static List<List<Double>> transpose(List<List<Double>> matrix) {
+    public static List<List<Double>> transposeMatrix(List<List<Double>> matrix) {
         List<List<Double>> transposed = new ArrayList<>();
 
         for (int i = 0; i < matrix.get(0).size(); i++) {
@@ -76,6 +76,36 @@ public class MatrixService {
         }
 
         return transposed;
+    }
+
+    public static List<List<Double>> subtractMatrix(List<List<Double>> matrixA, List<List<Double>> matrixB) {
+        List<List<Double>> outputMatrix = new ArrayList<>();
+
+        for (int i = 0; i < matrixA.size(); i++) {
+            List<Double> newRow = new ArrayList<>();
+
+            for (int j = 0; j < matrixA.get(0).size(); j++) {
+                newRow.add(matrixA.get(i).get(j) - matrixB.get(i).get(j));
+            }
+            outputMatrix.add(newRow);
+        }
+
+        return outputMatrix;
+    }
+
+    public static List<List<Double>> multiplyByNumber(List<List<Double>> matrix, double num) {
+        List<List<Double>> outputMatrix = new ArrayList<>();
+
+        for (List<Double> row : matrix) {
+            List<Double> newRow = new ArrayList<>();
+
+            for (Double number : row) {
+                newRow.add(number * num);
+            }
+            outputMatrix.add(newRow);
+        }
+
+        return outputMatrix;
     }
 
     public void print(List<List<Double>> matrix) {

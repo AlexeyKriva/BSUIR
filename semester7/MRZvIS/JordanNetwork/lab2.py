@@ -40,8 +40,6 @@ class Jordan:
         self.shape = args
         n = len(args)
 
-        print(len(self.shape))
-
         # Build layers
         self.layers = []
         # Input layer (+1 unit for bias
@@ -154,7 +152,7 @@ if __name__ == '__main__':
         for i in range(n):
             network.propagate_forward(input_m[i])
             current_error = network.propagate_backward(output[i])
-            print("error ",current_error )
+            #print("error ",current_error )
 
 
     for i in range(len(input_m)):
