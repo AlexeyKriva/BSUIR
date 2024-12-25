@@ -1,3 +1,8 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 1: Реализовать модель сети Джордана с логарифмической функцией активации (гиперболический арксинус)
+*/
 package org.example.jordannetwork;
 
 import org.springframework.stereotype.Service;
@@ -28,5 +33,15 @@ public class SequenceGenerator {
         }
 
         return fibonacciNumbers;
+    }
+
+    public List<Long> generate() {
+        List<Long> numbers = new ArrayList<>();
+        numbers.add(1L);
+        numbers.add(4L);
+        numbers.add(9L);
+        numbers.add(16L);
+
+        return numbers;
     }
 }
