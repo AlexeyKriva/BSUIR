@@ -7,6 +7,7 @@ package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,6 @@ public class RelaxationNetwork {
             weights = matrixService.sum(weights, matrixService.multiply(matrixService.transpose(picturesMatrixes.get(i)),
                     numbersMatrixes.get(i)));
         }
-
         return weights;
     }
 
@@ -137,5 +137,20 @@ public class RelaxationNetwork {
 
         return coincidenceRussian == lastPicture.get(0).size() &&
                 coincidenceEnglish == lastNumber.get(0).size();
-    }
+
+//    public boolean isImagesMatched(List<List<Integer>> predicted, List<List<Integer>> reference) {
+//        int coincidence = 0;
+//
+//        for (int i = 0; i < predicted.get(0).size(); i++) {
+//            if (reference.get(0).get(i).equals(predicted.get(0).get(i))) {
+//                coincidence++;
+//            }
+//        }
+//
+//        System.out.println(coincidence);
+//        System.out.println(reference.get(0).size() * 0.98);
+//
+//        return predicted.get(0).size() == reference.get(0).size() && (double) coincidence > (double)
+//                reference.get(0).size() * 0.98;
+//    }
 }

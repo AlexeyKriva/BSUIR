@@ -37,4 +37,9 @@ public class RelaxationNetworkController {
     public Map<String, List<String>> backward(@RequestBody Backward number) {
         return relaxationNetwork.backward(number.getNumber());
     }
+
+    @PostMapping("/test")
+    public void test(@RequestParam("image") MultipartFile image) {
+        relaxationNetwork.test(image);
+    }
 }
