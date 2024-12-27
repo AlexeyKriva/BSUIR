@@ -1,3 +1,8 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 2: Реализовать модель двунаправленной ассоциативной памяти
+*/
 package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
@@ -8,10 +13,22 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class MatrixService {
+    public List<List<Integer>> sum(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
+        List<List<Integer>> outputMatrix = new ArrayList<>();
+
+        for (int i = 0; i < matrixA.size(); i++) {
+            outputMatrix.add(new ArrayList<>());
+            for (int j = 0; j < matrixA.get(0).size(); j++) {
+                outputMatrix.get(i).add(matrixA.get(i).get(j) + matrixB.get(i).get(j));
+            }
+        }
+
+        return outputMatrix;
+    }
+
     public List<List<Integer>> multiply(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
-        List<List<Integer>> outputMatrix = fillMatrix(matrixA.size(), matrixB.get(0).size());
+        List<List<Integer>> outputMatrix = fillZeroMatrix(matrixA.size(), matrixB.get(0).size());
 
         for (int i = 0; i < matrixA.size(); i++) {
             for (int j = 0; j < matrixB.get(0).size(); j++) {
@@ -25,7 +42,7 @@ public class MatrixService {
         return outputMatrix;
     }
 
-    public List<List<Integer>> fillMatrix(int rows, int cols) {
+    public List<List<Integer>> fillZeroMatrix(int rows, int cols) {
         List<List<Integer>> outputMatrix = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
@@ -54,7 +71,7 @@ public class MatrixService {
     }
 
     public List<List<Integer>> multiplyWithActivation(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
-        List<List<Integer>> outputMatrix = fillMatrix(matrixA.size(), matrixB.get(0).size());
+        List<List<Integer>> outputMatrix = fillZeroMatrix(matrixA.size(), matrixB.get(0).size());
 
         for (int i = 0; i < matrixA.size(); i++) {
             for (int j = 0; j < matrixB.get(0).size(); j++) {
@@ -62,43 +79,57 @@ public class MatrixService {
                     outputMatrix.get(i).set(j, outputMatrix.get(i).get(j) + matrixA.get(i).get(k) *
                             matrixB.get(k).get(j));
                 }
-                outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j)));
+//                if (i == 0 && j == 0) {
+                    outputMatrix.get(i).set(j, activation(outputMatrix.get(i).get(j), 0));
+//                }
+//                } else if (i == ){
+//
+//                }
             }
         }
 
         return outputMatrix;
     }
 
-    public Integer findMismatches(List<List<Double>> matrixA, List<List<Double>> matrixB) {
-        int mismatches = 0;
-
-        for (int i = 0; i < matrixA.size(); i++) {
-            for (int j = 0; j < matrixA.get(0).size(); j++) {
-                if (!Objects.equals(matrixA.get(i).get(j), matrixB.get(i).get(j))) {
-                    mismatches++;
-                }
-            }
-        }
-
-        return mismatches;
-    }
-
-    public int activation(int weightedSum) {
-        if (weightedSum >= 30) {
+    public int activation(int weightedSum, int preWeightedSum) {
+        System.out.println(weightedSum);
+        if (weightedSum >= 0) {
             return 1;
+        } else {
+            return -1;
         }
-
-        return -1;
     }
 
-    public void print(List<List<Double>> matrix) {
-        for (List<Double> row: matrix) {
-            for (double number: row) {
+    public void print(List<List<Integer>> matrix) {
+        for (List<Integer> row: matrix) {
+            for (int number: row) {
                 System.out.print(number + " ");
             }
 
             System.out.println();
         }
         System.out.println("=========================================================================================");
+    }
+
+    public boolean isThereSuchMatrix(List<List<Integer>> target, List<List<List<Integer>>> sources) {
+        for (List<List<Integer>> matrix: sources) {
+            int coincidence = 0;
+
+            for (int i = 0; i < target.size(); i++) {
+                for (int j = 0; j < target.get(i).size(); j++) {
+                    if (Objects.equals(target.get(i).get(j), matrix.get(i).get(j))) {
+                        coincidence++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            if (coincidence == target.size() * target.get(0).size()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

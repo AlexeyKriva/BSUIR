@@ -1,6 +1,6 @@
 /*
 Лабораторная работа №1 по дисциплине МРЗВИС
-Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичес
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
 Вариант 1: Реализовать модель линейной рециркуляционной сети с постоянным коэффициентом обучения с ненормированными весами
 */
 package com.software.bsuir.multilayerneuralnetwork.services;
@@ -23,9 +23,10 @@ public class SynapseService {
     public List<List<Synapse>> buildRandomSynapses(int rows, int cols) {
         List<List<Synapse>> synapses = new ArrayList<>();
 
+
         for (int i = 0; i < rows; i++) {
             synapses.add(new ArrayList<>());
-            for (int j = 0; j < ImageService.NUMBER_OF_COMPONENTS_IN_PIXEL * cols; j++) {
+            for (int j = 0; j < cols; j++) {
                 synapses.get(i).add(new Synapse(roundRandomWeight()));
             }
         }

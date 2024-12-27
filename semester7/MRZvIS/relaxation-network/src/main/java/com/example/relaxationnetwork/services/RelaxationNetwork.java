@@ -1,3 +1,8 @@
+/*
+Лабораторная работа №2 по дисциплине МРЗВИС
+Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
+Вариант 2: Реализовать модель двунаправленной ассоциативной памяти
+*/
 package com.example.relaxationnetwork.services;
 
 import lombok.RequiredArgsConstructor;
@@ -13,83 +18,125 @@ import java.util.Map;
 public class RelaxationNetwork {
     private final MatrixService matrixService;
     private final TextService textService;
-    private final BinaryService binaryService;
-    private final ImageService imageService;
 
-    private final int MAX_ITER = 50;
-    private List<List<Integer>> pixelValues = new ArrayList<>();
-    private List<List<Integer>> encodedText = new ArrayList<>();
+    private List<List<Integer>> weights;
+    private List<List<List<Integer>>> picturesMatrixes = new ArrayList<>();
+    private List<List<List<Integer>>> numbersMatrixes = new ArrayList<>();
 
-    private List<List<Integer>> weights = new ArrayList<>();
+    private final int MAX_ITER = 100;
+    private final int BITE = 5;
 
-    public void test(MultipartFile image) {
-        List<Integer> values = imageService.getPixelValues(image);
+    public List<List<Integer>> train(List<List<String>> pictures, List<String> numbers) {
+        if (pictures.size() != numbers.size()) {
+            throw new RuntimeException("Не все слова имеют ассоциации");
+        }
 
-        imageService.restoreAndSaveImage(values);
-    }
+        weights = matrixService.fillZeroMatrix(15, BITE);
 
-    public List<List<Integer>> train(MultipartFile image, String text) {
-        pixelValues.add(imageService.getPixelValues(image));
-        encodedText.add(textService.encodeText(text, ImageService.whitePixels, ImageService.blackPixels));
+        for (int i = 0; i < pictures.size(); i++) {
+            List<String> picture = pictures.get(i);
+            String number = numbers.get(i);
 
-        weights = matrixService.multiply(matrixService.transpose(pixelValues), encodedText);
+            picturesMatrixes.add(textService.encodePicture(picture));
+            numbersMatrixes.add(textService.toBinary(number, BITE));
 
+            weights = matrixService.sum(weights, matrixService.multiply(matrixService.transpose(picturesMatrixes.get(i)),
+                    numbersMatrixes.get(i)));
+        }
         return weights;
     }
 
-    public Map<String, String> forward(MultipartFile image) {
+    public Map<String, List<String>> forward(List<String> picture) {
         if (weights.isEmpty()) {
             throw new RuntimeException("Матрица весов не инициализирована!!!");
         }
 
-        List<List<Integer>> forwardOutput = new ArrayList<>();
-        List<List<Integer>> backOutput = new ArrayList<>();
-        backOutput.add(imageService.getPixelValues(image));
+        List<List<Integer>> previousPicture = new ArrayList<>();
+        List<List<Integer>> previousNumber = new ArrayList<>();
+        List<List<Integer>> lastPicture = textService.encodePicture(picture);
+        List<List<Integer>> lastNumber = new ArrayList<>();
 
         int i = 0;
         while (i < MAX_ITER) {
-            forwardOutput = matrixService.multiplyWithActivation(backOutput, weights);
+            lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
+            lastPicture = matrixService.multiplyWithActivation(lastNumber, matrixService.transpose(weights));
+            lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
 
-            if (isTextsMatched(forwardOutput, encodedText)) {// && isImagesMatched(backOutput, matrixService.transpose(pixelValues))) {
-                String targetText = textService.decodeText(forwardOutput);
-                String sourceText = textService.decodeText(encodedText);
+            System.out.println("STEP #" + (i++));
 
-                imageService.restoreAndSaveImage(backOutput.get(0));
-                imageService.restoreAndSaveImage(pixelValues.get(0));
+            if (!previousPicture.isEmpty() && !previousNumber.isEmpty() &&
+                    isNetworkFindResult(previousPicture, previousNumber, lastPicture, lastNumber)) {
+                matrixService.print(lastNumber);
+                String targetNumber = textService.fromBinary(lastNumber);
+                List<String> sourcePicture = textService.decodePicture(lastPicture);
 
-                return Map.of(sourceText, targetText);
+                return Map.of("найденная цифра", List.of(targetNumber), "найденное изображение", sourcePicture,
+                        "посланное изображение", picture, "количество итераций", List.of(String.valueOf(i)));
             }
 
-            System.out.println(i);
-
-            backOutput = matrixService.multiplyWithActivation(forwardOutput, matrixService.transpose(weights));
-            i++;
+            previousPicture = lastPicture;
+            previousNumber = lastNumber;
         }
 
-        imageService.restoreAndSaveImage(backOutput.get(0));
-
-        return null;
+        return Map.of("ошибка", List.of("сеть не может найти ассоциацию"), "посланное изображение",
+                textService.decodePicture(lastPicture));
     }
 
-    public List<List<Integer>> backward(List<List<Integer>> output) {
+    public Map<String, List<String>> backward(String number) {
         if (weights.isEmpty()) {
             throw new RuntimeException("Матрица весов не инициализирована!!!");
         }
 
-        return matrixService.multiplyWithActivation(output, matrixService.transpose(weights));
+        List<List<Integer>> previousPicture = new ArrayList<>();
+        List<List<Integer>> previousNumber = new ArrayList<>();
+        List<List<Integer>> lastPicture = new ArrayList<>();
+        List<List<Integer>> lastNumber = textService.toBinary(number, BITE);
+
+        int i = 0;
+        while (i < MAX_ITER) {
+            lastPicture = matrixService.multiplyWithActivation(lastNumber, matrixService.transpose(weights));
+            lastNumber = matrixService.multiplyWithActivation(lastPicture, weights);
+
+            System.out.println("STEP #" + (i++));
+
+            if (!previousPicture.isEmpty() && !previousNumber.isEmpty() &&
+                    isNetworkFindResult(previousPicture, previousNumber, lastPicture, lastNumber)) {
+                matrixService.print(lastNumber);
+                String targetNumber = textService.fromBinary(lastNumber);
+                List<String> sourcePicture = textService.decodePicture(lastPicture);
+
+                return Map.of("найденное изображение", sourcePicture, "найденная цифра", List.of(targetNumber),
+                        "посланная цифра", List.of(number), "количество итераций", List.of(String.valueOf(i)));
+            }
+
+            previousPicture = lastPicture;
+            previousNumber = lastNumber;
+        }
+
+        return Map.of("ошибка", List.of("сеть не может найти ассоциацию"), "посланная цифра",
+                List.of(textService.fromBinary(lastNumber)));
     }
 
-    public boolean isTextsMatched(List<List<Integer>> predicted, List<List<Integer>> reference) {
-        int coincidence = 0;
+    public boolean isNetworkFindResult(List<List<Integer>> previousPicture, List<List<Integer>> previousNumber,
+                                       List<List<Integer>> lastPicture, List<List<Integer>> lastNumber) {
+        int coincidenceRussian = 0;
 
-        for (int i = 0; i < predicted.get(0).size(); i++) {
-            if (reference.get(0).get(i).equals(predicted.get(0).get(i))) {
-                coincidence++;
+        for (int i = 0; i < previousPicture.get(0).size(); i++) {
+            if (previousPicture.get(0).get(i).equals(lastPicture.get(0).get(i))) {
+                coincidenceRussian++;
             }
         }
 
-        return predicted.get(0).size() == reference.get(0).size() && coincidence == reference.get(0).size();
-    }
+        int coincidenceEnglish = 0;
+
+        for (int i = 0; i < previousNumber.get(0).size(); i++) {
+            if (previousNumber.get(0).get(i).equals(lastNumber.get(0).get(i))) {
+                coincidenceEnglish++;
+            }
+        }
+
+        return coincidenceRussian == lastPicture.get(0).size() &&
+                coincidenceEnglish == lastNumber.get(0).size();
 
 //    public boolean isImagesMatched(List<List<Integer>> predicted, List<List<Integer>> reference) {
 //        int coincidence = 0;

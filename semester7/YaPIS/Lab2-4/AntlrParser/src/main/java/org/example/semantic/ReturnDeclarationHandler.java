@@ -11,7 +11,8 @@ public class ReturnDeclarationHandler {
 
     public static void returnDeclaration(MyParser.ExpressionContext ctx, MyFunctionDeclaration functionDeclaration,
                                   List<MyVariableDeclaration> globalVariableDeclarations) {
-        VariableDeclarationHandler.checkVariableTypeAndFindVariableValue(ctx, functionDeclaration.getName(), functionDeclaration.getReturnType(),
+        VariableDeclarationHandler.checkVariableTypeAndFindVariableValue(ctx, functionDeclaration.getName(),
+                functionDeclaration.getReturnType(),
                 functionDeclaration.getVariables(), globalVariableDeclarations);
     }
 
