@@ -9,9 +9,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SequenceGenerator {
+    public List<Double> generateDoubleSequenceByNumberAndIndexes(int number, int startIndex, int endIndex) {
+        switch (number) {
+            case 0 -> {
+                return generateFibonacciByIndices(startIndex, endIndex).stream()
+                        .map(Long::doubleValue)
+                        .collect(Collectors.toCollection(ArrayList::new));
+            }
+            default -> throw new IllegalArgumentException(number + " is not available sequence number.");
+        }
+    }
+
     public List<Long> generateFibonacciByIndices(int startIndex, int endIndex) {
         if (startIndex < 0 || endIndex < 0) {
             throw new IllegalArgumentException("Indices must be non-negative.");

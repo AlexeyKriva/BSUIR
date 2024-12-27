@@ -6,36 +6,39 @@
 package org.example.jordannetwork.network;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.example.jordannetwork.utils.MatrixService.*;
+import static org.example.jordannetwork.utils.ResultService.buildResult;
+import static org.example.jordannetwork.utils.SimpleMathService.roundToPrecision;
+
 import org.example.jordannetwork.utils.SequenceGenerator;
 
 
 @Service
 @RequiredArgsConstructor
 public class JordanNetwork {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     //Services
     private final SequenceGenerator sequenceGenerator;
-
 
     //Constants
     private final int HIDDEN_NEURONES = 4;
     private final int OUTPUT_NEURONES = 1;
     private final int NORMAL_COEF = 10;
     private final int MEMORY_NEURONES = OUTPUT_NEURONES;
-    private final int LEFT_BOARD = 0;
-    private final int RIGHT_BOARD = 2;
-    private final int HORIZONTAL_LAYERS = 2;
-    private final int INPUT_NEURONES = RIGHT_BOARD - LEFT_BOARD + 1;
+    private final int LEFT_SEQUENCE_BOARD = 0;
+    private final int RIGHT_SEQUENCE_BOARD = 2;
+    private final int NUMBER_OF_WEIGHT_MATRICES = 2;
+    private final int INPUT_NEURONES = RIGHT_SEQUENCE_BOARD - LEFT_SEQUENCE_BOARD + 1;
     private final double MAX_ERROR = 0.000001;
     private final double LEARNING_RATE = 0.0001;
-    private final int NUMBERS_FOR_PREDICTION = RIGHT_BOARD - LEFT_BOARD + 1;
+    private final int NUMBERS_FOR_PREDICTION = RIGHT_SEQUENCE_BOARD - LEFT_SEQUENCE_BOARD + 1;
     private final int TOTAL_NUMBERS_FOR_PREDICTION = 3 * NUMBERS_FOR_PREDICTION;
 
     private List<List<List<Double>>> weights = new ArrayList<>();
@@ -47,7 +50,7 @@ public class JordanNetwork {
     }
 
     public void initWeights() {
-        for (int layer = 0; layer < HORIZONTAL_LAYERS; layer++) {
+        for (int layer = 0; layer < NUMBER_OF_WEIGHT_MATRICES; layer++) {
             List<List<Double>> weightMatrix = new ArrayList<>();
 
             if (layer == 0) {
@@ -79,40 +82,26 @@ public class JordanNetwork {
         return roundToPrecision(randomWeight);
     }
 
-    private double roundToPrecision(double value) {
-        BigDecimal roundedValue = BigDecimal.valueOf(value);
-        return roundedValue.setScale(2, RoundingMode.HALF_UP).doubleValue();
-    }
-
     public Map<String, String> train() {
-        List<Double> sequence = sequenceGenerator.generateFibonacciByIndices(LEFT_BOARD, RIGHT_BOARD).stream()
-                .map(Long::doubleValue)
-                .collect(Collectors.toCollection(ArrayList::new));
+        initWeights();
 
-        List<Double> sourceSequence = new ArrayList<>(sequence);
-
-        sequence.forEach(System.out::println);
+        List<Double> sequence = sequenceGenerator.generateDoubleSequenceByNumberAndIndexes(0,
+                LEFT_SEQUENCE_BOARD, RIGHT_SEQUENCE_BOARD);
 
         initMemory(sequence);
 
         List<List<Double>> sequenceAndMemory = new ArrayList<>();
         sequenceAndMemory.add(sequence);
 
-        sequenceAndMemory.stream().forEach(list -> {
-            list.stream().forEach(element -> System.out.print(element + "\t"));
-            System.out.println();
-        });
-
-        List<Double> nextNumbers = sequenceGenerator.generateFibonacciByIndices(RIGHT_BOARD + 1, RIGHT_BOARD +
-                        TOTAL_NUMBERS_FOR_PREDICTION).stream().map(Long::doubleValue).toList();
-
-        initWeights();
-
-        //System.out.println("Next number: " + nextNumber);
+        List<Double> nextNumbers = sequenceGenerator.generateDoubleSequenceByNumberAndIndexes(0,
+                RIGHT_SEQUENCE_BOARD + 1, RIGHT_SEQUENCE_BOARD +
+                        TOTAL_NUMBERS_FOR_PREDICTION);
 
         int count = 0;
 
         List<Double> predictedNumbers = new ArrayList<>();
+
+        List<Double> copiedSequence = new ArrayList<>(sequence);
 
         for (int x = 0; x < TOTAL_NUMBERS_FOR_PREDICTION; x += NUMBERS_FOR_PREDICTION) {
 
@@ -125,8 +114,10 @@ public class JordanNetwork {
 
                     currentError = propagateBackward(nextNumbers.get(i), predicted.get(0), predicted.get(1), sequenceAndMemory);
                     sequenceAndMemory.get(0).set(sequenceAndMemory.get(0).size() - 1, predicted.get(1).get(0).get(0));
-                    System.out.println("Count=" + (count++));
-                    System.out.println("Current predicted=" + predicted.get(1).get(0).get(0));
+                    LOGGER.info("Step = {}", (count++));
+                    LOGGER.info("Current prediction = {}", predicted.get(1).get(0).get(0));
+                    //System.out.println("Count=" + (count++));
+                    //System.out.println("Current predicted=" + predicted.get(1).get(0).get(0));
                 }
 
                 predictedNumbers.add(predicted.get(1).get(0).get(0));
@@ -139,7 +130,7 @@ public class JordanNetwork {
             }
         }
 
-        return result(sourceSequence, nextNumbers, predictedNumbers, count);
+        return buildResult(copiedSequence, nextNumbers, predictedNumbers, count, NUMBERS_FOR_PREDICTION);
     }
 
     public List<List<List<Double>>> propagateForward(List<List<Double>> sequenceAndMemory) {
@@ -150,7 +141,7 @@ public class JordanNetwork {
 
         for (int i = 0; i < predictedHidden.size(); i++) {
             for (int j = 0; j < predictedHidden.get(i).size(); j++) {
-                predictedHidden.get(i).set(j, arsinh(predictedHidden.get(i).get(j)));
+                predictedHidden.get(i).set(j, activation(predictedHidden.get(i).get(j)));
             }
         }
 
@@ -158,7 +149,7 @@ public class JordanNetwork {
 
         for (int i = 0; i < predictedOutput.size(); i++) {
             for (int j = 0; j < predictedOutput.get(i).size(); j++) {
-                predictedOutput.get(i).set(j, arsinh(predictedOutput.get(i).get(j)));
+                predictedOutput.get(i).set(j, activation(predictedOutput.get(i).get(j)));
             }
         }
 
@@ -185,12 +176,6 @@ public class JordanNetwork {
                 newWeightsLayer2
         ));
 
-//        System.out.println("Hidden errors:");
-//        hiddenErrors.forEach(errors -> {
-//            errors.stream().forEach(num -> System.out.print(num + " "));
-//            System.out.println();
-//        });
-
         List<List<Double>> newWeightsLayer1 = subtractMatrix(
                 weights.get(0), multiplyByNumber(
                         multiplyMatrix(
@@ -202,14 +187,6 @@ public class JordanNetwork {
         weights.set(0, newWeightsLayer1);
         weights.set(1, newWeightsLayer2);
 
-//        System.out.println("Weights[0]");
-//        for (int i = 0; i < weights.get(0).size(); i++) {
-//            for (int j = 0; j < weights.get(0).get(i).size(); j++) {
-//                System.out.print(weights.get(0).get(i).get(j) + " ");
-//            }
-//            System.out.println();
-//        }
-
         return outputErrors.stream()
                 .mapToDouble(row -> row.stream()
                         .mapToDouble(val -> Math.pow(val, 2))
@@ -217,48 +194,11 @@ public class JordanNetwork {
                 .sum();
     }
 
-    public double arsinh(double x) {
+    public double activation(double x) {
         return Math.log(x + Math.sqrt(x * x + 1));
     }
 
-    public double dArsinh(double x) {
+    public double activationDerivative(double x) {
         return 1 / Math.sqrt(x * x + 1);
-    }
-
-    public Map<String, String> result(List<Double> sequence, List<Double> nextNumbers, List<Double> predictedNumbers, int itCount) {
-        Map<String, String> result = new LinkedHashMap<>();
-
-        int numberOfWindow = 1;
-
-        StringBuilder window = new StringBuilder();
-
-        for (Double number: sequence) {
-            window.append(number).append(" ");
-        }
-
-        result.put("окно " + numberOfWindow, window.toString());
-
-        window.setLength(0);
-        StringBuilder references = new StringBuilder();
-        StringBuilder predicted = new StringBuilder();
-        for (int i = 0; i < nextNumbers.size(); i++) {
-            if (i != 0 && i % NUMBERS_FOR_PREDICTION == 0) {
-                result.put("ожидаемые значения " + numberOfWindow, references.toString());
-                result.put("предсказанные значения " + numberOfWindow, predicted.toString());
-                result.put("окно " + (++numberOfWindow), references.toString());
-                references.setLength(0);
-                predicted.setLength(0);
-            }
-
-            references.append(nextNumbers.get(i)).append(" ");
-            predicted.append(predictedNumbers.get(i)).append(" ");
-        }
-
-        result.put("ожидаемые значения " + numberOfWindow, references.toString());
-        result.put("предсказанные значения " + numberOfWindow, predicted.toString());
-
-        result.put("количество итераций", String.valueOf(itCount));
-
-        return result;
     }
 }
