@@ -42,7 +42,6 @@ public class SemanticAnalyzer extends MyParserBaseListener {
     }
 
     private void visit(ParseTree node) {
-        // Проверяем тип узла и выполняем действия
         if (node instanceof MyParser.FunctionDeclarationContext) {
             currentScopeType = ScopeType.FUNCTION;
 
@@ -56,7 +55,6 @@ public class SemanticAnalyzer extends MyParserBaseListener {
             handleStatement((MyParser.StatementContext) node, functionDeclarations, globalVariableDeclarations);
         }
 
-        // Рекурсивно посещаем все дочерние узлы
         for (int i = 0; i < node.getChildCount(); i++) {
             visit(node.getChild(i));
         }

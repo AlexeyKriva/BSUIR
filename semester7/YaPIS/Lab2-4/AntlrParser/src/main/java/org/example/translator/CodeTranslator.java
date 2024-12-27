@@ -35,7 +35,6 @@ public class CodeTranslator {
     public static String translateToJava(CommonTokenStream tokens) {
         List<String> javaCode = new ArrayList<>();
 
-
         for (int i = 0; i < tokens.getTokens().size(); i++) {
             Token token = tokens.getTokens().get(i);
 
