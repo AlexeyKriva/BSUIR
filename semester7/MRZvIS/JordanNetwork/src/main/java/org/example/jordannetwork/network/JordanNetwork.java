@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static org.example.jordannetwork.MatrixService.*;
@@ -24,17 +23,18 @@ public class JordanNetwork {
 
 
     //Constants
-
-    private final int HIDDEN_NEURONES = 11;
+    private final int HIDDEN_NEURONES = 4;
     private final int OUTPUT_NEURONES = 1;
-    private final int NORMAL_COEF = 100;
-    private final int MEMORY_NEURONES = 1;
+    private final int NORMAL_COEF = 10;
+    private final int MEMORY_NEURONES = OUTPUT_NEURONES;
     private final int LEFT_BOARD = 0;
-    private final int RIGHT_BOARD = 9;
+    private final int RIGHT_BOARD = 2;
     private final int HORIZONTAL_LAYERS = 2;
     private final int INPUT_NEURONES = RIGHT_BOARD - LEFT_BOARD + 1;
-    private final double MAX_ERROR = 0.00001;
-    private final double LEARNING_RATE = 0.00001;
+    private final double MAX_ERROR = 0.000001;
+    private final double LEARNING_RATE = 0.0001;
+    private final int NUMBERS_FOR_PREDICTION = RIGHT_BOARD - LEFT_BOARD + 1;
+    private final int TOTAL_NUMBERS_FOR_PREDICTION = 3 * NUMBERS_FOR_PREDICTION;
 
     private List<List<List<Double>>> weights = new ArrayList<>();
 
@@ -82,62 +82,63 @@ public class JordanNetwork {
         return roundedValue.setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
-    public Map<String, Double> train() {
-        //1, 4, 9, 16, 25, 36, 49, 64, 81, 100
+    public Map<String, String> train() {
         List<Double> sequence = sequenceGenerator.generateFibonacciByIndices(LEFT_BOARD, RIGHT_BOARD).stream()
                 .map(Long::doubleValue)
-//                .map(num -> num / NORMAL_COEF)
                 .collect(Collectors.toCollection(ArrayList::new));
+
+        List<Double> sourceSequence = new ArrayList<>(sequence);
+
+        sequence.forEach(System.out::println);
 
         initMemory(sequence);
 
         List<List<Double>> sequenceAndMemory = new ArrayList<>();
         sequenceAndMemory.add(sequence);
 
-        //System.out.println("sequenceAndMemory:");
         sequenceAndMemory.stream().forEach(list -> {
             list.stream().forEach(element -> System.out.print(element + "\t"));
             System.out.println();
         });
 
-        double nextNumber = sequenceGenerator.generateFibonacciByIndices(RIGHT_BOARD + 1, RIGHT_BOARD + 1).stream()
-                .map(Long::doubleValue)
-                .toList().get(0);
+        List<Double> nextNumbers = sequenceGenerator.generateFibonacciByIndices(RIGHT_BOARD + 1, RIGHT_BOARD +
+                        TOTAL_NUMBERS_FOR_PREDICTION).stream().map(Long::doubleValue).toList();
 
         initWeights();
 
         //System.out.println("Next number: " + nextNumber);
 
-        double currentError = 1.0;
-
         int count = 0;
 
-        List<List<List<Double>>> predicted = new ArrayList<>();
+        List<Double> predictedNumbers = new ArrayList<>();
 
-        while (currentError > MAX_ERROR) {
-            predicted = propagateForward(new ArrayList<>(sequenceAndMemory));
+        for (int x = 0; x < TOTAL_NUMBERS_FOR_PREDICTION; x += NUMBERS_FOR_PREDICTION) {
 
-//            System.out.println("Hidden");
-//            predicted.get(0).stream().forEach(list -> {
-//                list.stream().forEach(element -> System.out.print(element + "\t"));
-//                System.out.println();
-//            });
+            for (int i = x; i < x + NUMBERS_FOR_PREDICTION; i++) {
+                double currentError = 1.0;
+                List<List<List<Double>>> predicted = new ArrayList<>();
 
-//            System.out.println("Output:");
-//            predicted.get(1).stream().forEach(list -> {
-//                list.stream().forEach(element -> System.out.print(element + "\t"));
-//                System.out.println();
-//            });
+                while (currentError > MAX_ERROR) {
+                    predicted = propagateForward(new ArrayList<>(sequenceAndMemory));
 
-            currentError = propagateBackward(nextNumber, predicted.get(0), predicted.get(1), sequenceAndMemory);
-            sequenceAndMemory.get(0).set(sequenceAndMemory.get(0).size() - 1, predicted.get(1).get(0).get(0));
-            System.out.println("Count=" + (count++));
-            System.out.println("Current predicted=" + predicted.get(1).get(0).get(0));
+                    currentError = propagateBackward(nextNumbers.get(i), predicted.get(0), predicted.get(1), sequenceAndMemory);
+                    sequenceAndMemory.get(0).set(sequenceAndMemory.get(0).size() - 1, predicted.get(1).get(0).get(0));
+                    System.out.println("Count=" + (count++));
+                    System.out.println("Current predicted=" + predicted.get(1).get(0).get(0));
+                }
+
+                predictedNumbers.add(predicted.get(1).get(0).get(0));
+
+                for (int j = 1; j < sequenceAndMemory.get(0).size() - 1; j++) {
+                    sequenceAndMemory.get(0).set(j - 1, sequenceAndMemory.get(0).get(j));
+                }
+
+                sequenceAndMemory.get(0).set(sequenceAndMemory.get(0).size() - 1, predicted.get(1).get(0).get(0));
+            }
         }
 
-        return result(sequence.subList(0, sequence.size() - 1), nextNumber, predicted.get(1).get(0).get(0), count);
+        return result(sourceSequence, nextNumbers, predictedNumbers, count);
     }
-
 
     public List<List<List<Double>>> propagateForward(List<List<Double>> sequenceAndMemory) {
         sequenceAndMemory.set(0, sequenceAndMemory.get(0).stream()
@@ -182,6 +183,12 @@ public class JordanNetwork {
                 newWeightsLayer2
         ));
 
+//        System.out.println("Hidden errors:");
+//        hiddenErrors.forEach(errors -> {
+//            errors.stream().forEach(num -> System.out.print(num + " "));
+//            System.out.println();
+//        });
+
         List<List<Double>> newWeightsLayer1 = subtractMatrix(
                 weights.get(0), multiplyByNumber(
                         multiplyMatrix(
@@ -192,6 +199,14 @@ public class JordanNetwork {
 
         weights.set(0, newWeightsLayer1);
         weights.set(1, newWeightsLayer2);
+
+//        System.out.println("Weights[0]");
+//        for (int i = 0; i < weights.get(0).size(); i++) {
+//            for (int j = 0; j < weights.get(0).get(i).size(); j++) {
+//                System.out.print(weights.get(0).get(i).get(j) + " ");
+//            }
+//            System.out.println();
+//        }
 
         return outputErrors.stream()
                 .mapToDouble(row -> row.stream()
@@ -204,17 +219,43 @@ public class JordanNetwork {
         return Math.log(x + Math.sqrt(x * x + 1));
     }
 
-    public Map<String, Double> result(List<Double> sequence, double nextNumber, double predictedNumber, int itCount) {
-        Map<String, Double> result = new LinkedHashMap<>();
+    public double dArsinh(double x) {
+        return 1 / Math.sqrt(x * x + 1);
+    }
 
-        AtomicInteger index = new AtomicInteger(0);
-        sequence.stream().forEach(el -> {
-            result.put("элемент " + (index), sequence.get(index.getAndIncrement()));
-        });
+    public Map<String, String> result(List<Double> sequence, List<Double> nextNumbers, List<Double> predictedNumbers, int itCount) {
+        Map<String, String> result = new LinkedHashMap<>();
 
-        result.put("нужно получить", nextNumber);
-        result.put("предсказанное число", predictedNumber);
-        result.put("количество итераций", (double) itCount);
+        int numberOfWindow = 1;
+
+        StringBuilder window = new StringBuilder();
+
+        for (Double number: sequence) {
+            window.append(number).append(" ");
+        }
+
+        result.put("окно " + numberOfWindow, window.toString());
+
+        window.setLength(0);
+        StringBuilder references = new StringBuilder();
+        StringBuilder predicted = new StringBuilder();
+        for (int i = 0; i < nextNumbers.size(); i++) {
+            if (i != 0 && i % NUMBERS_FOR_PREDICTION == 0) {
+                result.put("ожидаемые значения " + numberOfWindow, references.toString());
+                result.put("предсказанные значения " + numberOfWindow, predicted.toString());
+                result.put("окно " + (++numberOfWindow), references.toString());
+                references.setLength(0);
+                predicted.setLength(0);
+            }
+
+            references.append(nextNumbers.get(i)).append(" ");
+            predicted.append(predictedNumbers.get(i)).append(" ");
+        }
+
+        result.put("ожидаемые значения " + numberOfWindow, references.toString());
+        result.put("предсказанные значения " + numberOfWindow, predicted.toString());
+
+        result.put("количество итераций", String.valueOf(itCount));
 
         return result;
     }

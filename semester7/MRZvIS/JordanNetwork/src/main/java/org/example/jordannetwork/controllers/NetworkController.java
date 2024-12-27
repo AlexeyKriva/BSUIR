@@ -17,7 +17,7 @@ public class NetworkController {
     private final JordanNetwork jordanNetwork;
 
     @PostMapping("/train")
-    public Map<String, Double> train() {
+    public Map<String, String> train() {
         return jordanNetwork.train();
     }
 }

@@ -108,6 +108,12 @@ public class MatrixService {
         return outputMatrix;
     }
 
+//    public List<List<Double>> matrixShift(List<List<Double>> matrix) {
+//        for (int i = 1; i < matrix.get(0).size() - 1; i++) {
+//            matrix.get(0).set(i - 1, matrix.get(0).get(i));
+//        }
+//    }
+
     public void print(List<List<Double>> matrix) {
         for (List<Double> row: matrix) {
             for (double number: row) {
