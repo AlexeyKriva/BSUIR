@@ -1,9 +1,9 @@
 /*
-Лабораторная работа №2 по дисциплине МРЗВИС
+Лабораторная работа №3 по дисциплине МРЗВИС
 Выполнена студентом группы 121702 БГУИР Кривецким Алексеем Эдуардовичем
 Вариант 1: Реализовать модель сети Джордана с логарифмической функцией активации (гиперболический арксинус)
 */
-package org.example.jordannetwork;
+package org.example.jordannetwork.network;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,9 @@ import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.example.jordannetwork.MatrixService.*;
+import static org.example.jordannetwork.utils.MatrixService.*;
+import org.example.jordannetwork.utils.SequenceGenerator;
+
 
 @Service
 @RequiredArgsConstructor
