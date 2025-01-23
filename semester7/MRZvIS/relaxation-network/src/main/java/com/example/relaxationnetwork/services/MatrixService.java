@@ -93,11 +93,13 @@ public class MatrixService {
 
     public int activation(int weightedSum, int preWeightedSum) {
         System.out.println(weightedSum);
-        if (weightedSum >= 0) {
+        if (weightedSum > 0) {
             return 1;
-        } else {
+        } else if (weightedSum < 0){
             return -1;
         }
+
+        return preWeightedSum;
     }
 
     public void print(List<List<Integer>> matrix) {
